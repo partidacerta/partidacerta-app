@@ -2,7 +2,7 @@
   "expo": {
     "name": "partidacerta-app",
     "slug": "partidacerta-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -14,25 +14,35 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.projectsports"
+      "bundleIdentifier": "com.partidacerta"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.projectsports"
+      "package": "com.partidacerta"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router"
-    ],
+    "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "7e04b06e-717f-44ef-8a64-45e39688e1e4"
+      }
+    },
+    "runtimeVersion": "1.0.1",
+    "updates": {
+      "url": "https://u.expo.dev/7e04b06e-717f-44ef-8a64-45e39688e1e4"
     }
   }
 }
