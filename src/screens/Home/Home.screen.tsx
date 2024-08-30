@@ -1,18 +1,18 @@
-import { Text } from 'react-native';
-
 import { Link } from 'expo-router';
 
-import { ThemedView } from '@/src/components/ThemedView';
+import { ThemedText } from '@/src/components/ThemedText/ThemedText';
+import { ThemedView } from '@/src/components/ThemedView/ThemedView';
 
 export default function HomeScreen() {
   return (
     <ThemedView>
-      <Text>HOME SCREEN</Text>
-      <Text>HOME SCREEN</Text>
-      <Text>HOME SCREEN</Text>
-      <Text>HOME SCREEN</Text>
-      <Link href={'./UserProfile.stack'}>TESTE ROTA PARA PROFILE</Link>
-      <Link href={'../Login.stack'}>TESTE ROTA PARA LOGIN</Link>
+      <ThemedText type="title">HOME SCREEN</ThemedText>
+      <Link href={'./UserProfile.stack'}>
+        <ThemedText type="link">TESTE ROTA PARA PROFILE</ThemedText>
+      </Link>
+      <Link href={'../Login.stack'}>
+        <ThemedText type="link">TESTE ROTA PARA LOGIN</ThemedText>
+      </Link>
     </ThemedView>
   );
 }

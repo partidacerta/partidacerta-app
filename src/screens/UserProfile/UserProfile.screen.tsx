@@ -1,14 +1,12 @@
 import { Text } from 'react-native';
 
-import { ThemedView } from '@/src/components/ThemedView';
+import { ThemedText } from '@/src/components/ThemedText/ThemedText';
+import { ThemedView } from '@/src/components/ThemedView/ThemedView';
 
 export default function UserProfileScreen() {
   return (
     <ThemedView>
-      <Text>USER PROFILE SCREEN</Text>
-      <Text>USER PROFILE SCREEN</Text>
-      <Text>USER PROFILE SCREEN</Text>
-      <Text>USER PROFILE SCREEN</Text>
+      <ThemedText type="title">USER PROFILE SCREEN</ThemedText>
     </ThemedView>
   );
 }

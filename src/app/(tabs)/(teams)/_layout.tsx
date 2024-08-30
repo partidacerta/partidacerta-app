@@ -13,14 +13,7 @@ export default function RootLayout() {
         name="index"
         options={{
           headerShown: true,
-          headerTitle: 'Home',
-        }}
-      />
-      <Stack.Screen
-        name="UserProfile.stack"
-        options={{
-          headerShown: true,
-          headerTitle: 'Perfil',
+          headerTitle: 'Meus times',
         }}
       />
     </Stack>
