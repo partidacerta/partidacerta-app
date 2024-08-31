@@ -1,4 +1,5 @@
 import { TouchableOpacity } from 'react-native';
+import { useToast } from 'react-native-toast-notifications';
 
 import { Link, router } from 'expo-router';
 
@@ -11,6 +12,16 @@ import * as S from './Home.styles';
 
 export default function HomeScreen() {
   const { count, decrement, increment } = useAuthStore();
+
+  const toast = useToast();
+
+  function TestToast() {
+    // toast.show('Toast com sucesso', { type: 'success' });
+    // const id = toast.show('Loading...');
+    // toast.update(id, 'Loading completed', { type: 'success' });
+    const id = toast.show('Testando toast...', { type: 'info' });
+    toast.hideAll();
+  }
 
   return (
     <ThemedScrollView>
@@ -33,11 +44,7 @@ export default function HomeScreen() {
         text="Button"
         onPress={() => router.push('../Login.stack')}
       />
-      <Button
-        type="secondary"
-        text="Button"
-        onPress={() => router.push('../Login.stack')}
-      />
+      <Button type="secondary" text="Testar toast" onPress={TestToast} />
     </ThemedScrollView>
   );
 }

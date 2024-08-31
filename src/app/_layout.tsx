@@ -13,6 +13,7 @@ import {
 import { useColorScheme } from '@/src/hooks/useColorScheme';
 
 import 'react-native-reanimated';
+import { ThemedToast } from '../components/ThemedToast/ThemedToast';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -35,15 +36,17 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack
-        screenOptions={{
-          headerBackTitleVisible: false,
-        }}
-      >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-        <Stack.Screen name="Login.stack" options={{ headerTitle: 'Login' }} />
-      </Stack>
+      <ThemedToast>
+        <Stack
+          screenOptions={{
+            headerBackTitleVisible: false,
+          }}
+        >
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+          <Stack.Screen name="Login.stack" options={{ headerTitle: 'Login' }} />
+        </Stack>
+      </ThemedToast>
     </ThemeProvider>
   );
 }
