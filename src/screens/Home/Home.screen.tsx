@@ -1,9 +1,10 @@
 import { TouchableOpacity } from 'react-native';
 
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 
+import { Button } from '@/src/components/Button/Button';
+import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
-import { ThemedView } from '@/src/components/ThemedView/ThemedView';
 import useAuthStore from '@/src/store/auth/auth.store';
 
 import * as S from './Home.styles';
@@ -12,7 +13,7 @@ export default function HomeScreen() {
   const { count, decrement, increment } = useAuthStore();
 
   return (
-    <ThemedView>
+    <ThemedScrollView>
       <ThemedText type="title">HOME SCREEN</ThemedText>
       <Link href={'./UserProfile.stack'}>
         <ThemedText type="link">TESTE ROTA PARA PROFILE</ThemedText>
@@ -27,6 +28,16 @@ export default function HomeScreen() {
       <TouchableOpacity onPress={increment}>
         <ThemedText>+</ThemedText>
       </TouchableOpacity>
-    </ThemedView>
+      <Button
+        type="primary"
+        text="Button"
+        onPress={() => router.push('../Login.stack')}
+      />
+      <Button
+        type="secondary"
+        text="Button"
+        onPress={() => router.push('../Login.stack')}
+      />
+    </ThemedScrollView>
   );
 }

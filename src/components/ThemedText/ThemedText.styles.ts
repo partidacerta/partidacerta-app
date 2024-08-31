@@ -5,7 +5,7 @@ export const Default = styled.Text`
   line-height: 24px;
 `;
 
-export const DefaultSemiBold = styled.Text`
+export const SemiBold = styled.Text`
   font-size: 16px;
   line-height: 24px;
   font-weight: 600;

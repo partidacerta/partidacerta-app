@@ -2,7 +2,7 @@
   "expo": {
     "name": "partidacerta-app",
     "slug": "partidacerta-app",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -37,7 +37,7 @@
         "origin": false
       }
     },
-    "runtimeVersion": "1.0.1",
+    "runtimeVersion": "1.0.2",
     "updates": {
       "url": "https://u.expo.dev/7e04b06e-717f-44ef-8a64-45e39688e1e4"
     }

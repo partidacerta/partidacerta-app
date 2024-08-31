@@ -1,14 +1,14 @@
 import { useThemeColor } from '@/src/hooks/useThemeColor';
 
-import * as S from './ThemedView.styles';
-import { ThemedViewProps } from './ThemedView.types';
+import * as S from './ThemedScrollView.styles';
+import { ThemedScrollViewProps } from './ThemedScrollView.types';
 
-export function ThemedView({
+export function ThemedScrollView({
   style,
   lightColor,
   darkColor,
   ...props
-}: ThemedViewProps) {
+}: ThemedScrollViewProps) {
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     'background'

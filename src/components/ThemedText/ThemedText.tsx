@@ -18,8 +18,8 @@ export function ThemedText({
     switch (type) {
       case 'title':
         return S.Title;
-      case 'defaultSemiBold':
-        return S.DefaultSemiBold;
+      case 'semiBold':
+        return S.SemiBold;
       case 'subtitle':
         return S.Subtitle;
       case 'link':
