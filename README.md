@@ -21,5 +21,5 @@
 2.  Start build preview
 
 ```bash
- eas update --branch branchName --message "Version: 1.0.0"
+ eas update --branch branchName --message "Version: 1.0.3"
 ```
