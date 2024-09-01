@@ -9,7 +9,7 @@ export const postAuthRequest = async ({
   password: string;
 }): Promise<string> => {
   try {
-    const { data } = await instance.post('/login', {
+    const { data } = await instance.post('/auth/login', {
       email,
       password,
     });

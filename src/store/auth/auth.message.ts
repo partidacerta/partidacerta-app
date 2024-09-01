@@ -1,5 +1,3 @@
-export const FailedRequestUserAuth = {
-  title: 'Erro ao fazer login',
-  description: '',
-  buttonText: '',
+export const FailedRequestLogin = {
+  message: 'Erro ao fazer login',
 };

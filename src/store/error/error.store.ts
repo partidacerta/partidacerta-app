@@ -4,31 +4,20 @@ import { ErrorStoreProps, MessageTypes } from './error.types';
 
 const initialState = {
   hasError: false,
-  error: '',
   type: null,
-  title: '',
-  buttonText: '',
-  route: '',
+  message: '',
   color: '',
-  back: false,
 };
 
-const useErrorStore = create<ErrorStoreProps>((set, get) => ({
+const useErrorStore = create<ErrorStoreProps>(set => ({
   ...initialState,
 
-  showErrorMessage: (
-    title: string,
-    error: string,
-    type: keyof MessageTypes,
-    buttonText?: string,
-    route?: string,
-    back?: boolean
-  ) => {
-    set({ hasError: true, title, error, type, buttonText, route, back });
+  showErrorMessage: (message: string, type: keyof MessageTypes) => {
+    set({ hasError: true, message, type });
   },
 
   closePopup: () => {
-    set({ hasError: false, error: '', type: null });
+    set({ hasError: false, type: null });
   },
 
   changeColor: (color: string) => {

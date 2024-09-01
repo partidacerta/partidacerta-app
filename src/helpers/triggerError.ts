@@ -1,10 +1,5 @@
 import { showMessageError } from './showMessage';
 
-export const triggerError = (
-  title: string,
-  error: string,
-  buttonText?: string,
-  route?: string
-): void => {
-  showMessageError(title, error, buttonText, route);
+export const triggerError = (message: string): void => {
+  showMessageError(message);
 };

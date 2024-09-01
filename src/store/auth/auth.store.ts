@@ -7,7 +7,7 @@ import { postAuthRequest } from '@/src/services/auth/auth.request';
 
 import { triggerError } from '../../helpers/triggerError';
 import { injectZustandInstance } from '../../utils/injectZustandInstance';
-import { FailedRequestUserAuth } from './auth.message';
+import { FailedRequestLogin } from './auth.message';
 import { AuthStoreProps, LoginProps } from './auth.types';
 
 const initialState = {
@@ -42,12 +42,7 @@ const useAuthStore = create(
         };
 
         const onError = (): void => {
-          set({ isLoading: false });
-          return triggerError(
-            FailedRequestUserAuth.title,
-            FailedRequestUserAuth.description,
-            FailedRequestUserAuth.buttonText
-          );
+          return triggerError(FailedRequestLogin.message);
         };
 
         void makeAsync({ handle, onError });

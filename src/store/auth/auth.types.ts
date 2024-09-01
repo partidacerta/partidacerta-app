@@ -4,6 +4,7 @@ export type AuthStoreProps = {
   count: number;
   increment: () => void;
   decrement: () => void;
+  login: ({ email, password }: LoginProps) => void;
   makeAsync: <T>(props: {
     handle: () => Promise<T>;
     onError?: (error: unknown) => void;

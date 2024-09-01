@@ -1,6 +1,3 @@
-import { TouchableOpacity } from 'react-native';
-import { useToast } from 'react-native-toast-notifications';
-
 import { Link, router } from 'expo-router';
 
 import { Button } from '@/src/components/Button/Button';
@@ -11,16 +8,11 @@ import useAuthStore from '@/src/store/auth/auth.store';
 import * as S from './Home.styles';
 
 export default function HomeScreen() {
-  const { count, decrement, increment } = useAuthStore();
+  const { count, decrement, increment, login } = useAuthStore();
 
-  const toast = useToast();
-
-  function TestToast() {
-    // toast.show('Toast com sucesso', { type: 'success' });
-    // const id = toast.show('Loading...');
-    // toast.update(id, 'Loading completed', { type: 'success' });
-    const id = toast.show('Testando toast...', { type: 'info' });
-    toast.hideAll();
+  function testingLogin() {
+    // login({ email: 'cesars@email.com', password: '!@C12345' });
+    login({ email: 'cesars@email.com', password: 'senhaerrada' });
   }
 
   return (
@@ -33,18 +25,13 @@ export default function HomeScreen() {
         <ThemedText type="link">TESTE ROTA PARA LOGIN</ThemedText>
       </Link>
       <ThemedText>{count}</ThemedText>
-      <TouchableOpacity onPress={decrement}>
-        <ThemedText>-</ThemedText>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={increment}>
-        <ThemedText>+</ThemedText>
-      </TouchableOpacity>
+      <Button onPress={decrement} text="-" />
+      <Button onPress={increment} text="+" />
       <Button
-        type="primary"
-        text="Button"
+        text="Ir para login"
         onPress={() => router.push('../Login.stack')}
       />
-      <Button type="secondary" text="Testar toast" onPress={TestToast} />
+      <Button type="secondary" text="Testar LOGIN" onPress={testingLogin} />
     </ThemedScrollView>
   );
 }
