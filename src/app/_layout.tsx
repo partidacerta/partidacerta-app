@@ -13,11 +13,15 @@ import {
 import { useColorScheme } from '@/src/hooks/useColorScheme';
 
 import 'react-native-reanimated';
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+
+import '../helpers/reactotronConfig';
+import ToastPopup from '../components/ToastPopup/ToastPopup';
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
   const [loaded] = useFonts({
     SpaceMono: require('../../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -34,10 +38,15 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <ToastPopup />
+      <Stack
+        screenOptions={{
+          headerBackTitleVisible: false,
+        }}
+      >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="Login.stack" />
+        <Stack.Screen name="Login.stack" options={{ headerTitle: 'Login' }} />
       </Stack>
     </ThemeProvider>
   );

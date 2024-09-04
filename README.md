@@ -1,50 +1,66 @@
-# Welcome to your Expo app 👋
+# Partida Certa
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Tecnologias utilizadas no desenvolvimento
 
-## Get started
+- React Native
+- Expo
+- Typescript
+- Zustand
+- Axios
+- Styled Components
+- Reactotron
 
-1. Install dependencies
+## Para executar o projeto
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+1. Instale as dependências
 
 ```bash
-npm run reset-project
+   npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Inicie a aplicação
 
-## Learn more
+```bash
+   npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## Padronização na criação de banches e commits
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. Padrão de branch:
 
-## Join the community
+```bash
+   feat/nome-da-branch
+```
 
-Join our community of developers creating universal apps.
+2. Padrão de commit:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+   "feat: informacao do commit"
+```
+
+3. Prefixos que devem ser utilizados na criação de branches e realização de commits:
+
+- `feat`: Para novas features e código novo em geral.
+- `fix`: Correções em algo que não está funcionando corretamente.
+- `test`: Para código de testes.
+- `merge`: Para realizar o merge de uma branch na outra, subir correção de conflitos entre arquivos ou atualização (rebase) entre branches.
+- `style`: Melhorias de estilo das interfaces (por exemplo, CSS).
+- `refactor`: Melhorias no código que não modificam as funcionalidades existentes.
+- `chore`: Para coisas relacionadas a build, configurações e afins, como alterações no `package.json`.
+- `docs`: Ajustes na documentação, README e outros.
+- `revert`: Caso seja necessário fazer um revert, use esse prefixo.
+- `perf`: Ajustes de performance.
+- `build`: Código que ajusta o build do projeto.
+- `ci`: Ajustes nas pipelines e integração contínua.
+
+## Build da aplicação - Preview ExpoGo
+
+1. Defina a branch que será utilizada e informe a mesma no comando de inicialização do build
+
+2. Verifique a versão do app no arquivo package.json e app.json, depois informe na mensagem do build qual a versão utilizada
+
+3. Para inciar o build execute o seguinte comando alterando o nome da branch e a mensagem
+
+```bash
+   eas update --branch branchName --message "Version: 1.0.1"
+```

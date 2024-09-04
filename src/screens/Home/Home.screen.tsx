@@ -1,18 +1,37 @@
-import { Text } from 'react-native';
+import { Link, router } from 'expo-router';
 
-import { Link } from 'expo-router';
+import { Button } from '@/src/components/Button/Button';
+import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
+import { ThemedText } from '@/src/components/ThemedText/ThemedText';
+import useAuthStore from '@/src/store/auth/auth.store';
 
-import { ThemedView } from '@/src/components/ThemedView';
+import * as S from './Home.styles';
 
 export default function HomeScreen() {
+  const { count, decrement, increment, login } = useAuthStore();
+
+  function testingLogin() {
+    // login({ email: 'cesars@email.com', password: '!@C12345' });
+    login({ email: 'cesars@email.com', password: 'senhaerrada' });
+  }
+
   return (
-    <ThemedView>
-      <Text>HOME SCREEN</Text>
-      <Text>HOME SCREEN</Text>
-      <Text>HOME SCREEN</Text>
-      <Text>HOME SCREEN</Text>
-      <Link href={'./UserProfile.stack'}>TESTE ROTA PARA PROFILE</Link>
-      <Link href={'../Login.stack'}>TESTE ROTA PARA LOGIN</Link>
-    </ThemedView>
+    <ThemedScrollView>
+      <ThemedText type="title">HOME SCREEN</ThemedText>
+      <Link href={'./UserProfile.stack'}>
+        <ThemedText type="link">TESTE ROTA PARA PROFILE</ThemedText>
+      </Link>
+      <Link href={'../Login.stack'}>
+        <ThemedText type="link">TESTE ROTA PARA LOGIN</ThemedText>
+      </Link>
+      <ThemedText>{count}</ThemedText>
+      <Button onPress={decrement} text="-" />
+      <Button onPress={increment} text="+" />
+      <Button
+        text="Ir para login"
+        onPress={() => router.push('../Login.stack')}
+      />
+      <Button type="secondary" text="Testar LOGIN" onPress={testingLogin} />
+    </ThemedScrollView>
   );
 }
