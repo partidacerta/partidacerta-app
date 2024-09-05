@@ -29,7 +29,7 @@
 1. Padrão de branch:
 
 ```bash
-   prefix/nome-da-branch
+   prefix/000-nome-da-branch
 ```
 
 2. Padrão de commit:
