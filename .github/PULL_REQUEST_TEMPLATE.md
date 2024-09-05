@@ -1,10 +1,10 @@
 # Merge request Front-End
 
-# Código Issue
+## Código Issue
 
 Issue _[insira aqui o código da tarefa, precedido de um '#']_
 
-# Descrição:
+## Descrição:
 
 _Descrever em tópicos as principais mudanças desta pull request_
 
@@ -19,4 +19,4 @@ _Descrever em tópicos as principais mudanças desta pull request_
 
 ## Observações Adicionais
 
-_Inclua aqui qualquer informação adicional que possa ser relevante para os revisores ou para o registro futuro da mudança. Excluir se não aplicável._
+_Incluir aqui qualquer informação adicional que possa ser relevante. Excluir se não aplicável._
