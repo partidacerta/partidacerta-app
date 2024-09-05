@@ -29,19 +29,19 @@
 1. Padrão de branch:
 
 ```bash
-   feat/nome-da-branch
+   prefix/nome-da-branch
 ```
 
 2. Padrão de commit:
 
 ```
-   "feat: nome do commit"
+   "prefix: nome do commit"
 ```
 
 3. Padrão de Pull request:
 
 ```
-   "feat: nome da pull request"
+   "Prefix: Título da pull request"
 ```
 
 4. Prefixos que devem ser utilizados na criação de branches e realização de commits:
