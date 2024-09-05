@@ -24,21 +24,27 @@
    npx expo start
 ```
 
-## Padronização na criação de banches e commits
+## Padronização na criação de banches, commits e pull requests
 
 1. Padrão de branch:
 
 ```bash
-   feat/nome-da-branch
+   prefix/nome-da-branch
 ```
 
 2. Padrão de commit:
 
 ```
-   "feat: informacao do commit"
+   "prefix: nome do commit"
 ```
 
-3. Prefixos que devem ser utilizados na criação de branches e realização de commits:
+3. Padrão de Pull request:
+
+```
+   "Prefix: Título da pull request"
+```
+
+4. Prefixos que devem ser utilizados na criação de branches e realização de commits:
 
 - `feat`: Para novas features e código novo em geral.
 - `fix`: Correções em algo que não está funcionando corretamente.
