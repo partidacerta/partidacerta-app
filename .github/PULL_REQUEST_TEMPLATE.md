@@ -1,6 +1,6 @@
 # Merge request Front-End
 
-## Código Issue
+## Código Issue:
 
 Issue _[insira aqui o código da tarefa, precedido de um '#']_
 
@@ -8,7 +8,7 @@ Issue _[insira aqui o código da tarefa, precedido de um '#']_
 
 _Descrever em tópicos as principais mudanças desta pull request_
 
-## Tipo de mudança
+## Tipo de mudança:
 
 - [ ] Non-breaking change (Nova funcionalidade)
 - [ ] Breaking change (fix ou feat que causa alteração em uma funcionalidade existente)
@@ -17,6 +17,6 @@ _Descrever em tópicos as principais mudanças desta pull request_
 - [ ] Melhoria de performance
 - [ ] Refatoração de código ou estilo
 
-## Observações Adicionais
+## Observações Adicionais:
 
 _Incluir aqui qualquer informação adicional que possa ser relevante. Excluir se não aplicável._

@@ -4,3 +4,8 @@ export interface ThemedToastProps {
   duration?: number;
   closeToast?: (status: boolean) => void;
 }
+
+export interface useThemedToastControllerProps {
+  closeToast?: (status: boolean) => void;
+  duration?: number;
+}
