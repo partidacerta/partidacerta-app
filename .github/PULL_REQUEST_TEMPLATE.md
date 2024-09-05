@@ -1,6 +1,6 @@
 # Merge request Front-End
 
-## Código Issue
+## Código Issue:
 
 Issue _[insira aqui o código da tarefa, precedido de um '#']_
 
