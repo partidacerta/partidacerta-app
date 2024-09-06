@@ -3,28 +3,17 @@ import styled from 'styled-components/native';
 export const Default = styled.Text`
   font-size: 16px;
   line-height: 24px;
-`;
-
-export const SemiBold = styled.Text`
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 600;
+  font-family: 'RobotoRegular';
 `;
 
 export const Title = styled.Text`
   font-size: 32px;
   line-height: 32px;
-  font-weight: bold;
+  font-family: 'RobotoBold';
 `;
 
-export const Subtitle = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
-`;
-
-export const Link = styled.Text`
+export const SemiBold = styled.Text`
   font-size: 16px;
-  line-height: 30px;
-  color: blue;
-  text-decoration: underline;
+  line-height: 24px;
+  font-family: 'RobotoMedium';
 `;

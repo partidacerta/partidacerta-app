@@ -17,7 +17,8 @@ export default function HomeScreen() {
 
   return (
     <ThemedScrollView>
-      <ThemedText type="title">HOME SCREEN</ThemedText>
+      <ThemedText type="title">Entrar</ThemedText>
+      <ThemedText>HOME SCREEN</ThemedText>
       <Link href={'./UserProfile.stack'}>
         <ThemedText type="link">TESTE ROTA PARA PROFILE</ThemedText>
       </Link>

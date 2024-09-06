@@ -20,14 +20,10 @@ export function ThemedText({
         return S.Title;
       case 'semiBold':
         return S.SemiBold;
-      case 'subtitle':
-        return S.Subtitle;
-      case 'link':
-        return S.Link;
       default:
         return S.Default;
     }
   })();
 
-  return <StyledTextComponent style={style} {...rest} />;
+  return <StyledTextComponent style={[{ color }, style]} {...rest} />;
 }
