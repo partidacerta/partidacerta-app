@@ -1,9 +1,9 @@
 import { Colors } from '@/src/constants/Colors';
+import { useThemeColor } from '@/src/hooks/useThemeColor';
 
 import { ThemedText } from '../ThemedText/ThemedText';
 import * as S from './Button.styles';
 import { ButtonProps } from './Button.types';
-import { useThemeColor } from '@/src/hooks/useThemeColor';
 
 export function Button({
   type = 'primary',
@@ -24,19 +24,27 @@ export function Button({
       case 'primary':
         return (
           <S.ButtonPrimary style={style} {...props} onPress={onPress}>
-            <ThemedText type="semiBold" style={{ color: Colors.white }}>
+            <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
               {text}
             </ThemedText>
           </S.ButtonPrimary>
+        );
+      case 'link':
+        return (
+          <S.ButtonLink style={style} {...props} onPress={onPress}>
+            <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
+              {text}
+            </ThemedText>
+          </S.ButtonLink>
         );
       default:
         return (
           <S.ButtonSecondary
             style={[{ borderColor }, style]}
-            {...props}
             onPress={onPress}
+            {...props}
           >
-            <ThemedText type="semiBold" style={{ color: Colors.blue }}>
+            <ThemedText size={16} type="bold">
               {text}
             </ThemedText>
           </S.ButtonSecondary>

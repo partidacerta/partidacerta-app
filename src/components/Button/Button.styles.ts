@@ -9,7 +9,7 @@ export const ButtonPrimary = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 24px;
   background-color: ${Colors.blue};
-  margin: 8px auto;
+  margin: 12px auto;
 `;
 
 export const ButtonSecondary = styled.TouchableOpacity`
@@ -19,5 +19,11 @@ export const ButtonSecondary = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 24px;
   border: 1px solid ${Colors.blue};
-  margin: 8px auto;
+  margin: 12px auto;
+`;
+
+export const ButtonLink = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  margin: 12px auto;
 `;

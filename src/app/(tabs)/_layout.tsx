@@ -4,16 +4,22 @@ import { Tabs } from 'expo-router';
 
 import { TabBarIcon } from '@/src/components/TabBarIcon/TabBarIcon';
 import { Colors } from '@/src/constants/Colors';
-import { useColorScheme } from '@/src/hooks/useColorScheme';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = 'dark';
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tabIconSelected,
+        headerTintColor: Colors[colorScheme ?? 'light'].tabIconSelected,
+        headerStyle: {
+          backgroundColor: Colors[colorScheme ?? 'light'].background,
+        },
+        tabBarStyle: {
+          backgroundColor: Colors[colorScheme ?? 'light'].background,
+        },
       }}
     >
       <Tabs.Screen
@@ -32,7 +38,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(teams)"
         options={{
-          title: 'Meus times',
+          title: 'Meu perfil',
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon

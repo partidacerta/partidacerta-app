@@ -3,5 +3,6 @@ import { type TextProps } from 'react-native';
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'semiBold' | 'link';
+  size?: number;
+  type?: 'default' | 'title' | 'bold' | 'semiBold' | 'link';
 };

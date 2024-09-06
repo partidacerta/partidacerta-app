@@ -7,6 +7,8 @@ export function ThemedView({
   style,
   lightColor,
   darkColor,
+  justifyContent = false,
+  alignItems = false,
   ...props
 }: ThemedViewProps) {
   const backgroundColor = useThemeColor(
@@ -14,5 +16,12 @@ export function ThemedView({
     'background'
   );
 
-  return <S.Container style={[{ backgroundColor }, style]} {...props} />;
+  return (
+    <S.Container
+      justifyContent={justifyContent}
+      alignItems={alignItems}
+      style={[{ backgroundColor }, style]}
+      {...props}
+    />
+  );
 }
