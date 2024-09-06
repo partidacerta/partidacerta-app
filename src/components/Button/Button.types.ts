@@ -4,5 +4,7 @@ export type ButtonProps = {
   type?: 'primary' | 'secondary';
   text: string;
   style?: StyleProp<ViewStyle>;
+  lightColor?: string;
+  darkColor?: string;
   onPress: () => void;
 };
