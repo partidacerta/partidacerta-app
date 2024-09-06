@@ -10,8 +10,6 @@ import {
   ThemeProvider,
 } from '@react-navigation/native';
 
-import { useColorScheme } from '@/src/hooks/useColorScheme';
-
 import 'react-native-reanimated';
 
 import '../helpers/reactotronConfig';
@@ -20,7 +18,8 @@ import ToastPopup from '../components/ToastPopup/ToastPopup';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  // const colorScheme = useColorScheme();
+  const colorScheme = 'dark';
 
   const [loaded] = useFonts({
     RobotoBold: require('../../assets/fonts/Roboto-Bold.ttf'),
@@ -49,11 +48,11 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerBackTitleVisible: false,
+          headerShown: false,
         }}
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="Login.stack" options={{ headerTitle: 'Login' }} />
       </Stack>
     </ThemeProvider>
   );

@@ -9,6 +9,7 @@ export function ThemedText({
   style,
   lightColor,
   darkColor,
+  size,
   type = 'default',
   ...rest
 }: ThemedTextProps) {
@@ -18,6 +19,8 @@ export function ThemedText({
     switch (type) {
       case 'title':
         return S.Title;
+      case 'bold':
+        return S.Bold;
       case 'semiBold':
         return S.SemiBold;
       default:
@@ -25,5 +28,7 @@ export function ThemedText({
     }
   })();
 
-  return <StyledTextComponent style={[{ color }, style]} {...rest} />;
+  return (
+    <StyledTextComponent style={[{ color, fontSize: size }, style]} {...rest} />
+  );
 }
