@@ -22,3 +22,7 @@ export const StyledTextInput = styled.TextInput`
 export const Icon = styled.View`
   margin-left: 10px;
 `;
+
+export const MessageError = styled.Text`
+  color: red;
+`;
