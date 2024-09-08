@@ -14,11 +14,18 @@ import { useLoginController } from './Login.controller';
 import * as S from './Login.styles';
 
 export default function LoginScreen() {
-  const { control, handleSubmit, errors, isValid, onSubmitLogin } =
-    useLoginController();
+  const {
+    control,
+    handleSubmit,
+    errors,
+    isValid,
+    onSubmitLogin,
+    isVisiblePassword,
+    handleShowPassword,
+  } = useLoginController();
 
   return (
-    <ThemedView justifyContent alignItems>
+    <ThemedView justifyCenter alignCenter>
       <Logo width={200} height={200} />
       <S.ContainerInputs>
         <Controller
@@ -37,6 +44,7 @@ export default function LoginScreen() {
               onChangeText={onChange}
               value={value}
               error={errors?.email && errors?.email?.message}
+              maxLength={50}
             />
           )}
         />
@@ -47,21 +55,31 @@ export default function LoginScreen() {
             <Input
               placeholder="Senha"
               icon={
-                <Ionicons name="eye-outline" size={24} color={Colors.gray300} />
+                <Ionicons
+                  name={!isVisiblePassword ? 'eye-off-outline' : 'eye-outline'}
+                  size={24}
+                  color={Colors.gray300}
+                  onPress={handleShowPassword}
+                />
               }
               onChangeText={onChange}
               value={value}
               error={errors?.password && errors?.password?.message}
+              secureTextEntry={isVisiblePassword}
+              maxLength={8}
             />
           )}
         />
-        <Button type="link" text="Esqueci minha senha" />
+        <Button
+          type="link"
+          text="Esqueci minha senha"
+          onPress={() => router.push('/(tabs)/(home)')}
+        />
       </S.ContainerInputs>
       <Button
         text="Entrar"
         onPress={handleSubmit(onSubmitLogin)}
         // disabled={!isValid}
-        // onPress={() => router.push('/(tabs)/(home)')}
       />
       <Button type="secondary" text="Cadastrar" />
     </ThemedView>
