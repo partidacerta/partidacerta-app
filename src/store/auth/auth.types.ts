@@ -1,9 +1,6 @@
 export type AuthStoreProps = {
   accessToken: string;
   isLoading: boolean;
-  count: number;
-  increment: () => void;
-  decrement: () => void;
   login: ({ email, password }: LoginProps) => void;
   makeAsync: <T>(props: {
     handle: () => Promise<T>;
