@@ -18,16 +18,14 @@ export function ThemedText({
     switch (type) {
       case 'title':
         return S.Title;
+      case 'bold':
+        return S.Bold;
       case 'semiBold':
         return S.SemiBold;
-      case 'subtitle':
-        return S.Subtitle;
-      case 'link':
-        return S.Link;
       default:
         return S.Default;
     }
   })();
 
-  return <StyledTextComponent style={style} {...rest} />;
+  return <StyledTextComponent style={[{ color }, style]} {...rest} />;
 }

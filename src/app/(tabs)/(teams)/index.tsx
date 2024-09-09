@@ -1,5 +1,5 @@
-import LoginScreen from '@/src/screens/Login/Login.screen';
+import UserProfileScreen from '@/src/screens/UserProfile/UserProfile.screen';
 
 export default function TeamsStack() {
-  return <LoginScreen />;
+  return <UserProfileScreen />;
 }
