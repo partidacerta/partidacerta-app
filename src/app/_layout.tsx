@@ -47,12 +47,12 @@ export default function RootLayout() {
       <ToastPopup />
       <Stack
         screenOptions={{
-          headerBackTitleVisible: false,
           headerShown: false,
         }}
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="Login.stack" />
       </Stack>
     </ThemeProvider>
   );

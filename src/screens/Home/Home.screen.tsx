@@ -1,4 +1,4 @@
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 
 import { Button } from '@/src/components/Button/Button';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
@@ -14,13 +14,11 @@ export default function HomeScreen() {
         text="Testar tela Not Found"
         onPress={() => router.push('./login.stack')}
       />
-      {/* <Button
+      <Button
+        type="secondary"
         text="Sair"
-        onPress={() => router.push('/(tabs)/(home)/Login.stack')}
+        onPress={() => router.replace('/Login.stack')}
       />
-      <Link href={'/Login.stack'}>
-        <ThemedText>TESTE ROTA PARA LOGIN</ThemedText>
-      </Link> */}
     </ThemedScrollView>
   );
 }

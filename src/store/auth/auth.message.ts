@@ -1,3 +1,3 @@
 export const FailedRequestLogin = {
-  message: 'Erro ao fazer login',
+  message: 'Erro ao fazer login. Tente novamente!',
 };
