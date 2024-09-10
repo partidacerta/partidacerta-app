@@ -10,6 +10,7 @@ export default function RootLayout() {
   return (
     <Stack
       screenOptions={{
+        headerShown: true,
         headerBackTitleVisible: false,
         headerTintColor: Colors[colorScheme ?? 'light'].text,
         headerStyle: {
@@ -20,7 +21,6 @@ export default function RootLayout() {
       <Stack.Screen
         name="index"
         options={{
-          headerShown: true,
           headerTitle: 'Meu perfil',
         }}
       />

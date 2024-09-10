@@ -12,7 +12,7 @@ import { FormRequiredLogin, IUseLoginControllerProps } from './Login.types';
 export const useLoginController = (): IUseLoginControllerProps => {
   const { login } = useAuthStore();
 
-  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+  const [isVisiblePassword, setIsVisiblePassword] = useState(true);
 
   const handleShowPassword = () => {
     setIsVisiblePassword(prev => !prev);

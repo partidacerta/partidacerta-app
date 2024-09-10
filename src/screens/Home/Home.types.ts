@@ -1,3 +1,3 @@
-export interface HomeProps {
-  teste: string;
+export interface IUseHomeControllerProps {
+  handleLogout: () => void;
 }
