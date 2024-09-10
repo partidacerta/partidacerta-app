@@ -6,8 +6,11 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 
 import * as S from './Home.styles';
 import Checkbox from '@/src/components/Checkbox/Checkbox';
+import { useState } from 'react';
 
 export default function HomeScreen() {
+  const [isChecked, setChecked] = useState(false);
+
   return (
     <ThemedScrollView>
       <ThemedText type="title">HOME SCREEN</ThemedText>
@@ -20,7 +23,12 @@ export default function HomeScreen() {
         text="Sair"
         onPress={() => router.replace('/Login.stack')}
       />
-      <Checkbox label="Li e concordo com os termos" />
+      <Checkbox
+        label="Li e concordo com os termos"
+        value={isChecked}
+        onValueChange={setChecked}
+        isChecked={isChecked}
+      />
     </ThemedScrollView>
   );
 }
