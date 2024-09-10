@@ -10,7 +10,8 @@ export default function RootLayout() {
   return (
     <Stack
       screenOptions={{
-        headerBackTitleVisible: false,
+        headerShown: true,
+        headerBackTitleVisible: true,
         headerTintColor: Colors[colorScheme ?? 'light'].text,
         headerStyle: {
           backgroundColor: Colors[colorScheme ?? 'light'].background,
@@ -20,14 +21,12 @@ export default function RootLayout() {
       <Stack.Screen
         name="index"
         options={{
-          headerShown: true,
           headerTitle: 'Home',
         }}
       />
       <Stack.Screen
         name="UserProfile.stack"
         options={{
-          headerShown: true,
           headerTitle: 'Perfil',
         }}
       />
