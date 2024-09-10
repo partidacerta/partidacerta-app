@@ -5,6 +5,7 @@ import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScroll
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 
 import * as S from './Home.styles';
+import Checkbox from '@/src/components/Checkbox/Checkbox';
 
 export default function HomeScreen() {
   return (
@@ -19,6 +20,7 @@ export default function HomeScreen() {
         text="Sair"
         onPress={() => router.replace('/Login.stack')}
       />
+      <Checkbox label="Li e concordo com os termos" />
     </ThemedScrollView>
   );
 }

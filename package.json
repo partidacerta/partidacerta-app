@@ -56,7 +56,8 @@
     "reactotron-react-native": "^5.1.8",
     "styled-components": "^6.1.12",
     "yup": "^1.4.0",
-    "zustand": "^4.5.5"
+    "zustand": "^4.5.5",
+    "expo-checkbox": "~3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
