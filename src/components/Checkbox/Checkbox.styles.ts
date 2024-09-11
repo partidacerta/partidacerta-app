@@ -13,12 +13,17 @@ export const CheckboxContainer = styled.View`
   padding: 0px 18px;
 `;
 
-export const StyledCheckbox = styled(ExpoCheckbox)`
-  width: 16px;
-  height: 16px;
-  border: none;
+export const CheckboxWrapper = styled.View<{ isChecked: boolean }>`
+  padding: 4px;
+  background-color: ${({ isChecked }) =>
+    isChecked ? Colors.blue : Colors.white};
   border-radius: 4px;
-  background-color: ${Colors.white};
+`;
+
+export const StyledCheckbox = styled(ExpoCheckbox)`
+  width: 12px;
+  height: 12px;
+  border: none;
 `;
 
 export const Label = styled(ThemedText)`

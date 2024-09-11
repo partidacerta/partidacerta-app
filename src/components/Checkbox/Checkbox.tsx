@@ -14,12 +14,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
   return (
     <S.Container>
       <S.CheckboxContainer>
-        <S.StyledCheckbox
-          value={value}
-          onValueChange={onValueChange}
-          color={isChecked ? Colors.blue : undefined}
-          {...props}
-        />
+        <S.CheckboxWrapper isChecked={!!isChecked}>
+          <S.StyledCheckbox
+            value={value}
+            onValueChange={onValueChange}
+            color={isChecked ? Colors.blue : undefined}
+            {...props}
+          />
+        </S.CheckboxWrapper>
         <S.Label>{label}</S.Label>
       </S.CheckboxContainer>
       <S.MessageError>{error}</S.MessageError>
