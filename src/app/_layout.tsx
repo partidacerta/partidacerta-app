@@ -53,6 +53,9 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="Login.stack" />
+        <Stack.Screen name="ForgotPassword.stack" />
+        <Stack.Screen name="VerifyCode.stack" />
+        <Stack.Screen name="NewPassword.stack" />
       </Stack>
     </ThemeProvider>
   );

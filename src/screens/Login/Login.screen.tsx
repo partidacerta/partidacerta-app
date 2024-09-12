@@ -75,7 +75,7 @@ export default function LoginScreen() {
         <Button
           type="link"
           text="Esqueci minha senha"
-          onPress={() => router.push('/(tabs)/(home)')}
+          onPress={() => router.push('./ForgotPassword.stack')}
         />
       </S.ContainerInputs>
       <Button
