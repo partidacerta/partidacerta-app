@@ -14,6 +14,7 @@ import 'react-native-reanimated';
 
 import '../helpers/reactotronConfig';
 import ToastPopup from '../components/ToastPopup/ToastPopup';
+import { Colors } from '../constants/Colors';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -47,12 +48,18 @@ export default function RootLayout() {
       <ToastPopup />
       <Stack
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
+          headerBackTitleVisible: false,
+          headerTitle: '',
+          headerStyle: {
+            backgroundColor: Colors.darkBlue,
+          },
+          headerTintColor: Colors.white,
         }}
       >
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="Login.stack" />
+        <Stack.Screen name="Login.stack" options={{ headerShown: false }} />
         <Stack.Screen name="ForgotPassword.stack" />
         <Stack.Screen name="VerifyCode.stack" />
         <Stack.Screen name="NewPassword.stack" />

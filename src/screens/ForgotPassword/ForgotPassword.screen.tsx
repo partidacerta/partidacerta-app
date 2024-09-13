@@ -4,20 +4,12 @@ import { router } from 'expo-router';
 import * as S from './ForgotPassword.styles';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import Input from '@/src/components/Input/Input';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/src/constants/Colors';
 
 export default function ForgotPasswordScreen() {
   return (
     <ThemedScrollView>
-      <S.ContainerIcon>
-        <AntDesign
-          name="left"
-          size={24}
-          color={Colors.white}
-          onPress={() => router.push('./Login.stack')}
-        />
-      </S.ContainerIcon>
       <S.ContainerText>
         <ThemedText type="title">Esqueceu sua senha?</ThemedText>
         <ThemedText>

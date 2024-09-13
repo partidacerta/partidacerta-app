@@ -26,7 +26,7 @@ export default function LoginScreen() {
 
   return (
     <ThemedView justifyCenter alignCenter>
-      <Logo width={200} height={200} />
+      <Logo />
       <S.ContainerInputs>
         <Controller
           name="email"
