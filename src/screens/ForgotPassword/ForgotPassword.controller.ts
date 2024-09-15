@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
-  FormRequiredSendEmail,
+  FormRequiredForgotPassword,
   IUseForgotPasswordControllerProps,
 } from './ForgotPassword.types';
 import { router } from 'expo-router';
@@ -21,7 +21,7 @@ export const useForgotPasswordController =
       control,
       getValues,
       formState: { errors, isValid },
-    } = useForm<FormRequiredSendEmail>({
+    } = useForm<FormRequiredForgotPassword>({
       defaultValues: {
         email: '',
       },
@@ -29,7 +29,7 @@ export const useForgotPasswordController =
       resolver: yupResolver(schema),
     });
 
-    const onSubmitSendEmail = async (): Promise<void> => {
+    const onSubmitForgotPassword = async (): Promise<void> => {
       const { email } = getValues();
 
       router.push('./VerifyCode.stack');
@@ -41,6 +41,6 @@ export const useForgotPasswordController =
       errors,
       control,
       handleSubmit,
-      onSubmitSendEmail,
+      onSubmitForgotPassword,
     };
   };

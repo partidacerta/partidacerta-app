@@ -10,7 +10,7 @@ import { useForgotPasswordController } from './ForgotPassword.controller';
 import { Controller } from 'react-hook-form';
 
 export default function ForgotPasswordScreen() {
-  const { control, handleSubmit, errors, isValid, onSubmitSendEmail } =
+  const { control, handleSubmit, errors, isValid, onSubmitForgotPassword } =
     useForgotPasswordController();
 
   return (
@@ -46,7 +46,7 @@ export default function ForgotPasswordScreen() {
       </S.ContainerInputs>
       <Button
         text="Solicitar código"
-        onPress={handleSubmit(onSubmitSendEmail)}
+        onPress={handleSubmit(onSubmitForgotPassword)}
       />
     </ThemedScrollView>
   );
