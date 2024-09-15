@@ -3,6 +3,10 @@ import { Colors } from '@/src/constants/Colors';
 import { ThemedText } from '../ThemedText/ThemedText';
 import { Checkbox as ExpoCheckbox } from 'expo-checkbox';
 
+interface CheckboxProps {
+  isChecked: boolean;
+}
+
 export const Container = styled.View`
   margin-bottom: 24px;
 `;
@@ -13,7 +17,7 @@ export const CheckboxContainer = styled.View`
   padding: 0px 18px;
 `;
 
-export const CheckboxWrapper = styled.View<{ isChecked: boolean }>`
+export const CheckboxWrapper = styled.View<CheckboxProps>`
   padding: 4px;
   background-color: ${({ isChecked }) =>
     isChecked ? Colors.blue : Colors.white};
