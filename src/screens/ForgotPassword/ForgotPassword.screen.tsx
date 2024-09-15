@@ -6,8 +6,13 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import Input from '@/src/components/Input/Input';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/src/constants/Colors';
+import { useForgotPasswordController } from './ForgotPassword.controller';
+import { Controller } from 'react-hook-form';
 
 export default function ForgotPasswordScreen() {
+  const { control, handleSubmit, errors, isValid, onSubmitSendEmail } =
+    useForgotPasswordController();
+
   return (
     <ThemedScrollView>
       <S.ContainerText>
@@ -17,16 +22,31 @@ export default function ForgotPasswordScreen() {
         </ThemedText>
       </S.ContainerText>
       <S.ContainerInputs>
-        <Input
-          placeholder="E-mail"
-          icon={
-            <Ionicons name="person-outline" size={24} color={Colors.gray300} />
-          }
+        <Controller
+          name="email"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <Input
+              placeholder="E-mail"
+              icon={
+                <Ionicons
+                  name="person-outline"
+                  size={24}
+                  color={Colors.gray300}
+                />
+              }
+              onChangeText={onChange}
+              value={value}
+              error={errors?.email && errors?.email?.message}
+              maxLength={50}
+              autoCapitalize="none"
+            />
+          )}
         />
       </S.ContainerInputs>
       <Button
         text="Solicitar código"
-        onPress={() => router.push('./VerifyCode.stack')}
+        onPress={handleSubmit(onSubmitSendEmail)}
       />
     </ThemedScrollView>
   );
