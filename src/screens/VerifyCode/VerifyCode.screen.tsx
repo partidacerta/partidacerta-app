@@ -4,8 +4,12 @@ import { router } from 'expo-router';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import Input from '@/src/components/Input/Input';
 import { Button } from '@/src/components/Button/Button';
+import { useVerifyCodeController } from './VerifyCode.controller';
 
 export default function VerifyCodeScreen() {
+  const { isValid, errors, control, handleSubmit, onSubmitVerifyCode } =
+    useVerifyCodeController();
+
   return (
     <ThemedScrollView>
       <S.ContainerText>

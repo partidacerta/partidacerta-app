@@ -32,8 +32,8 @@ export const useForgotPasswordController =
     const onSubmitForgotPassword = async (): Promise<void> => {
       const { email } = getValues();
 
-      router.push('./VerifyCode.stack');
       // forgotPassword({ email: email });
+      router.push('./VerifyCode.stack');
     };
 
     return {
