@@ -45,6 +45,7 @@ export default function LoginScreen() {
               value={value}
               error={errors?.email && errors?.email?.message}
               maxLength={50}
+              autoCapitalize="none"
             />
           )}
         />
@@ -67,6 +68,7 @@ export default function LoginScreen() {
               error={errors?.password && errors?.password?.message}
               secureTextEntry={isVisiblePassword}
               maxLength={8}
+              autoCapitalize="none"
             />
           )}
         />

@@ -26,7 +26,6 @@ export default function TabLayout() {
         name="(home)"
         options={{
           title: 'Home',
-          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? 'home' : 'home-outline'}
@@ -39,7 +38,6 @@ export default function TabLayout() {
         name="(teams)"
         options={{
           title: 'Meu perfil',
-          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? 'football' : 'football-outline'}

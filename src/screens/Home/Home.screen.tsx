@@ -4,6 +4,7 @@ import { Button } from '@/src/components/Button/Button';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 
+import { useHomeController } from './Home.controller';
 import * as S from './Home.styles';
 import Checkbox from '@/src/components/Checkbox/Checkbox';
 import { useState } from 'react';
