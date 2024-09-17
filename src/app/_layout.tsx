@@ -55,6 +55,7 @@ export default function RootLayout() {
             backgroundColor: Colors.darkBlue,
           },
           headerTintColor: Colors.white,
+          headerShadowVisible: false,
         }}
       >
         <Stack.Screen name="(tabs)" />
