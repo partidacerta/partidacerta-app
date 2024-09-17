@@ -32,7 +32,7 @@ export const useVerifyCodeController = (): IUseVerifyCodeControllerProps => {
     const { code } = getValues();
 
     // verifyCode({ code: code });
-    router.push('./VerifyCode.stack');
+    router.push('./NewPassword.stack');
   };
 
   return {

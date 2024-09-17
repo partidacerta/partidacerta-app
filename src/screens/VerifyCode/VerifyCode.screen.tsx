@@ -5,6 +5,7 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import Input from '@/src/components/Input/Input';
 import { Button } from '@/src/components/Button/Button';
 import { useVerifyCodeController } from './VerifyCode.controller';
+import { Controller } from 'react-hook-form';
 
 export default function VerifyCodeScreen() {
   const { isValid, errors, control, handleSubmit, onSubmitVerifyCode } =
@@ -17,19 +18,29 @@ export default function VerifyCodeScreen() {
         <ThemedText>Digite o código que você recebeu via e-mail.</ThemedText>
       </S.ContainerText>
       <S.ContainerInputs>
-        <Input />
-        <Input />
-        <Input />
-        <Input />
-        <Input />
-        <Input />
+        <Controller
+          name="code"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <Input
+              placeholder="Código de verificação"
+              keyboardType="numeric"
+              maxLength={6}
+              value={value}
+              onChangeText={onChange}
+              error={errors?.code && errors?.code?.message}
+              autoCapitalize="none"
+            />
+          )}
+        />
       </S.ContainerInputs>
       <S.ContainerButton>
         <Button
           text="Confirmar"
-          onPress={() => router.push('./NewPassword.stack')}
+          onPress={handleSubmit(onSubmitVerifyCode)}
+          // disabled={!isValid}
         />
-        <ThemedText>Não Recebi o código, reenviar.</ThemedText>
+        <ThemedText>Não recebi o código, reenviar.</ThemedText>
       </S.ContainerButton>
     </ThemedScrollView>
   );

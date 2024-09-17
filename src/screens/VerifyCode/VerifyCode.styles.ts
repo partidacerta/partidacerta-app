@@ -6,8 +6,6 @@ export const ContainerText = styled.View`
 `;
 
 export const ContainerInputs = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
   padding-bottom: 70%;
 `;
 
