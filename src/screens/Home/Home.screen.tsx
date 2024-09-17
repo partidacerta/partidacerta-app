@@ -6,9 +6,11 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 
 import { useHomeController } from './Home.controller';
 import * as S from './Home.styles';
+import Checkbox from '@/src/components/Checkbox/Checkbox';
+import { useState } from 'react';
 
 export default function HomeScreen() {
-  const { handleLogout } = useHomeController();
+  const [isChecked, setChecked] = useState(false);
 
   return (
     <ThemedScrollView>
@@ -17,7 +19,17 @@ export default function HomeScreen() {
         text="Testar tela Not Found"
         onPress={() => router.push('./login.stack')}
       />
-      <Button type="secondary" text="Sair" onPress={handleLogout} />
+      <Button
+        type="secondary"
+        text="Sair"
+        onPress={() => router.replace('/Login.stack')}
+      />
+      <Checkbox
+        label="Li e concordo com os termos"
+        value={isChecked}
+        onValueChange={setChecked}
+        isChecked={isChecked}
+      />
     </ThemedScrollView>
   );
 }
