@@ -86,7 +86,7 @@ export default function NewPasswordScreen() {
       <Button
         text="Alterar senha"
         onPress={handleSubmit(onSubmitNewPassword)}
-        // disabled={!isValid}
+        disabled={!isValid}
       />
     </ThemedScrollView>
   );

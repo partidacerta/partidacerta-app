@@ -1,14 +1,19 @@
 import styled from 'styled-components/native';
-
+import { TouchableOpacity } from 'react-native';
 import { Colors } from '@/src/constants/Colors';
 
-export const ButtonPrimary = styled.TouchableOpacity`
+interface ButtonProps {
+  disable?: boolean;
+}
+
+export const ButtonPrimary = styled(TouchableOpacity)<ButtonProps>`
   height: 50px;
   width: 100%;
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-  background-color: ${Colors.blue};
+  background-color: ${({ disabled }) =>
+    disabled ? Colors.darkBlue900 : Colors.blue};
   margin: 12px auto;
 `;
 

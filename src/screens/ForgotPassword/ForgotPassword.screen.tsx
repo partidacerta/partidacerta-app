@@ -47,7 +47,7 @@ export default function ForgotPasswordScreen() {
       <Button
         text="Solicitar código"
         onPress={handleSubmit(onSubmitForgotPassword)}
-        // disabled={!isValid}
+        disabled={!isValid}
       />
     </ThemedScrollView>
   );

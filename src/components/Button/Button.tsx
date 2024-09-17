@@ -11,6 +11,7 @@ export function Button({
   style,
   lightColor,
   darkColor,
+  disabled,
   onPress,
   ...props
 }: ButtonProps) {
@@ -23,8 +24,17 @@ export function Button({
     switch (type) {
       case 'primary':
         return (
-          <S.ButtonPrimary style={style} {...props} onPress={onPress}>
-            <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
+          <S.ButtonPrimary
+            style={style}
+            {...props}
+            disabled={disabled}
+            onPress={onPress}
+          >
+            <ThemedText
+              size={16}
+              type="bold"
+              style={{ color: disabled ? Colors.gray500 : Colors.white }}
+            >
               {text}
             </ThemedText>
           </S.ButtonPrimary>

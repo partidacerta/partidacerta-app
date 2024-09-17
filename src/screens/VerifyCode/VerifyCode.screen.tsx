@@ -38,7 +38,7 @@ export default function VerifyCodeScreen() {
         <Button
           text="Confirmar"
           onPress={handleSubmit(onSubmitVerifyCode)}
-          // disabled={!isValid}
+          disabled={!isValid}
         />
         <ThemedText>Não recebi o código, reenviar.</ThemedText>
       </S.ContainerButton>
