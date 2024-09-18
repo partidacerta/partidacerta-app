@@ -5,3 +5,9 @@ export const ContainerInputs = styled.View`
   margin-top: 60px;
   margin-bottom: 60px;
 `;
+
+export const ContainerButton = styled.View`
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 24px;
+`;

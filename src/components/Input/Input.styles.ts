@@ -4,9 +4,7 @@ import { Colors } from '@/src/constants/Colors';
 
 import { ThemedText } from '../ThemedText/ThemedText';
 
-export const Container = styled.View`
-  margin-bottom: 24px;
-`;
+export const Container = styled.View``;
 
 export const ContainerInput = styled.View`
   flex-direction: row;

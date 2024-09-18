@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { StatusBar } from 'react-native';
 
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -14,6 +15,7 @@ import 'react-native-reanimated';
 
 import '../helpers/reactotronConfig';
 import ToastPopup from '../components/ToastPopup/ToastPopup';
+import { Colors } from '../constants/Colors';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -44,15 +46,21 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <StatusBar
+        barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
+        backgroundColor={colorScheme === 'dark' ? Colors.black : Colors.white}
+      />
       <ToastPopup />
       <Stack
         screenOptions={{
           headerShown: false,
+          animation: 'fade',
         }}
       >
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="Login.stack" />
+        <Stack.Screen name="RegisterUser.stack" />
       </Stack>
     </ThemeProvider>
   );
