@@ -1,20 +1,17 @@
-import styled from 'styled-components/native';
-import { Colors } from '@/src/constants/Colors';
-import { ThemedText } from '../ThemedText/ThemedText';
 import { Checkbox as ExpoCheckbox } from 'expo-checkbox';
+import styled from 'styled-components/native';
+
+import { Colors } from '@/src/constants/Colors';
+
+import { ThemedText } from '../ThemedText/ThemedText';
 
 interface CheckboxProps {
   isChecked: boolean;
 }
 
-export const Container = styled.View`
-  margin-bottom: 24px;
-`;
-
-export const CheckboxContainer = styled.View`
+export const CheckboxContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-  padding: 0px 18px;
 `;
 
 export const CheckboxWrapper = styled.View<CheckboxProps>`
