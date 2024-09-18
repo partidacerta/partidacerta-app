@@ -1,15 +1,18 @@
+import { useState } from 'react';
+
 import { router } from 'expo-router';
 
 import { Button } from '@/src/components/Button/Button';
+import Checkbox from '@/src/components/Checkbox/Checkbox';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 
 import { useHomeController } from './Home.controller';
 import * as S from './Home.styles';
-import Checkbox from '@/src/components/Checkbox/Checkbox';
-import { useState } from 'react';
 
 export default function HomeScreen() {
+  const { handleLogout } = useHomeController();
+
   const [isChecked, setChecked] = useState(false);
 
   return (
@@ -19,11 +22,7 @@ export default function HomeScreen() {
         text="Testar tela Not Found"
         onPress={() => router.push('./login.stack')}
       />
-      <Button
-        type="secondary"
-        text="Sair"
-        onPress={() => router.replace('/Login.stack')}
-      />
+      <Button type="secondary" text="Sair" onPress={handleLogout} />
       <Checkbox
         label="Li e concordo com os termos"
         value={isChecked}

@@ -1,7 +1,10 @@
 import React from 'react';
+
+import { Colors } from '@/src/constants/Colors';
+
+import { useCheckboxController } from './Checkbox.controller';
 import * as S from './Checkbox.styles';
 import { CheckboxProps } from './Checkbox.types';
-import { Colors } from '@/src/constants/Colors';
 
 const Checkbox: React.FC<CheckboxProps> = ({
   label,
@@ -11,9 +14,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
   isChecked,
   ...props
 }) => {
+  const { handlePressCheckbox } = useCheckboxController({
+    onValueChange,
+    value,
+  });
+
   return (
-    <S.Container>
-      <S.CheckboxContainer>
+    <>
+      <S.CheckboxContainer onPress={handlePressCheckbox}>
         <S.CheckboxWrapper isChecked={!!isChecked}>
           <S.StyledCheckbox
             value={value}
@@ -25,7 +33,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         <S.Label>{label}</S.Label>
       </S.CheckboxContainer>
       <S.MessageError>{error}</S.MessageError>
-    </S.Container>
+    </>
   );
 };
 
