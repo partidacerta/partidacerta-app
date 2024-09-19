@@ -10,6 +10,7 @@ export default function RootLayout() {
   return (
     <Stack
       screenOptions={{
+        animation: 'fade',
         headerShown: true,
         headerBackTitleVisible: false,
         headerTintColor: Colors[colorScheme ?? 'light'].text,

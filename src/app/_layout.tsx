@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { StatusBar } from 'react-native';
 
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -45,9 +46,14 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <StatusBar
+        barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
+        backgroundColor={colorScheme === 'dark' ? Colors.black : Colors.white}
+      />
       <ToastPopup />
       <Stack
         screenOptions={{
+          animation: 'fade',
           headerShown: true,
           headerBackTitleVisible: false,
           headerTitle: '',
@@ -64,6 +70,10 @@ export default function RootLayout() {
         <Stack.Screen name="ForgotPassword.stack" />
         <Stack.Screen name="VerifyCode.stack" />
         <Stack.Screen name="NewPassword.stack" />
+        <Stack.Screen
+          name="RegisterUser.stack"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </ThemeProvider>
   );

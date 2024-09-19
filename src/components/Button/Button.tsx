@@ -25,23 +25,24 @@ export function Button({
       case 'primary':
         return (
           <S.ButtonPrimary
-            style={style}
             {...props}
+            style={style}
             disabled={disabled}
             onPress={onPress}
           >
-            <ThemedText
-              size={16}
-              type="bold"
-              style={{ color: disabled ? Colors.gray500 : Colors.white }}
-            >
+            <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
               {text}
             </ThemedText>
           </S.ButtonPrimary>
         );
       case 'link':
         return (
-          <S.ButtonLink style={style} {...props} onPress={onPress}>
+          <S.ButtonLink
+            {...props}
+            style={style}
+            disabled={disabled}
+            onPress={onPress}
+          >
             <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
               {text}
             </ThemedText>
@@ -50,9 +51,10 @@ export function Button({
       default:
         return (
           <S.ButtonSecondary
-            style={[{ borderColor }, style]}
-            onPress={onPress}
             {...props}
+            style={[{ borderColor }, style]}
+            disabled={disabled}
+            onPress={onPress}
           >
             <ThemedText size={16} type="bold">
               {text}

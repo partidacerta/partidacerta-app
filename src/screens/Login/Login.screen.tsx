@@ -72,18 +72,24 @@ export default function LoginScreen() {
             />
           )}
         />
-        <Button
-          type="link"
-          text="Esqueci minha senha"
-          onPress={() => router.push('./ForgotPassword.stack')}
-        />
+        <S.ContainerButton>
+          <Button
+            type="link"
+            text="Esqueci minha senha"
+            onPress={() => router.push('./ForgotPassword.stack')}
+          />
+        </S.ContainerButton>
       </S.ContainerInputs>
       <Button
         text="Entrar"
         onPress={handleSubmit(onSubmitLogin)}
-        // disabled={!isValid}
+        disabled={!isValid}
       />
-      <Button type="secondary" text="Cadastrar" />
+      <Button
+        type="secondary"
+        text="Cadastrar"
+        onPress={() => router.push('/RegisterUser.stack')}
+      />
     </ThemedView>
   );
 }

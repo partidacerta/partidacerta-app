@@ -6,4 +6,5 @@ export interface ButtonProps extends TouchableOpacityProps {
   style?: StyleProp<ViewStyle>;
   lightColor?: string;
   darkColor?: string;
+  disabled?: boolean;
 }
