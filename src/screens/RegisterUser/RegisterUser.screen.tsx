@@ -1,4 +1,4 @@
-import { Controller } from 'react-hook-form';
+import { Controller, useWatch } from 'react-hook-form';
 
 import { router } from 'expo-router';
 
@@ -8,19 +8,23 @@ import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
+import { validateInputPassword } from '@/src/utils/validateInputPassword';
 
+import Google from '../../assets/svgs/images/google.svg';
 import { useRegisteUserController } from './RegisterUser.controller';
 import * as S from './RegisterUser.styles';
 
 export default function RegisterUserScreen() {
   const {
     control,
-    handleSubmit,
     errors,
     isValid,
     onSubmitRegisterUser,
     isVisiblePassword,
     handleShowPassword,
+    isVisibleConfirmPassword,
+    handleShowConfirmPassword,
+    watchPassword,
   } = useRegisteUserController();
 
   return (
@@ -83,10 +87,14 @@ export default function RegisterUserScreen() {
               placeholder="Confirmar senha"
               icon={
                 <Ionicons
-                  name={!isVisiblePassword ? 'eye-off-outline' : 'eye-outline'}
+                  name={
+                    !isVisibleConfirmPassword
+                      ? 'eye-off-outline'
+                      : 'eye-outline'
+                  }
                   size={24}
                   color={Colors.gray300}
-                  onPress={handleShowPassword}
+                  onPress={handleShowConfirmPassword}
                 />
               }
               onChangeText={onChange}
@@ -94,19 +102,89 @@ export default function RegisterUserScreen() {
               error={
                 errors?.confirmPassword && errors?.confirmPassword?.message
               }
-              secureTextEntry={isVisiblePassword}
+              secureTextEntry={isVisibleConfirmPassword}
               maxLength={8}
               autoCapitalize="none"
             />
           )}
         />
       </S.ContainerInputs>
-      <Button
-        type="primary"
-        text="Continuar"
-        disabled={!isValid}
-        onPress={() => router.push('/(tabs)/(home)')}
-      />
+      <S.Row>
+        <S.TextCheckPassword>Número</S.TextCheckPassword>
+        <Ionicons
+          name={'checkmark-sharp'}
+          size={24}
+          color={
+            validateInputPassword({
+              input: watchPassword,
+              validationType: 'number',
+            })
+              ? Colors.green
+              : Colors.gray300
+          }
+        />
+      </S.Row>
+      <S.Row>
+        <S.TextCheckPassword>Letra maiúscula</S.TextCheckPassword>
+        <Ionicons
+          name={'checkmark-sharp'}
+          size={24}
+          color={
+            validateInputPassword({
+              input: watchPassword,
+              validationType: 'uppercase',
+            })
+              ? Colors.green
+              : Colors.gray300
+          }
+        />
+      </S.Row>
+      <S.Row>
+        <S.TextCheckPassword>Letra minúscula</S.TextCheckPassword>
+        <Ionicons
+          name={'checkmark-sharp'}
+          size={24}
+          color={
+            validateInputPassword({
+              input: watchPassword,
+              validationType: 'lowercase',
+            })
+              ? Colors.green
+              : Colors.gray300
+          }
+        />
+      </S.Row>
+      <S.Row>
+        <S.TextCheckPassword>Caractere especial</S.TextCheckPassword>
+        <Ionicons
+          name={'checkmark-sharp'}
+          size={24}
+          color={
+            validateInputPassword({
+              input: watchPassword,
+              validationType: 'specialChar',
+            })
+              ? Colors.green
+              : Colors.gray300
+          }
+        />
+      </S.Row>
+      <S.FooterScreen>
+        <Button
+          type="primary"
+          text="Continuar"
+          disabled={!isValid}
+          onPress={onSubmitRegisterUser}
+        />
+        <S.ContainerDivider>
+          <S.Divider />
+          <ThemedText>ou cadastra-se com</ThemedText>
+          <S.Divider />
+        </S.ContainerDivider>
+        <S.ButtonGoogle>
+          <Google />
+        </S.ButtonGoogle>
+      </S.FooterScreen>
     </S.ContainerScreen>
   );
 }

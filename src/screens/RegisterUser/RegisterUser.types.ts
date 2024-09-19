@@ -8,6 +8,9 @@ export interface IUseRegisterUserControllerProps {
   isValid: boolean;
   isVisiblePassword: boolean;
   handleShowPassword: () => void;
+  handleShowConfirmPassword: () => void;
+  isVisibleConfirmPassword: boolean;
+  watchPassword: string;
 }
 
 export interface FormRequiredRegisterUser {

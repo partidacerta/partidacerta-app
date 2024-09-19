@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 
+import { router } from 'expo-router';
 import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,9 +13,15 @@ import {
 
 export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
+  const [isVisibleConfirmPassword, setIsVisibleConfirmPassword] =
+    useState(true);
 
   const handleShowPassword = () => {
     setIsVisiblePassword(prev => !prev);
+  };
+
+  const handleShowConfirmPassword = () => {
+    setIsVisibleConfirmPassword(prev => !prev);
   };
 
   const schema = yup.object().shape({
@@ -23,7 +30,10 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
       .email('Digite um e-mail válido')
       .required('O e-mail é obrigatório'),
     password: yup.string().required('A senha é obrigatória'),
-    confirmPassword: yup.string().required('A senha é obrigatória'),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password')], 'As senhas precisam ser iguais')
+      .required('A confirmação de senha é obrigatória'),
   });
 
   const {
@@ -41,8 +51,14 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     resolver: yupResolver(schema),
   });
 
+  const watchPassword = useWatch({
+    control,
+    name: 'password',
+  });
+
   const onSubmitRegisterUser = async (): Promise<void> => {
     const { email, password, confirmPassword } = getValues();
+    router.push('/(tabs)/(home)');
   };
 
   return {
@@ -53,5 +69,8 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     handleShowPassword,
     handleSubmit,
     onSubmitRegisterUser,
+    handleShowConfirmPassword,
+    isVisibleConfirmPassword,
+    watchPassword,
   };
 };
