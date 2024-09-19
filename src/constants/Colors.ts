@@ -44,6 +44,7 @@ export const Colors = {
   blue: bluePrimary,
 
   darkBlue: darkBlue,
+  darkBlue900: '#161842',
   darkOpacity: '#22262F80',
 
   green: '#32C07C',

@@ -53,14 +53,27 @@ export default function RootLayout() {
       <ToastPopup />
       <Stack
         screenOptions={{
-          headerShown: false,
           animation: 'fade',
+          headerShown: true,
+          headerBackTitleVisible: false,
+          headerTitle: '',
+          headerStyle: {
+            backgroundColor: Colors.darkBlue,
+          },
+          headerTintColor: Colors.white,
+          headerShadowVisible: false,
         }}
       >
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="Login.stack" />
-        <Stack.Screen name="RegisterUser.stack" />
+        <Stack.Screen name="Login.stack" options={{ headerShown: false }} />
+        <Stack.Screen name="ForgotPassword.stack" />
+        <Stack.Screen name="VerifyCode.stack" />
+        <Stack.Screen name="NewPassword.stack" />
+        <Stack.Screen
+          name="RegisterUser.stack"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </ThemeProvider>
   );

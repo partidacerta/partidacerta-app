@@ -26,7 +26,7 @@ export default function LoginScreen() {
 
   return (
     <ThemedView justifyCenter alignCenter>
-      <Logo width={200} height={200} />
+      <Logo />
       <S.ContainerInputs>
         <Controller
           name="email"
@@ -76,14 +76,14 @@ export default function LoginScreen() {
           <Button
             type="link"
             text="Esqueci minha senha"
-            onPress={() => router.push('/(tabs)/(home)')}
+            onPress={() => router.push('./ForgotPassword.stack')}
           />
         </S.ContainerButton>
       </S.ContainerInputs>
       <Button
         text="Entrar"
         onPress={handleSubmit(onSubmitLogin)}
-        // disabled={!isValid}
+        disabled={!isValid}
       />
       <Button
         type="secondary"
