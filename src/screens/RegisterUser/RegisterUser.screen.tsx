@@ -1,4 +1,4 @@
-import { Controller, useWatch } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { router } from 'expo-router';
 
@@ -173,7 +173,7 @@ export default function RegisterUserScreen() {
         <Button
           type="primary"
           text="Continuar"
-          disabled={!isValid}
+          // disabled={!isValid}
           onPress={onSubmitRegisterUser}
         />
         <S.ContainerDivider>

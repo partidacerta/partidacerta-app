@@ -9,6 +9,8 @@ export function ThemedText({
   style,
   lightColor,
   darkColor,
+  textAlign,
+  width,
   type = 'default',
   ...rest
 }: ThemedTextProps) {
@@ -27,5 +29,12 @@ export function ThemedText({
     }
   })();
 
-  return <StyledTextComponent style={[{ color }, style]} {...rest} />;
+  return (
+    <StyledTextComponent
+      style={[{ color }, style]}
+      textAlign={textAlign}
+      width={width}
+      {...rest}
+    />
+  );
 }

@@ -54,7 +54,7 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           animation: 'fade',
-          headerShown: true,
+          headerShown: false,
           headerBackTitleVisible: false,
           headerTitle: '',
           headerStyle: {
@@ -66,13 +66,20 @@ export default function RootLayout() {
       >
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="Login.stack" options={{ headerShown: false }} />
-        <Stack.Screen name="ForgotPassword.stack" />
-        <Stack.Screen name="VerifyCode.stack" />
-        <Stack.Screen name="NewPassword.stack" />
+        <Stack.Screen name="Login.stack" />
         <Stack.Screen
-          name="RegisterUser.stack"
-          options={{ headerShown: false }}
+          name="ForgotPassword.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen name="VerifyCode.stack" options={{ headerShown: true }} />
+        <Stack.Screen
+          name="NewPassword.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen name="RegisterUser.stack" />
+        <Stack.Screen
+          name="PrivacyPolicies.stack"
+          options={{ headerShown: true }}
         />
       </Stack>
     </ThemeProvider>

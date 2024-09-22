@@ -58,7 +58,7 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
 
   const onSubmitRegisterUser = async (): Promise<void> => {
     const { email, password, confirmPassword } = getValues();
-    router.push('/(tabs)/(home)');
+    router.push('/PrivacyPolicies.stack');
   };
 
   return {

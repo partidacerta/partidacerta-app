@@ -5,4 +5,6 @@ export type ThemedTextProps = TextProps & {
   darkColor?: string;
   size?: number;
   type?: 'default' | 'title' | 'bold' | 'semiBold';
+  textAlign?: 'center' | 'start' | 'end' | 'justify';
+  width?: string;
 };
