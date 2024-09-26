@@ -5,7 +5,7 @@ import { SvgsTypes } from '.';
 export interface SvgsProps {
   style?: StyleProp<ImageStyle>;
   containerStyle?: StyleProp<ViewStyle>;
-  icon?: SvgsTypes;
+  icon?: string;
   width?: string;
   height?: string;
   color?: string;

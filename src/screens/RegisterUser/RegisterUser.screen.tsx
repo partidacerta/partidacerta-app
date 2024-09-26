@@ -25,6 +25,7 @@ export default function RegisterUserScreen() {
     isVisibleConfirmPassword,
     handleShowConfirmPassword,
     watchPassword,
+    dataValidateCharacteres,
   } = useRegisteUserController();
 
   return (
@@ -109,66 +110,27 @@ export default function RegisterUserScreen() {
           )}
         />
       </S.ContainerInputs>
-      <S.Row>
-        <S.TextCheckPassword>Número</S.TextCheckPassword>
-        <Ionicons
-          name={'checkmark-sharp'}
-          size={24}
-          color={
-            validateInputPassword({
-              input: watchPassword,
-              validationType: 'number',
-            })
-              ? Colors.green
-              : Colors.gray300
-          }
-        />
-      </S.Row>
-      <S.Row>
-        <S.TextCheckPassword>Letra maiúscula</S.TextCheckPassword>
-        <Ionicons
-          name={'checkmark-sharp'}
-          size={24}
-          color={
-            validateInputPassword({
-              input: watchPassword,
-              validationType: 'uppercase',
-            })
-              ? Colors.green
-              : Colors.gray300
-          }
-        />
-      </S.Row>
-      <S.Row>
-        <S.TextCheckPassword>Letra minúscula</S.TextCheckPassword>
-        <Ionicons
-          name={'checkmark-sharp'}
-          size={24}
-          color={
-            validateInputPassword({
-              input: watchPassword,
-              validationType: 'lowercase',
-            })
-              ? Colors.green
-              : Colors.gray300
-          }
-        />
-      </S.Row>
-      <S.Row>
-        <S.TextCheckPassword>Caractere especial</S.TextCheckPassword>
-        <Ionicons
-          name={'checkmark-sharp'}
-          size={24}
-          color={
-            validateInputPassword({
-              input: watchPassword,
-              validationType: 'specialChar',
-            })
-              ? Colors.green
-              : Colors.gray300
-          }
-        />
-      </S.Row>
+      {dataValidateCharacteres.map((item, index) => (
+        <S.Row key={index}>
+          <S.TextCheckPassword>{item.label}</S.TextCheckPassword>
+          <Ionicons
+            name={'checkmark-sharp'}
+            size={24}
+            color={
+              validateInputPassword({
+                input: watchPassword,
+                validationType: item.type as
+                  | 'number'
+                  | 'uppercase'
+                  | 'lowercase'
+                  | 'specialChar',
+              })
+                ? Colors.green
+                : Colors.gray300
+            }
+          />
+        </S.Row>
+      ))}
       <S.FooterScreen>
         <Button
           type="primary"

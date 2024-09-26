@@ -61,6 +61,25 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     router.push('/PrivacyPolicies.stack');
   };
 
+  const dataValidateCharacteres = [
+    {
+      type: 'number',
+      label: 'Número',
+    },
+    {
+      type: 'uppercase',
+      label: 'Letra maiúscula',
+    },
+    {
+      type: 'lowercase',
+      label: 'Letra minúscula',
+    },
+    {
+      type: 'specialChar',
+      label: 'Caractere especial',
+    },
+  ];
+
   return {
     isValid,
     errors,
@@ -72,5 +91,6 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     handleShowConfirmPassword,
     isVisibleConfirmPassword,
     watchPassword,
+    dataValidateCharacteres,
   };
 };

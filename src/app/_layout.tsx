@@ -81,6 +81,14 @@ export default function RootLayout() {
           name="PrivacyPolicies.stack"
           options={{ headerShown: true }}
         />
+        <Stack.Screen
+          name="RegisterUserInfo.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="RegisterUserSports.stack"
+          options={{ headerShown: true }}
+        />
       </Stack>
     </ThemeProvider>
   );

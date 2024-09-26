@@ -11,10 +11,16 @@ export interface IUseRegisterUserControllerProps {
   handleShowConfirmPassword: () => void;
   isVisibleConfirmPassword: boolean;
   watchPassword: string;
+  dataValidateCharacteres: DataValidateCharacteres[];
 }
 
 export interface FormRequiredRegisterUser {
   email: string;
   password: string;
   confirmPassword: string;
+}
+
+interface DataValidateCharacteres {
+  type: string;
+  label: string;
 }

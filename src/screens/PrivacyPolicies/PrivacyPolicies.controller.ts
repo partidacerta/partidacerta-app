@@ -10,7 +10,7 @@ export const usePrivacyPoliciesController =
       useState(false);
 
     const onSubmitConfirmPrivacyPolicies = () => {
-      router.push('/(home)');
+      router.push('/RegisterUserInfo.stack');
     };
 
     return {
