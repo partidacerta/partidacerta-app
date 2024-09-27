@@ -5,7 +5,7 @@ export interface IUseRegisterUserControllerProps {
   handleSubmit: UseFormHandleSubmit<FormRequiredRegisterUser>;
   control: Control<FormRequiredRegisterUser>;
   errors: FieldErrors<FormRequiredRegisterUser>;
-  isValid: boolean;
+  handleFormIsValid: () => boolean;
   isVisiblePassword: boolean;
   handleShowPassword: () => void;
   handleShowConfirmPassword: () => void;

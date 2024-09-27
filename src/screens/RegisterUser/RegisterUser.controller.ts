@@ -6,12 +6,16 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import useSignInStore from '@/src/store/signIn/signIn.store';
+
 import {
   FormRequiredRegisterUser,
   IUseRegisterUserControllerProps,
 } from './RegisterUser.types';
 
 export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
+  const { setUserDataSignIn } = useSignInStore();
+
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
   const [isVisibleConfirmPassword, setIsVisibleConfirmPassword] =
     useState(true);
@@ -57,8 +61,29 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
   });
 
   const onSubmitRegisterUser = async (): Promise<void> => {
-    const { email, password, confirmPassword } = getValues();
+    const { email, password } = getValues();
+
+    setUserDataSignIn({
+      email,
+      password,
+    });
+
     router.push('/PrivacyPolicies.stack');
+  };
+
+  const handleFormIsValid = () => {
+    const { password, confirmPassword } = getValues();
+
+    if (password === confirmPassword && password.length === 8 && isValid) {
+      const hasUppercase = /[A-Z]/.test(password);
+      const hasLowercase = /[a-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+      return hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
+    }
+
+    return false;
   };
 
   const dataValidateCharacteres = [
@@ -81,7 +106,7 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
   ];
 
   return {
-    isValid,
+    handleFormIsValid,
     errors,
     control,
     isVisiblePassword,

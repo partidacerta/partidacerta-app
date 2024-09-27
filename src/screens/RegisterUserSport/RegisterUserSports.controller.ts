@@ -2,10 +2,14 @@ import { useState } from 'react';
 
 import { router } from 'expo-router';
 
+import useSignInStore from '@/src/store/signIn/signIn.store';
+
 import { IUseRegisterUserSportsControllerProps } from './RegisterUserSports.types';
 
 export const useRegisterUserSportsController =
   (): IUseRegisterUserSportsControllerProps => {
+    const { setUserDataSignIn } = useSignInStore();
+
     const [sportsSelected, setSportsSelecteds] = useState<string[]>([]);
 
     const handleSportsSelecteds = (sport: string) => {
@@ -19,6 +23,10 @@ export const useRegisterUserSportsController =
     };
 
     const onSubmitRegisterUserSports = () => {
+      setUserDataSignIn({
+        sports: sportsSelected,
+      });
+
       router.push('/(home)');
     };
 

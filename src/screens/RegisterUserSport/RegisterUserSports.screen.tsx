@@ -36,7 +36,7 @@ export default function RegisterUserSportsScreen() {
               icon={sport}
               height="92"
               width="92"
-              style={{ opacity: sportsSelected.includes(sport) ? 1 : 0.5 }}
+              style={{ opacity: sportsSelected.includes(sport) ? 1 : 0.4 }}
             />
           </S.ButtonSport>
         ))}

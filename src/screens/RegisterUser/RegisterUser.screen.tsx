@@ -18,7 +18,7 @@ export default function RegisterUserScreen() {
   const {
     control,
     errors,
-    isValid,
+    handleFormIsValid,
     onSubmitRegisterUser,
     isVisiblePassword,
     handleShowPassword,
@@ -135,7 +135,7 @@ export default function RegisterUserScreen() {
         <Button
           type="primary"
           text="Continuar"
-          // disabled={!isValid}
+          disabled={!handleFormIsValid()}
           onPress={onSubmitRegisterUser}
         />
         <S.ContainerDivider>
