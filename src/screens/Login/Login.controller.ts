@@ -10,7 +10,7 @@ import useAuthStore from '@/src/store/auth/auth.store';
 import { FormRequiredLogin, IUseLoginControllerProps } from './Login.types';
 
 export const useLoginController = (): IUseLoginControllerProps => {
-  const { login } = useAuthStore();
+  const { authLogin } = useAuthStore();
 
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
 
@@ -43,7 +43,7 @@ export const useLoginController = (): IUseLoginControllerProps => {
   const onSubmitLogin = async (): Promise<void> => {
     const { email, password } = getValues();
 
-    login({ email: email, password: password });
+    authLogin({ email: email, password: password });
   };
 
   return {

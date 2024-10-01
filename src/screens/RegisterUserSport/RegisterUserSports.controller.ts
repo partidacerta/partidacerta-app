@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 import { router } from 'expo-router';
 
-import useSignInStore from '@/src/store/signIn/signIn.store';
+import useAuthStore from '@/src/store/auth/auth.store';
 
 import { IUseRegisterUserSportsControllerProps } from './RegisterUserSports.types';
 
 export const useRegisterUserSportsController =
   (): IUseRegisterUserSportsControllerProps => {
-    const { setUserDataSignIn } = useSignInStore();
+    const { setUserDataSignIn, authRegister } = useAuthStore();
 
     const [sportsSelected, setSportsSelecteds] = useState<string[]>([]);
 
@@ -26,6 +26,8 @@ export const useRegisterUserSportsController =
       setUserDataSignIn({
         sports: sportsSelected,
       });
+
+      authRegister();
 
       router.push('/(home)');
     };

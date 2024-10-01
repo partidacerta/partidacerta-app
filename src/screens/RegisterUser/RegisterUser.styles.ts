@@ -21,6 +21,7 @@ export const ContainerInputs = styled.View`
   width: 100%;
   margin-top: 60px;
   margin-bottom: 10px;
+  gap: 20px;
 `;
 
 export const TextCheckPassword = styled(ThemedText)`

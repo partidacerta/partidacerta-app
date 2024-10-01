@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 import { router } from 'expo-router';
 
-import useSignInStore from '@/src/store/signIn/signIn.store';
+import useAuthStore from '@/src/store/auth/auth.store';
 
 import { IUsePrivacyPoliciesControllerProps } from './PrivacyPolicies.types';
 
 export const usePrivacyPoliciesController =
   (): IUsePrivacyPoliciesControllerProps => {
-    const { setUserDataSignIn } = useSignInStore();
+    const { setUserDataSignIn } = useAuthStore();
 
     const [isCheckedPrivacyPolicies, setIsCheckedPrivacyPolicies] =
       useState(false);

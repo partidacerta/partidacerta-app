@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import useSignInStore from '@/src/store/signIn/signIn.store';
+import useAuthStore from '@/src/store/auth/auth.store';
 
 import {
   FormRequiredRegisterUserInfo,
@@ -14,7 +14,7 @@ import {
 
 export const useRegisterUserInfoController =
   (): IUseRegisterUserInfoControllerProps => {
-    const { setUserDataSignIn } = useSignInStore();
+    const { setUserDataSignIn, authRegister } = useAuthStore();
 
     const schema = yup.object().shape({
       name: yup.string().required('O nome é obrigatório'),
@@ -43,7 +43,9 @@ export const useRegisterUserInfoController =
         nickname,
       });
 
-      router.push('/RegisterUserSports.stack');
+      authRegister();
+
+      router.push('/(home)');
     };
 
     return {
