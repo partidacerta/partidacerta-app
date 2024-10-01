@@ -1,6 +1,8 @@
+import { Colors } from '@/src/constants/Colors';
 import { useThemedToastController } from './ThemedToast.controller';
 import { ThemedToastProps } from './ThemedToast.props';
 import * as S from './ThemedToast.styles';
+import { Ionicons } from '@expo/vector-icons';
 
 export const ThemedToast = ({
   type,
@@ -8,7 +10,10 @@ export const ThemedToast = ({
   duration,
   closeToast,
 }: ThemedToastProps) => {
-  const { slideAnimeted } = useThemedToastController({ duration, closeToast });
+  const { slideAnimeted, getIconName } = useThemedToastController({
+    duration,
+    closeToast,
+  });
 
   return (
     <S.Container
@@ -16,6 +21,9 @@ export const ThemedToast = ({
       style={{ transform: [{ translateX: slideAnimeted }] }}
     >
       <S.ContainerMesssage>
+        <S.IconWrapper type={type}>
+          <Ionicons name={getIconName(type)} size={20} color={Colors.white} />
+        </S.IconWrapper>
         <S.Message type={type}>{message}</S.Message>
       </S.ContainerMesssage>
     </S.Container>

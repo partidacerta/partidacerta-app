@@ -28,5 +28,18 @@ export const useThemedToastController = ({
     return () => clearTimeout(timer);
   }, []);
 
-  return { slideAnimeted };
+  function getIconName(type: 'success' | 'error' | 'info') {
+    switch (type) {
+      case 'success':
+        return 'checkmark';
+      case 'error':
+        return 'close';
+      case 'info':
+        return 'information-circle-outline';
+      default:
+        return 'alert-circle-outline';
+    }
+  }
+
+  return { slideAnimeted, getIconName };
 };
