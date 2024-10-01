@@ -6,6 +6,8 @@ export interface IUseRegisterUserInfoControllerProps {
   control: Control<FormRequiredRegisterUserInfo>;
   errors: FieldErrors<FormRequiredRegisterUserInfo>;
   isValid: boolean;
+  isNicknameRegistered: boolean;
+  isLoading: boolean;
 }
 
 export interface FormRequiredRegisterUserInfo {

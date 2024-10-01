@@ -128,15 +128,6 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     if (watchEmail) {
       const timeout = setTimeout(async () => {
         verifyEmail({ email: watchEmail });
-
-        if (isEmailRegistered) {
-          setError('email', {
-            type: 'manual',
-            message: 'Este e-mail já está cadastrado',
-          });
-        } else {
-          clearErrors('email');
-        }
       }, 2000);
 
       setDebounceTimeout(timeout);
@@ -161,5 +152,6 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     isVisibleConfirmPassword,
     watchPassword,
     dataValidateCharacteres,
+    isEmailRegistered,
   };
 };

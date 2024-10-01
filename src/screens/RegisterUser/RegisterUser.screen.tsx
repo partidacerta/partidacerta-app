@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { Text } from 'react-native';
 
 import { router } from 'expo-router';
 
@@ -26,6 +27,7 @@ export default function RegisterUserScreen() {
     handleShowConfirmPassword,
     watchPassword,
     dataValidateCharacteres,
+    isEmailRegistered,
   } = useRegisteUserController();
 
   return (
@@ -57,6 +59,13 @@ export default function RegisterUserScreen() {
             />
           )}
         />
+        <S.ContainerTextEmailVerify>
+          {isEmailRegistered && (
+            <ThemedText colorText={Colors.red}>
+              Este e-mail já está cadastrado
+            </ThemedText>
+          )}
+        </S.ContainerTextEmailVerify>
         <Controller
           name="password"
           control={control}

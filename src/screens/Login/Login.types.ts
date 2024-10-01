@@ -8,6 +8,7 @@ export interface IUseLoginControllerProps {
   isValid: boolean;
   isVisiblePassword: boolean;
   handleShowPassword: () => void;
+  isLoading: boolean;
 }
 
 export interface FormRequiredLogin {

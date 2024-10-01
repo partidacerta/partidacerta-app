@@ -11,10 +11,12 @@ export function ThemedText({
   darkColor,
   textAlign,
   width,
+  colorText,
   type = 'default',
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const color =
+    colorText ?? useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   const StyledTextComponent = (() => {
     switch (type) {

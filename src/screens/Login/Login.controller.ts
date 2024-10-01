@@ -10,7 +10,7 @@ import useAuthStore from '@/src/store/auth/auth.store';
 import { FormRequiredLogin, IUseLoginControllerProps } from './Login.types';
 
 export const useLoginController = (): IUseLoginControllerProps => {
-  const { authLogin } = useAuthStore();
+  const { authLogin, isLoading } = useAuthStore();
 
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
 
@@ -54,5 +54,6 @@ export const useLoginController = (): IUseLoginControllerProps => {
     handleShowPassword,
     handleSubmit,
     onSubmitLogin,
+    isLoading,
   };
 };

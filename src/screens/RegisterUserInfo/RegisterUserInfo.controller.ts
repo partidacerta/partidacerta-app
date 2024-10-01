@@ -1,4 +1,5 @@
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { router } from 'expo-router';
 import * as yup from 'yup';
@@ -14,7 +15,16 @@ import {
 
 export const useRegisterUserInfoController =
   (): IUseRegisterUserInfoControllerProps => {
-    const { setUserDataSignIn, authRegister } = useAuthStore();
+    const {
+      setUserDataSignIn,
+      authRegister,
+      verifyNickname,
+      isNicknameRegistered,
+      isLoading,
+    } = useAuthStore();
+
+    const [debounceTimeout, setDebounceTimeout] =
+      useState<NodeJS.Timeout | null>(null);
 
     const schema = yup.object().shape({
       name: yup.string().required('O nome é obrigatório'),
@@ -35,6 +45,11 @@ export const useRegisterUserInfoController =
       resolver: yupResolver(schema),
     });
 
+    const watchNickname = useWatch({
+      control,
+      name: 'nickname',
+    });
+
     const onSubmitRegisterUserInfo = async (): Promise<void> => {
       const { name, nickname } = getValues();
 
@@ -44,9 +59,27 @@ export const useRegisterUserInfoController =
       });
 
       authRegister();
-
-      router.push('/(home)');
     };
+
+    useEffect(() => {
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+
+      if (watchNickname) {
+        const timeout = setTimeout(async () => {
+          verifyNickname({ nickname: watchNickname });
+        }, 2000);
+
+        setDebounceTimeout(timeout);
+      }
+
+      return () => {
+        if (debounceTimeout) {
+          clearTimeout(debounceTimeout);
+        }
+      };
+    }, [watchNickname]);
 
     return {
       isValid,
@@ -54,5 +87,7 @@ export const useRegisterUserInfoController =
       control,
       handleSubmit,
       onSubmitRegisterUserInfo,
+      isNicknameRegistered,
+      isLoading,
     };
   };

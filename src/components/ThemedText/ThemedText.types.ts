@@ -7,4 +7,5 @@ export type ThemedTextProps = TextProps & {
   type?: 'default' | 'title' | 'bold' | 'semiBold';
   textAlign?: 'center' | 'start' | 'end' | 'justify';
   width?: string;
+  colorText?: string;
 };

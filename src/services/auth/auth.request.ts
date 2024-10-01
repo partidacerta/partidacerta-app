@@ -84,6 +84,6 @@ export const getVerifyNicknameRequest = async ({
 
     return data;
   } catch (error) {
-    throw new Error('Erro ao verificar e-mail existente');
+    throw new Error('Erro ao verificar nickname existente');
   }
 };

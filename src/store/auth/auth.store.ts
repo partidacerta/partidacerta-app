@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -79,6 +80,8 @@ const useAuthStore = create(
             });
           }
 
+          router.push('/(home)');
+
           set({ isLoading: false });
         };
 
@@ -115,13 +118,11 @@ const useAuthStore = create(
       verifyEmail: async ({ email }: { email: string }) => {
         const { makeAsync } = get();
         const handle = async (): Promise<void> => {
-          set({ isLoading: true });
-
           const data = await getVerifyEmailRequest({
             email: email,
           });
 
-          set({ isLoading: false, isEmailRegistered: data });
+          set({ isEmailRegistered: data });
         };
 
         const onError = (): void => {
@@ -134,19 +135,11 @@ const useAuthStore = create(
       verifyNickname: async ({ nickname }: { nickname: string }) => {
         const { makeAsync } = get();
         const handle = async (): Promise<void> => {
-          set({ isLoading: true });
-
           const data = await getVerifyNicknameRequest({
             nickname: nickname,
           });
 
-          if (data) {
-            set({
-              isNicknameRegistered: data,
-            });
-          }
-
-          set({ isLoading: false });
+          set({ isNicknameRegistered: data });
         };
 
         const onError = (): void => {
