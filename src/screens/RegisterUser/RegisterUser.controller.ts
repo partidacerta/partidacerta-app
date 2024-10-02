@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
 import { router } from 'expo-router';
@@ -6,15 +6,22 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import useAuthStore from '@/src/store/auth/auth.store';
+
 import {
   FormRequiredRegisterUser,
   IUseRegisterUserControllerProps,
 } from './RegisterUser.types';
 
 export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
+  const { setUserDataSignIn, verifyEmail, isEmailRegistered } = useAuthStore();
+
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
   const [isVisibleConfirmPassword, setIsVisibleConfirmPassword] =
     useState(true);
+  const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
 
   const handleShowPassword = () => {
     setIsVisiblePassword(prev => !prev);
@@ -40,6 +47,8 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     handleSubmit,
     control,
     getValues,
+    setError,
+    clearErrors,
     formState: { errors, isValid },
   } = useForm<FormRequiredRegisterUser>({
     defaultValues: {
@@ -51,18 +60,88 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     resolver: yupResolver(schema),
   });
 
+  const watchEmail = useWatch({
+    control,
+    name: 'email',
+  });
+
   const watchPassword = useWatch({
     control,
     name: 'password',
   });
 
   const onSubmitRegisterUser = async (): Promise<void> => {
-    const { email, password, confirmPassword } = getValues();
-    router.push('/(tabs)/(home)');
+    const { email, password } = getValues();
+
+    setUserDataSignIn({
+      email,
+      password,
+    });
+
+    router.push('/PrivacyPolicies.stack');
   };
 
+  const handleFormIsValid = () => {
+    const { password, confirmPassword } = getValues();
+
+    if (
+      password === confirmPassword &&
+      password.length === 8 &&
+      isValid &&
+      !isEmailRegistered
+    ) {
+      const hasUppercase = /[A-Z]/.test(password);
+      const hasLowercase = /[a-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+      return hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
+    }
+
+    return false;
+  };
+
+  const dataValidateCharacteres = [
+    {
+      type: 'number',
+      label: 'Número',
+    },
+    {
+      type: 'uppercase',
+      label: 'Letra maiúscula',
+    },
+    {
+      type: 'lowercase',
+      label: 'Letra minúscula',
+    },
+    {
+      type: 'specialChar',
+      label: 'Caractere especial',
+    },
+  ];
+
+  useEffect(() => {
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    if (watchEmail) {
+      const timeout = setTimeout(async () => {
+        verifyEmail({ email: watchEmail });
+      }, 2000);
+
+      setDebounceTimeout(timeout);
+    }
+
+    return () => {
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+    };
+  }, [watchEmail]);
+
   return {
-    isValid,
+    handleFormIsValid,
     errors,
     control,
     isVisiblePassword,
@@ -72,5 +151,7 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     handleShowConfirmPassword,
     isVisibleConfirmPassword,
     watchPassword,
+    dataValidateCharacteres,
+    isEmailRegistered,
   };
 };

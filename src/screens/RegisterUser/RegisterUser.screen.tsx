@@ -1,4 +1,5 @@
-import { Controller, useWatch } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
+import { Text } from 'react-native';
 
 import { router } from 'expo-router';
 
@@ -18,13 +19,15 @@ export default function RegisterUserScreen() {
   const {
     control,
     errors,
-    isValid,
+    handleFormIsValid,
     onSubmitRegisterUser,
     isVisiblePassword,
     handleShowPassword,
     isVisibleConfirmPassword,
     handleShowConfirmPassword,
     watchPassword,
+    dataValidateCharacteres,
+    isEmailRegistered,
   } = useRegisteUserController();
 
   return (
@@ -56,6 +59,13 @@ export default function RegisterUserScreen() {
             />
           )}
         />
+        <S.ContainerTextEmailVerify>
+          {isEmailRegistered && (
+            <ThemedText colorText={Colors.red}>
+              Este e-mail já está cadastrado
+            </ThemedText>
+          )}
+        </S.ContainerTextEmailVerify>
         <Controller
           name="password"
           control={control}
@@ -109,71 +119,32 @@ export default function RegisterUserScreen() {
           )}
         />
       </S.ContainerInputs>
-      <S.Row>
-        <S.TextCheckPassword>Número</S.TextCheckPassword>
-        <Ionicons
-          name={'checkmark-sharp'}
-          size={24}
-          color={
-            validateInputPassword({
-              input: watchPassword,
-              validationType: 'number',
-            })
-              ? Colors.green
-              : Colors.gray300
-          }
-        />
-      </S.Row>
-      <S.Row>
-        <S.TextCheckPassword>Letra maiúscula</S.TextCheckPassword>
-        <Ionicons
-          name={'checkmark-sharp'}
-          size={24}
-          color={
-            validateInputPassword({
-              input: watchPassword,
-              validationType: 'uppercase',
-            })
-              ? Colors.green
-              : Colors.gray300
-          }
-        />
-      </S.Row>
-      <S.Row>
-        <S.TextCheckPassword>Letra minúscula</S.TextCheckPassword>
-        <Ionicons
-          name={'checkmark-sharp'}
-          size={24}
-          color={
-            validateInputPassword({
-              input: watchPassword,
-              validationType: 'lowercase',
-            })
-              ? Colors.green
-              : Colors.gray300
-          }
-        />
-      </S.Row>
-      <S.Row>
-        <S.TextCheckPassword>Caractere especial</S.TextCheckPassword>
-        <Ionicons
-          name={'checkmark-sharp'}
-          size={24}
-          color={
-            validateInputPassword({
-              input: watchPassword,
-              validationType: 'specialChar',
-            })
-              ? Colors.green
-              : Colors.gray300
-          }
-        />
-      </S.Row>
+      {dataValidateCharacteres.map((item, index) => (
+        <S.Row key={index}>
+          <S.TextCheckPassword>{item.label}</S.TextCheckPassword>
+          <Ionicons
+            name={'checkmark-sharp'}
+            size={24}
+            color={
+              validateInputPassword({
+                input: watchPassword,
+                validationType: item.type as
+                  | 'number'
+                  | 'uppercase'
+                  | 'lowercase'
+                  | 'specialChar',
+              })
+                ? Colors.green
+                : Colors.gray300
+            }
+          />
+        </S.Row>
+      ))}
       <S.FooterScreen>
         <Button
           type="primary"
           text="Continuar"
-          disabled={!isValid}
+          disabled={!handleFormIsValid()}
           onPress={onSubmitRegisterUser}
         />
         <S.ContainerDivider>

@@ -5,16 +5,23 @@ export interface IUseRegisterUserControllerProps {
   handleSubmit: UseFormHandleSubmit<FormRequiredRegisterUser>;
   control: Control<FormRequiredRegisterUser>;
   errors: FieldErrors<FormRequiredRegisterUser>;
-  isValid: boolean;
+  handleFormIsValid: () => boolean;
   isVisiblePassword: boolean;
   handleShowPassword: () => void;
   handleShowConfirmPassword: () => void;
   isVisibleConfirmPassword: boolean;
   watchPassword: string;
+  dataValidateCharacteres: DataValidateCharacteres[];
+  isEmailRegistered: boolean;
 }
 
 export interface FormRequiredRegisterUser {
   email: string;
   password: string;
   confirmPassword: string;
+}
+
+interface DataValidateCharacteres {
+  type: string;
+  label: string;
 }

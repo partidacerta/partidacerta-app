@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form';
+
+import { router } from 'expo-router';
 import * as yup from 'yup';
+
 import { yupResolver } from '@hookform/resolvers/yup';
+
 import {
   FormRequiredForgotPassword,
   IUseForgotPasswordControllerProps,
 } from './ForgotPassword.types';
-import { router } from 'expo-router';
 
 export const useForgotPasswordController =
   (): IUseForgotPasswordControllerProps => {

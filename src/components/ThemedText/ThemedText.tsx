@@ -9,10 +9,14 @@ export function ThemedText({
   style,
   lightColor,
   darkColor,
+  textAlign,
+  width,
+  colorText,
   type = 'default',
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const color =
+    colorText ?? useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   const StyledTextComponent = (() => {
     switch (type) {
@@ -27,5 +31,12 @@ export function ThemedText({
     }
   })();
 
-  return <StyledTextComponent style={[{ color }, style]} {...rest} />;
+  return (
+    <StyledTextComponent
+      style={[{ color }, style]}
+      textAlign={textAlign}
+      width={width}
+      {...rest}
+    />
+  );
 }

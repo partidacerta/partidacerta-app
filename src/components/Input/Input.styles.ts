@@ -28,7 +28,7 @@ export const Icon = styled.View`
 `;
 
 export const MessageError = styled(ThemedText)`
-  color: red;
+  color: ${Colors.red};
   margin-top: 4px;
   padding-left: 18px;
   min-height: 24px;
