@@ -3,6 +3,7 @@ import { Platform, Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 import { Colors } from '@/src/constants/Colors';
+import { ThemedText } from '../ThemedText/ThemedText';
 
 interface ToastProps {
   type: string;
@@ -57,9 +58,7 @@ export const IconWrapper = styled.View<ToastProps>`
   background-color: ${({ type }) => getIconBackgroundColor(type)};
 `;
 
-export const Message = styled.Text<ToastProps>`
-  color: black;
-  font-size: 14px;
-  font-weight: 400;
+export const Message = styled(ThemedText)<ToastProps>`
+  color: ${Colors.black};
   margin-left: 8px;
 `;
