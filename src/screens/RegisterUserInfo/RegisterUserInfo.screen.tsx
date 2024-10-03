@@ -15,7 +15,7 @@ export default function RegisterUserInfoScreen() {
     control,
     errors,
     onSubmitRegisterUserInfo,
-    isValid,
+    shouldDisabledButton,
     isNicknameRegistered,
     isLoading,
   } = useRegisterUserInfoController();
@@ -46,7 +46,7 @@ export default function RegisterUserInfoScreen() {
           render={({ field: { value, onChange } }) => (
             <Input
               placeholder="Nickname"
-              onChangeText={onChange}
+              onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
               value={value}
               error={errors?.nickname && errors?.nickname?.message}
               maxLength={50}
@@ -66,7 +66,7 @@ export default function RegisterUserInfoScreen() {
         <Button
           type="primary"
           text="Continuar"
-          disabled={!isValid && isNicknameRegistered}
+          disabled={shouldDisabledButton}
           onPress={onSubmitRegisterUserInfo}
         />
       </S.ContainerButton>

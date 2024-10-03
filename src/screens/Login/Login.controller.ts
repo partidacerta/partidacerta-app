@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import * as yup from 'yup';
@@ -10,7 +10,7 @@ import useAuthStore from '@/src/store/auth/auth.store';
 import { FormRequiredLogin, IUseLoginControllerProps } from './Login.types';
 
 export const useLoginController = (): IUseLoginControllerProps => {
-  const { authLogin, isLoading } = useAuthStore();
+  const { authLogin, isLoading, setCleanVerifyEmailNickname } = useAuthStore();
 
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
 
@@ -45,6 +45,10 @@ export const useLoginController = (): IUseLoginControllerProps => {
 
     authLogin({ email: email, password: password });
   };
+
+  useEffect(() => {
+    setCleanVerifyEmailNickname();
+  }, []);
 
   return {
     isValid,

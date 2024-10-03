@@ -26,12 +26,14 @@ export const postAuthRegisterRequest = async ({
   email,
   password,
   role,
+  acceptsTerms,
 }: {
   name?: string;
   nickname?: string;
   email?: string;
   password?: string;
   role?: string;
+  acceptsTerms?: boolean;
 }): Promise<IUserAuthMeDTO> => {
   try {
     const { data } = await instance.post('/auth/register', {
@@ -40,6 +42,7 @@ export const postAuthRegisterRequest = async ({
       email,
       password,
       role,
+      acceptsTerms,
     });
 
     return data;

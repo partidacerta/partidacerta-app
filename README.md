@@ -18,10 +18,16 @@
    npm install
 ```
 
-2. Inicie a aplicação
+2. Iniciando a aplicação
 
 ```bash
    npx expo start
+```
+
+3. Iniciando a aplicação limpando o cache
+
+```bash
+   npx expo start -c
 ```
 
 ## Padronização na criação de banches, commits e pull requests

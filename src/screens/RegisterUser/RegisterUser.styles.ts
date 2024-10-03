@@ -56,7 +56,7 @@ export const ButtonGoogle = styled.TouchableOpacity``;
 
 export const FooterScreen = styled.View`
   margin-top: 40px;
-  gap: 50px;
+  gap: 30px;
   width: 100%;
   align-items: center;
 `;

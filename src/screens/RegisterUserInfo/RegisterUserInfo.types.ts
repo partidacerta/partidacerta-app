@@ -5,7 +5,7 @@ export interface IUseRegisterUserInfoControllerProps {
   handleSubmit: UseFormHandleSubmit<FormRequiredRegisterUserInfo>;
   control: Control<FormRequiredRegisterUserInfo>;
   errors: FieldErrors<FormRequiredRegisterUserInfo>;
-  isValid: boolean;
+  shouldDisabledButton: boolean;
   isNicknameRegistered: boolean;
   isLoading: boolean;
 }
