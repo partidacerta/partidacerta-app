@@ -3,24 +3,19 @@ import { Platform, Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 import { Colors } from '@/src/constants/Colors';
+import { ThemedText } from '../ThemedText/ThemedText';
 
 interface ToastProps {
   type: string;
 }
 
-function getBackgroundColorToast(type: string) {
-  return type === 'success'
-    ? Colors.lightGreen
-    : type === 'error'
-    ? Colors.lightRed
-    : Colors.gray100;
-}
-
-function getColorTextToast(type: string) {
+function getIconBackgroundColor(type: string) {
   return type === 'success'
     ? Colors.green
     : type === 'error'
     ? Colors.red
+    : type === 'info'
+    ? Colors.yellow600
     : Colors.gray700;
 }
 
@@ -33,8 +28,20 @@ export const Container = styled(Animated.View)<ToastProps>`
   height: 56px;
   width: 95%;
   justify-content: center;
-  padding: 0 16px;
-  background-color: ${({ type }) => getBackgroundColorToast(type)};
+  padding: 0 14px;
+  background-color: ${Colors.white};
+`;
+
+export const ContainerTitle = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Title = styled.Text<ToastProps>`
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 8px;
 `;
 
 export const ContainerMesssage = styled.View`
@@ -42,10 +49,16 @@ export const ContainerMesssage = styled.View`
   align-items: center;
 `;
 
-export const Message = styled.Text<ToastProps>`
-  color: black;
-  font-size: 16px;
-  font-weight: 400;
+export const IconWrapper = styled.View<ToastProps>`
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  margin-right: 4px;
+  border-radius: 8px;
+  background-color: ${({ type }) => getIconBackgroundColor(type)};
+`;
+
+export const Message = styled(ThemedText)<ToastProps>`
+  color: ${Colors.black};
   margin-left: 8px;
-  color: ${({ type }) => getColorTextToast(type)};
 `;
