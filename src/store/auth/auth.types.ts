@@ -6,6 +6,7 @@ export type AuthStoreProps = {
   isLoading: boolean;
   isEmailRegistered: boolean;
   isNicknameRegistered: boolean;
+  setCleanVerifyEmailNickname: () => void;
   verifyEmail: ({ email }: { email: string }) => void;
   verifyNickname: ({ nickname }: { nickname: string }) => void;
   userDataSignIn: SignInProps;

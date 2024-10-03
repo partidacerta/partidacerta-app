@@ -45,7 +45,7 @@ export default function LoginScreen() {
                   color={Colors.gray300}
                 />
               }
-              onChangeText={onChange}
+              onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
               value={value}
               error={errors?.email && errors?.email?.message}
               maxLength={50}
@@ -67,7 +67,7 @@ export default function LoginScreen() {
                   onPress={handleShowPassword}
                 />
               }
-              onChangeText={onChange}
+              onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
               value={value}
               error={errors?.password && errors?.password?.message}
               secureTextEntry={isVisiblePassword}

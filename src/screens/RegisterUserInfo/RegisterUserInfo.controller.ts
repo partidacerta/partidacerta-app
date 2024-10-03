@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
-import { router } from 'expo-router';
 import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -45,6 +44,8 @@ export const useRegisterUserInfoController =
       resolver: yupResolver(schema),
     });
 
+    const shouldDisabledButton = !isValid || isNicknameRegistered;
+
     const watchNickname = useWatch({
       control,
       name: 'nickname',
@@ -82,7 +83,7 @@ export const useRegisterUserInfoController =
     }, [watchNickname]);
 
     return {
-      isValid,
+      shouldDisabledButton,
       errors,
       control,
       handleSubmit,

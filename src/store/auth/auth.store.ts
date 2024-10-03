@@ -71,6 +71,7 @@ const useAuthStore = create(
             nickname: userDataSignIn.nickname,
             email: userDataSignIn.email,
             password: userDataSignIn.password,
+            acceptsTerms: userDataSignIn.isAcceptedPrivacyPolicies,
             role: 'PLAYER',
           });
 
@@ -147,6 +148,13 @@ const useAuthStore = create(
         };
 
         void makeAsync({ handle, onError });
+      },
+
+      setCleanVerifyEmailNickname: () => {
+        set({
+          isEmailRegistered: false,
+          isNicknameRegistered: false,
+        });
       },
 
       logout: () => {

@@ -51,7 +51,7 @@ export default function RegisterUserScreen() {
                   color={Colors.gray300}
                 />
               }
-              onChangeText={onChange}
+              onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
               value={value}
               error={errors?.email && errors?.email?.message}
               maxLength={50}
@@ -80,7 +80,7 @@ export default function RegisterUserScreen() {
                   onPress={handleShowPassword}
                 />
               }
-              onChangeText={onChange}
+              onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
               value={value}
               error={errors?.password && errors?.password?.message}
               secureTextEntry={isVisiblePassword}
@@ -107,7 +107,7 @@ export default function RegisterUserScreen() {
                   onPress={handleShowConfirmPassword}
                 />
               }
-              onChangeText={onChange}
+              onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
               value={value}
               error={
                 errors?.confirmPassword && errors?.confirmPassword?.message
