@@ -53,5 +53,7 @@ export const Colors = {
   red: '#E60000',
   lightRed: '#FFF3F2',
 
+  yellow600: '#ACA61C',
+
   orange: '#FF8000',
 };
