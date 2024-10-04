@@ -5,6 +5,8 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import useAuthStore from '@/src/store/auth/auth.store';
+
 import {
   FormRequiredForgotPassword,
   IUseForgotPasswordControllerProps,
@@ -12,6 +14,8 @@ import {
 
 export const useForgotPasswordController =
   (): IUseForgotPasswordControllerProps => {
+    const { resetPassword } = useAuthStore();
+
     const schema = yup.object().shape({
       email: yup
         .string()
@@ -35,8 +39,7 @@ export const useForgotPasswordController =
     const onSubmitForgotPassword = async (): Promise<void> => {
       const { email } = getValues();
 
-      // forgotPassword({ email: email });
-      router.push('./VerifyCode.stack');
+      resetPassword({ email: email });
     };
 
     return {

@@ -4,11 +4,13 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { showMessageSuccess } from '@/src/helpers/showMessage';
 import {
   getVerifyEmailRequest,
   getVerifyNicknameRequest,
   postAuthLoginRequest,
   postAuthRegisterRequest,
+  postResetPasswordRequest,
 } from '@/src/services/auth/auth.request';
 
 import { triggerError } from '../../helpers/triggerError';
@@ -16,8 +18,10 @@ import { injectZustandInstance } from '../../utils/injectZustandInstance';
 import {
   FailedRequestAuthLogin,
   FailedRequestAuthRegister,
+  FailedRequestResetPassword,
   FailedRequestVerifyEmail,
   FailedRequestVerifyNickname,
+  SuccessRequestResetPassword,
 } from './auth.message';
 import { AuthStoreProps, LoginProps, SignInProps } from './auth.types';
 
@@ -145,6 +149,37 @@ const useAuthStore = create(
 
         const onError = (): void => {
           return triggerError(FailedRequestVerifyNickname.message);
+        };
+
+        void makeAsync({ handle, onError });
+      },
+
+      resetPassword: async ({ email }: { email: string }) => {
+        const { makeAsync } = get();
+
+        const handle = async (): Promise<void> => {
+          try {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const response: any = await postResetPasswordRequest({
+              email,
+            });
+
+            if (response.status === 200) {
+              showMessageSuccess(SuccessRequestResetPassword.message);
+              router.push('./VerifyCode.stack');
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } catch (error: any) {
+            if (error.response?.status === 404) {
+              triggerError(FailedRequestResetPassword.message);
+            } else {
+              onError();
+            }
+          }
+        };
+
+        const onError = (): void => {
+          return triggerError(FailedRequestResetPassword.message);
         };
 
         void makeAsync({ handle, onError });

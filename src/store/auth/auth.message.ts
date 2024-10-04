@@ -13,3 +13,12 @@ export const FailedRequestVerifyEmail = {
 export const FailedRequestVerifyNickname = {
   message: 'Erro ao verificar se este nickname já está cadastrado!',
 };
+
+export const FailedRequestResetPassword = {
+  message:
+    'Este e-mail não está cadastrado. Venha fazer parte do nosso time e cadastra-se',
+};
+
+export const SuccessRequestResetPassword = {
+  message: 'Solicitação enviada com sucesso. Verifique seu e-mail!',
+};

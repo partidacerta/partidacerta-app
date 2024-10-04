@@ -10,6 +10,7 @@ export type AuthStoreProps = {
   verifyEmail: ({ email }: { email: string }) => void;
   verifyNickname: ({ nickname }: { nickname: string }) => void;
   userDataSignIn: SignInProps;
+  resetPassword: ({ email }: { email: string }) => void;
   setUserDataSignIn: ({
     name,
     nickname,
