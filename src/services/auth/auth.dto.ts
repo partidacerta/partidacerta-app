@@ -17,3 +17,8 @@ export interface IUserAuthMeDTO {
   verified: boolean;
   complete: boolean;
 }
+
+export interface IUserResetPasswordDTO {
+  email?: string;
+  resetCode?: string;
+}

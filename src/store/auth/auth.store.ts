@@ -10,6 +10,7 @@ import {
   getVerifyNicknameRequest,
   postAuthLoginRequest,
   postAuthRegisterRequest,
+  postResetPasswordFinalStepRequest,
   postResetPasswordRequest,
 } from '@/src/services/auth/auth.request';
 
@@ -18,10 +19,13 @@ import { injectZustandInstance } from '../../utils/injectZustandInstance';
 import {
   FailedRequestAuthLogin,
   FailedRequestAuthRegister,
+  FailedRequestResetCodeFinalStep,
   FailedRequestResetPassword,
+  FailedRequestResetPasswordFinalStep,
   FailedRequestVerifyEmail,
   FailedRequestVerifyNickname,
   SuccessRequestResetPassword,
+  SuccessRequestResetPasswordFinalStep,
 } from './auth.message';
 import { AuthStoreProps, LoginProps, SignInProps } from './auth.types';
 
@@ -30,6 +34,7 @@ const initialState = {
   accessToken: '',
   isLoading: false,
   userDataSignIn: {},
+  resetPasswordData: {},
   isEmailRegistered: false,
   isNicknameRegistered: false,
 };
@@ -154,20 +159,31 @@ const useAuthStore = create(
         void makeAsync({ handle, onError });
       },
 
-      resetPassword: async ({ email }: { email: string }) => {
+      resetPassword: async ({
+        email,
+        isResendCode = false,
+      }: {
+        email: string;
+        isResendCode?: boolean;
+      }) => {
         const { makeAsync } = get();
 
         const handle = async (): Promise<void> => {
-          try {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const response: any = await postResetPasswordRequest({
-              email,
-            });
+          set({ isLoading: true });
 
-            if (response.status === 200) {
-              showMessageSuccess(SuccessRequestResetPassword.message);
-              router.push('./VerifyCode.stack');
-            }
+          try {
+            await postResetPasswordRequest({ email });
+
+            set(state => ({
+              resetPasswordData: {
+                ...state.resetPasswordData,
+                email,
+              },
+            }));
+
+            !isResendCode && router.push('./VerifyCode.stack');
+            showMessageSuccess(SuccessRequestResetPassword.message);
+
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } catch (error: any) {
             if (error.response?.status === 404) {
@@ -176,6 +192,8 @@ const useAuthStore = create(
               onError();
             }
           }
+
+          set({ isLoading: false });
         };
 
         const onError = (): void => {
@@ -183,6 +201,55 @@ const useAuthStore = create(
         };
 
         void makeAsync({ handle, onError });
+      },
+
+      resetPasswordFinalStep: async ({
+        newPassword,
+      }: {
+        newPassword: string;
+      }) => {
+        const { makeAsync, resetPasswordData } = get();
+
+        const handle = async (): Promise<void> => {
+          set({ isLoading: true });
+
+          try {
+            await postResetPasswordFinalStepRequest({
+              email: resetPasswordData.email,
+              resetCode: resetPasswordData.resetCode,
+              newPassword,
+            });
+
+            showMessageSuccess(SuccessRequestResetPasswordFinalStep.message);
+
+            router.push('/Login.stack');
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } catch (error: any) {
+            if (error.response.status === 400) {
+              triggerError(FailedRequestResetCodeFinalStep.message);
+            } else {
+              onError();
+            }
+          }
+
+          set({ isLoading: false });
+        };
+
+        const onError = (): void => {
+          return triggerError(FailedRequestResetPasswordFinalStep.message);
+        };
+
+        void makeAsync({ handle, onError });
+      },
+
+      setCodeResetPassword: ({ resetCode }: { resetCode: string }) => {
+        set(state => ({
+          resetPasswordData: {
+            ...state.resetPasswordData,
+            resetCode,
+          },
+        }));
       },
 
       setCleanVerifyEmailNickname: () => {

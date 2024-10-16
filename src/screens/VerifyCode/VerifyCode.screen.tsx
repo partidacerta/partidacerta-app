@@ -1,18 +1,29 @@
-import * as S from './VerifyCode.styles';
-import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
-import { router } from 'expo-router';
-import { ThemedText } from '@/src/components/ThemedText/ThemedText';
-import Input from '@/src/components/Input/Input';
-import { Button } from '@/src/components/Button/Button';
-import { useVerifyCodeController } from './VerifyCode.controller';
 import { Controller } from 'react-hook-form';
 
+import { Button } from '@/src/components/Button/Button';
+import Input from '@/src/components/Input/Input';
+import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
+import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
+import { ThemedText } from '@/src/components/ThemedText/ThemedText';
+
+import { useVerifyCodeController } from './VerifyCode.controller';
+import * as S from './VerifyCode.styles';
+
 export default function VerifyCodeScreen() {
-  const { isValid, errors, control, handleSubmit, onSubmitVerifyCode } =
-    useVerifyCodeController();
+  const {
+    isValid,
+    errors,
+    control,
+    handleSubmit,
+    onSubmitVerifyCode,
+    handleResendResetCode,
+    isLoading,
+  } = useVerifyCodeController();
 
   return (
     <ThemedScrollView>
+      <LoadingScreen isLoading={isLoading} />
+
       <S.ContainerText>
         <ThemedText type="title">Código de acesso</ThemedText>
         <ThemedText>Digite o código que você recebeu via e-mail.</ThemedText>
@@ -40,7 +51,11 @@ export default function VerifyCodeScreen() {
           onPress={handleSubmit(onSubmitVerifyCode)}
           disabled={!isValid}
         />
-        <ThemedText>Não recebi o código, reenviar.</ThemedText>
+        <Button
+          type="link"
+          text="Não recebi o código, reenviar."
+          onPress={handleResendResetCode}
+        />
       </S.ContainerButton>
     </ThemedScrollView>
   );

@@ -1,14 +1,20 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
+
 import * as yup from 'yup';
+
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import useAuthStore from '@/src/store/auth/auth.store';
+
 import {
   FormRequiredNewPassword,
   IUseNewPasswordControllerProps,
 } from './NewPassword.types';
-import { router } from 'expo-router';
 
 export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
+  const { resetPasswordFinalStep, isLoading } = useAuthStore();
+
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
   const [isVisibleConfirmPassword, setIsVisibleConfirmPassword] =
     useState(true);
@@ -43,15 +49,53 @@ export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmitNewPassword = async (): Promise<void> => {
-    const { password, confirmPassword } = getValues();
+  const watchPassword = useWatch({
+    control,
+    name: 'password',
+  });
 
-    // newPassword({ password: password, confirmPassword: confirmPassword });
-    router.push('./Login.stack');
+  const onSubmitNewPassword = async (): Promise<void> => {
+    const { confirmPassword } = getValues();
+
+    resetPasswordFinalStep({ newPassword: confirmPassword });
   };
 
+  const handleFormIsValid = () => {
+    const { password, confirmPassword } = getValues();
+
+    if (password === confirmPassword && password.length === 8 && isValid) {
+      const hasUppercase = /[A-Z]/.test(password);
+      const hasLowercase = /[a-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+      return hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
+    }
+
+    return false;
+  };
+
+  const dataValidateCharacteres = [
+    {
+      type: 'number',
+      label: 'Número',
+    },
+    {
+      type: 'uppercase',
+      label: 'Letra maiúscula',
+    },
+    {
+      type: 'lowercase',
+      label: 'Letra minúscula',
+    },
+    {
+      type: 'specialChar',
+      label: 'Caractere especial',
+    },
+  ];
+
   return {
-    isValid,
+    handleFormIsValid,
     errors,
     control,
     isVisiblePassword,
@@ -60,5 +104,8 @@ export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
     handleShowConfirmPassword,
     handleSubmit,
     onSubmitNewPassword,
+    dataValidateCharacteres,
+    watchPassword,
+    isLoading,
   };
 };

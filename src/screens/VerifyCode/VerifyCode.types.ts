@@ -6,6 +6,8 @@ export interface IUseVerifyCodeControllerProps {
   control: Control<FormRequiredVerifyCode>;
   errors: FieldErrors<FormRequiredVerifyCode>;
   isValid: boolean;
+  isLoading: boolean;
+  handleResendResetCode: () => void;
 }
 
 export interface FormRequiredVerifyCode {

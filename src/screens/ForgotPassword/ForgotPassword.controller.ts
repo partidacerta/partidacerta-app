@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 
-import { router } from 'expo-router';
 import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,7 +13,7 @@ import {
 
 export const useForgotPasswordController =
   (): IUseForgotPasswordControllerProps => {
-    const { resetPassword } = useAuthStore();
+    const { resetPassword, isLoading } = useAuthStore();
 
     const schema = yup.object().shape({
       email: yup
@@ -48,5 +47,6 @@ export const useForgotPasswordController =
       control,
       handleSubmit,
       onSubmitForgotPassword,
+      isLoading,
     };
   };

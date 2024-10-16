@@ -1,8 +1,10 @@
+import { Ionicons } from '@expo/vector-icons';
+
 import { Colors } from '@/src/constants/Colors';
+
 import { useThemedToastController } from './ThemedToast.controller';
 import { ThemedToastProps } from './ThemedToast.props';
 import * as S from './ThemedToast.styles';
-import { Ionicons } from '@expo/vector-icons';
 
 export const ThemedToast = ({
   type,

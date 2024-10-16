@@ -5,14 +5,22 @@ export interface IUseNewPasswordControllerProps {
   handleSubmit: UseFormHandleSubmit<FormRequiredNewPassword>;
   control: Control<FormRequiredNewPassword>;
   errors: FieldErrors<FormRequiredNewPassword>;
-  isValid: boolean;
+  handleFormIsValid: () => boolean;
   isVisiblePassword: boolean;
   isVisibleConfirmPassword: boolean;
   handleShowPassword: () => void;
   handleShowConfirmPassword: () => void;
+  dataValidateCharacteres: DataValidateCharacteres[];
+  watchPassword: string;
+  isLoading: boolean;
 }
 
 export interface FormRequiredNewPassword {
   password: string;
   confirmPassword: string;
+}
+
+interface DataValidateCharacteres {
+  type: string;
+  label: string;
 }

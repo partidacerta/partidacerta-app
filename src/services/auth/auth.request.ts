@@ -1,5 +1,9 @@
 import { instance } from '../api/api';
-import { IUserAuthLoginDTO, IUserAuthMeDTO } from './auth.dto';
+import {
+  IUserAuthLoginDTO,
+  IUserAuthMeDTO,
+  IUserResetPasswordDTO,
+} from './auth.dto';
 
 export const postAuthLoginRequest = async ({
   email,
@@ -99,6 +103,26 @@ export const postResetPasswordRequest = async ({
   try {
     const { data } = await instance.post(
       `/auth/reset-password/initiate?email=${email}`
+    );
+
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao solicitar redefinição de senha');
+  }
+};
+
+export const postResetPasswordFinalStepRequest = async ({
+  email,
+  newPassword,
+  resetCode,
+}: {
+  email?: string;
+  newPassword: string;
+  resetCode?: string;
+}): Promise<IUserResetPasswordDTO> => {
+  try {
+    const { data } = await instance.post(
+      `/auth/reset-password/complete?email=${email}&resetCode=${resetCode}&newPassword=${newPassword}`
     );
 
     return data;

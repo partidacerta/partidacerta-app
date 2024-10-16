@@ -6,6 +6,7 @@ export interface IUseForgotPasswordControllerProps {
   control: Control<FormRequiredForgotPassword>;
   errors: FieldErrors<FormRequiredForgotPassword>;
   isValid: boolean;
+  isLoading: boolean;
 }
 
 export interface FormRequiredForgotPassword {

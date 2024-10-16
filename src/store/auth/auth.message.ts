@@ -15,10 +15,21 @@ export const FailedRequestVerifyNickname = {
 };
 
 export const FailedRequestResetPassword = {
-  message:
-    'Este e-mail não está cadastrado. Venha fazer parte do nosso time e cadastra-se',
+  message: 'Este e-mail não está cadastrado. Faça seu cadastro agora!',
 };
 
 export const SuccessRequestResetPassword = {
   message: 'Solicitação enviada com sucesso. Verifique seu e-mail!',
+};
+
+export const SuccessRequestResetPasswordFinalStep = {
+  message: 'Senha redefinida com sucesso',
+};
+
+export const FailedRequestResetPasswordFinalStep = {
+  message: 'Erro ao redefinir a sua senha. Tente novamente!',
+};
+
+export const FailedRequestResetCodeFinalStep = {
+  message: 'Erro no código enviado. Verifique e tente novamente!',
 };

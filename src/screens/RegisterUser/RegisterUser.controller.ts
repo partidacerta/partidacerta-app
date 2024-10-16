@@ -47,8 +47,6 @@ export const useRegisteUserController = (): IUseRegisterUserControllerProps => {
     handleSubmit,
     control,
     getValues,
-    setError,
-    clearErrors,
     formState: { errors, isValid },
   } = useForm<FormRequiredRegisterUser>({
     defaultValues: {

@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
-import { Loading } from '@/src/components/Loading/Loading';
+import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
 import { ThemedView } from '@/src/components/ThemedView/ThemedView';
 import { Colors } from '@/src/constants/Colors';
 
@@ -28,7 +28,7 @@ export default function LoginScreen() {
 
   return (
     <ThemedView justifyCenter alignCenter>
-      <Loading isVisible={isLoading} />
+      <LoadingScreen isLoading={isLoading} />
 
       <Logo />
       <S.ContainerInputs>
