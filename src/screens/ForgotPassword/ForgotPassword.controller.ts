@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
 
-import { router } from 'expo-router';
 import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import useAuthStore from '@/src/store/auth/auth.store';
 
 import {
   FormRequiredForgotPassword,
@@ -12,6 +13,8 @@ import {
 
 export const useForgotPasswordController =
   (): IUseForgotPasswordControllerProps => {
+    const { resetPassword, isLoading } = useAuthStore();
+
     const schema = yup.object().shape({
       email: yup
         .string()
@@ -35,8 +38,7 @@ export const useForgotPasswordController =
     const onSubmitForgotPassword = async (): Promise<void> => {
       const { email } = getValues();
 
-      // forgotPassword({ email: email });
-      router.push('./VerifyCode.stack');
+      resetPassword({ email: email });
     };
 
     return {
@@ -45,5 +47,6 @@ export const useForgotPasswordController =
       control,
       handleSubmit,
       onSubmitForgotPassword,
+      isLoading,
     };
   };

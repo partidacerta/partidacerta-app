@@ -3,6 +3,7 @@ import { Platform, Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 import { Colors } from '@/src/constants/Colors';
+
 import { ThemedText } from '../ThemedText/ThemedText';
 
 interface ToastProps {
@@ -47,6 +48,7 @@ export const Title = styled.Text<ToastProps>`
 export const ContainerMesssage = styled.View`
   flex-direction: row;
   align-items: center;
+  max-width: 96%;
 `;
 
 export const IconWrapper = styled.View<ToastProps>`

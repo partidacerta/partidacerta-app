@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form';
 
 import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
-import { Loading } from '@/src/components/Loading/Loading';
+import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { ThemedView } from '@/src/components/ThemedView/ThemedView';
 import { Colors } from '@/src/constants/Colors';
@@ -22,7 +22,7 @@ export default function RegisterUserInfoScreen() {
 
   return (
     <ThemedView>
-      <Loading isVisible={isLoading} />
+      <LoadingScreen isLoading={isLoading} />
 
       <ThemedText type="title">Informações gerais do jogador</ThemedText>
       <S.ContainerInputs>

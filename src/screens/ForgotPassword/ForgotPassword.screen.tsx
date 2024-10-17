@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
+import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
@@ -12,11 +13,19 @@ import { useForgotPasswordController } from './ForgotPassword.controller';
 import * as S from './ForgotPassword.styles';
 
 export default function ForgotPasswordScreen() {
-  const { control, handleSubmit, errors, isValid, onSubmitForgotPassword } =
-    useForgotPasswordController();
+  const {
+    control,
+    handleSubmit,
+    errors,
+    isValid,
+    onSubmitForgotPassword,
+    isLoading,
+  } = useForgotPasswordController();
 
   return (
     <ThemedScrollView>
+      <LoadingScreen isLoading={isLoading} />
+
       <S.ContainerText>
         <ThemedText type="title">Esqueceu sua senha?</ThemedText>
         <ThemedText>

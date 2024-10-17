@@ -3,12 +3,12 @@ import { Modal, ActivityIndicator } from 'react-native';
 
 import { Colors } from '@/src/constants/Colors';
 
-import * as S from './Loading.styles';
-import { LoadingProps } from './Loading.types';
+import * as S from './LoadingScreen.styles';
+import { LoadingScreenProps } from './LoadingScreen.types';
 
-export function Loading({ isVisible }: LoadingProps) {
+export function LoadingScreen({ isLoading }: LoadingScreenProps) {
   return (
-    <Modal visible={isVisible} transparent animationType="fade">
+    <Modal visible={isLoading} transparent animationType="fade">
       <S.ContainerBlurView>
         <ActivityIndicator size="large" color={Colors.white} />
       </S.ContainerBlurView>

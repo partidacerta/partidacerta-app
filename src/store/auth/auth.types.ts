@@ -1,7 +1,11 @@
-import { IUserAuthMeDTO } from '@/src/services/auth/auth.dto';
+import {
+  IUserAuthMeDTO,
+  IUserResetPasswordDTO,
+} from '@/src/services/auth/auth.dto';
 
 export type AuthStoreProps = {
   userAuth?: IUserAuthMeDTO;
+  resetPasswordData: IUserResetPasswordDTO;
   accessToken: string;
   isLoading: boolean;
   isEmailRegistered: boolean;
@@ -10,6 +14,15 @@ export type AuthStoreProps = {
   verifyEmail: ({ email }: { email: string }) => void;
   verifyNickname: ({ nickname }: { nickname: string }) => void;
   userDataSignIn: SignInProps;
+  resetPassword: ({
+    email,
+    isResendCode,
+  }: {
+    email: string;
+    isResendCode?: boolean;
+  }) => void;
+  setCodeResetPassword: ({ resetCode }: { resetCode: string }) => void;
+  resetPasswordFinalStep: ({ newPassword }: { newPassword: string }) => void;
   setUserDataSignIn: ({
     name,
     nickname,

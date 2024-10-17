@@ -1,13 +1,21 @@
 import { useForm } from 'react-hook-form';
+
+import { router } from 'expo-router';
 import * as yup from 'yup';
+
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import useAuthStore from '@/src/store/auth/auth.store';
+
 import {
   FormRequiredVerifyCode,
   IUseVerifyCodeControllerProps,
 } from './VerifyCode.types';
-import { router } from 'expo-router';
 
 export const useVerifyCodeController = (): IUseVerifyCodeControllerProps => {
+  const { setCodeResetPassword, resetPassword, isLoading, resetPasswordData } =
+    useAuthStore();
+
   const schema = yup.object().shape({
     code: yup
       .string()
@@ -31,8 +39,16 @@ export const useVerifyCodeController = (): IUseVerifyCodeControllerProps => {
   const onSubmitVerifyCode = async (): Promise<void> => {
     const { code } = getValues();
 
-    // verifyCode({ code: code });
+    setCodeResetPassword({ resetCode: code });
+
     router.push('./NewPassword.stack');
+  };
+
+  const handleResendResetCode = () => {
+    resetPassword({
+      email: String(resetPasswordData.email),
+      isResendCode: true,
+    });
   };
 
   return {
@@ -41,5 +57,7 @@ export const useVerifyCodeController = (): IUseVerifyCodeControllerProps => {
     control,
     handleSubmit,
     onSubmitVerifyCode,
+    handleResendResetCode,
+    isLoading,
   };
 };

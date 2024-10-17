@@ -1,5 +1,9 @@
 import { instance } from '../api/api';
-import { IUserAuthLoginDTO, IUserAuthMeDTO } from './auth.dto';
+import {
+  IUserAuthLoginDTO,
+  IUserAuthMeDTO,
+  IUserResetPasswordDTO,
+} from './auth.dto';
 
 export const postAuthLoginRequest = async ({
   email,
@@ -51,7 +55,7 @@ export const postAuthRegisterRequest = async ({
   }
 };
 
-export const getAuthMeRequest = async (): Promise<IUserAuthMeDTO> => {
+export const postAuthMeRequest = async (): Promise<IUserAuthMeDTO> => {
   try {
     const { data } = await instance.post('/auth/me');
 
@@ -88,5 +92,41 @@ export const getVerifyNicknameRequest = async ({
     return data;
   } catch (error) {
     throw new Error('Erro ao verificar nickname existente');
+  }
+};
+
+export const postResetPasswordRequest = async ({
+  email,
+}: {
+  email: string;
+}): Promise<string> => {
+  try {
+    const { data } = await instance.post(
+      `/auth/reset-password/initiate?email=${email}`
+    );
+
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao solicitar redefinição de senha');
+  }
+};
+
+export const postResetPasswordFinalStepRequest = async ({
+  email,
+  newPassword,
+  resetCode,
+}: {
+  email?: string;
+  newPassword: string;
+  resetCode?: string;
+}): Promise<IUserResetPasswordDTO> => {
+  try {
+    const { data } = await instance.post(
+      `/auth/reset-password/complete?email=${email}&resetCode=${resetCode}&newPassword=${newPassword}`
+    );
+
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao solicitar redefinição de senha');
   }
 };
