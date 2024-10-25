@@ -9,6 +9,7 @@ import {
   getVerifyEmailRequest,
   getVerifyNicknameRequest,
   postAuthLoginRequest,
+  postAuthLogoutRequest,
   postAuthRegisterRequest,
   postResetPasswordFinalStepRequest,
   postResetPasswordRequest,
@@ -19,6 +20,7 @@ import { injectZustandInstance } from '../../utils/injectZustandInstance';
 import {
   FailedRequestAuthLogin,
   FailedRequestAuthRegister,
+  FailedRequestLogout,
   FailedRequestResetCodeFinalStep,
   FailedRequestResetPassword,
   FailedRequestResetPasswordFinalStep,
@@ -58,6 +60,8 @@ const useAuthStore = create(
               accessToken: token,
               userAuth: userAuthData,
             });
+
+            router.push('/(home)');
           }
 
           set({ isLoading: false });
@@ -259,10 +263,25 @@ const useAuthStore = create(
         });
       },
 
-      logout: () => {
-        set({
-          accessToken: '',
-        });
+      logout: async () => {
+        const { makeAsync } = get();
+        const handle = async (): Promise<void> => {
+          await postAuthLogoutRequest();
+          await AsyncStorage.removeItem('accessToken');
+
+          set({
+            accessToken: '',
+            userAuth: undefined,
+          });
+
+          router.push('/Login.stack');
+        };
+
+        const onError = (): void => {
+          return triggerError(FailedRequestLogout.message);
+        };
+
+        void makeAsync({ handle, onError });
       },
 
       makeAsync: async ({ handle, onError, onFinally }) => {

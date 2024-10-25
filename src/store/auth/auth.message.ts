@@ -33,3 +33,7 @@ export const FailedRequestResetPasswordFinalStep = {
 export const FailedRequestResetCodeFinalStep = {
   message: 'Erro no código enviado. Verifique e tente novamente!',
 };
+
+export const FailedRequestLogout = {
+  message: 'Erro ao fazer logout. Tente novamente!',
+};
