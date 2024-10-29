@@ -71,7 +71,7 @@ export default function LoginScreen() {
               value={value}
               error={errors?.password && errors?.password?.message}
               secureTextEntry={isVisiblePassword}
-              // maxLength={8}
+              maxLength={8}
               autoCapitalize="none"
             />
           )}
