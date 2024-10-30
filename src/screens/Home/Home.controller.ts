@@ -5,13 +5,20 @@ import { router, useFocusEffect } from 'expo-router';
 import useAuthStore from '@/src/store/auth/auth.store';
 
 import { IUseHomeControllerProps } from './Home.types';
+import { useState } from 'react';
 
 export const useHomeController = (): IUseHomeControllerProps => {
   const { logout } = useAuthStore();
 
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleOpenModal = () => setModalVisible(true);
+  const handleCloseModal = () => setModalVisible(false);
+
   const handleLogout = () => {
-    router.replace('/Login.stack');
     logout();
+    setModalVisible(false);
+    router.replace('/Login.stack');
   };
 
   useFocusEffect(() => {
@@ -27,5 +34,10 @@ export const useHomeController = (): IUseHomeControllerProps => {
     return () => backHandler.remove();
   });
 
-  return { handleLogout };
+  return {
+    handleLogout,
+    isModalVisible,
+    handleOpenModal,
+    handleCloseModal,
+  };
 };

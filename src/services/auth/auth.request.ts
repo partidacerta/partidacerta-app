@@ -130,3 +130,11 @@ export const postResetPasswordFinalStepRequest = async ({
     throw new Error('Erro ao solicitar redefinição de senha');
   }
 };
+
+export const postAuthLogoutRequest = async (): Promise<void> => {
+  try {
+    await instance.post('/auth/logout');
+  } catch (error) {
+    throw new Error('Erro ao fazer logout');
+  }
+};
