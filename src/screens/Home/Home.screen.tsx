@@ -1,5 +1,3 @@
-import { router } from 'expo-router';
-
 import { Button } from '@/src/components/Button/Button';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
@@ -7,7 +5,6 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { useHomeController } from './Home.controller';
 import * as S from './Home.styles';
 import Modal from '@/src/components/Modal/Modal';
-import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
 
 export default function HomeScreen() {
   const { handleLogout, isModalVisible, handleOpenModal, handleCloseModal } =
@@ -24,13 +21,9 @@ export default function HomeScreen() {
               type="secondary"
               text="Voltar"
               onPress={handleCloseModal}
-              style={{ width: '50%', height: 38 }}
+              style={{ height: 42 }}
             />
-            <Button
-              text="Sair"
-              onPress={handleLogout}
-              style={{ width: '50%', height: 38 }}
-            />
+            <Button text="Sair" onPress={handleLogout} style={{ height: 42 }} />
           </S.ButtonModal>
         </S.ModalContent>
       </Modal>
