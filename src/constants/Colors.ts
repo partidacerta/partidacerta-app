@@ -39,12 +39,15 @@ export const Colors = {
   gray600: '#333333',
   gray700: '#29292E',
   gray800: '#202024',
+  gray850: '#22262f',
   gray900: '#121214',
 
   blue: bluePrimary,
+  blueOpacity50: '#0D6EFD80',
 
   darkBlue: darkBlue,
   darkBlue900: '#161842',
+  darkBlueOpacity50: '#0A306780',
   darkOpacity: '#22262F80',
 
   green: '#32C07C',
