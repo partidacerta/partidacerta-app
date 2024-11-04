@@ -4,12 +4,11 @@ export const Container = styled.View``;
 
 export const ModalContent = styled.View`
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   width: 100%;
+  margin-top: 24px;
 `;
 
 export const ButtonModal = styled.View`
-  flex-direction: row;
-  gap: 10px;
   width: 100%;
 `;
