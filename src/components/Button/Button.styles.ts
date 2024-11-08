@@ -11,6 +11,7 @@ interface ButtonProps {
 export const ButtonPrimary = styled.TouchableOpacity<ButtonProps>`
   height: 50px;
   width: 100%;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   border-radius: 24px;
@@ -22,6 +23,7 @@ export const ButtonPrimary = styled.TouchableOpacity<ButtonProps>`
 export const ButtonSecondary = styled.TouchableOpacity<ButtonProps>`
   height: 50px;
   width: 100%;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   border-radius: 24px;
@@ -31,5 +33,6 @@ export const ButtonSecondary = styled.TouchableOpacity<ButtonProps>`
 `;
 
 export const ButtonLink = styled.TouchableOpacity<ButtonProps>`
+  flex-direction: row;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;

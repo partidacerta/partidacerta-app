@@ -22,7 +22,8 @@ export default function RootLayout() {
       <Stack.Screen
         name="index"
         options={{
-          headerTitle: 'Meu perfil',
+          headerTitle: '',
+          headerShown: false,
         }}
       />
     </Stack>

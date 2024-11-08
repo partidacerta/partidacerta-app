@@ -17,12 +17,12 @@ const createInstance = (baseURL: string, type?: string): AxiosInstance => {
 
   instance.interceptors.request.use(
     async (config: AxiosRequestConfig): Promise<any> => {
-      const { access_token } = store.getState();
+      const { accessToken } = store.getState();
 
-      if (access_token) {
+      if (accessToken) {
         config.headers = {
           ...config.headers,
-          Authorization: `Bearer ${access_token}`,
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': type || 'application/json',
         } as AxiosRequestHeaders;
       }

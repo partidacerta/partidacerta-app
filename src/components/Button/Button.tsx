@@ -4,6 +4,7 @@ import { useThemeColor } from '@/src/hooks/useThemeColor';
 import { ThemedText } from '../ThemedText/ThemedText';
 import * as S from './Button.styles';
 import { ButtonProps } from './Button.types';
+import { Ionicons } from '@expo/vector-icons';
 
 export function Button({
   type = 'primary',
@@ -12,6 +13,9 @@ export function Button({
   lightColor,
   darkColor,
   disabled,
+  icon,
+  sizeIcon = 20,
+  colorIcon = Colors.white,
   onPress,
   ...props
 }: ButtonProps) {
@@ -19,6 +23,21 @@ export function Button({
     { light: lightColor, dark: darkColor },
     'borderColor'
   );
+
+  const RenderIconButton = () => {
+    if (!icon) {
+      return null;
+    }
+
+    return (
+      <Ionicons
+        name={icon}
+        size={sizeIcon}
+        color={colorIcon}
+        style={{ marginLeft: text ? 6 : 0 }}
+      />
+    );
+  };
 
   const RenderStyledButton = () => {
     switch (type) {
@@ -33,6 +52,7 @@ export function Button({
             <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
               {text}
             </ThemedText>
+            <RenderIconButton />
           </S.ButtonPrimary>
         );
       case 'link':
@@ -46,6 +66,7 @@ export function Button({
             <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
               {text}
             </ThemedText>
+            <RenderIconButton />
           </S.ButtonLink>
         );
       default:
@@ -59,6 +80,7 @@ export function Button({
             <ThemedText size={16} type="bold">
               {text}
             </ThemedText>
+            <RenderIconButton />
           </S.ButtonSecondary>
         );
     }
