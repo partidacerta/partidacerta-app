@@ -10,6 +10,6 @@ export const getPlayerByIdRequest = async ({
     const { data } = await instance.get(`/players/${playerId}`);
     return data;
   } catch (error) {
-    throw new Error('Erro ao buscar dados do player');
+    throw new Error('Erro ao buscar dados do jogador');
   }
 };

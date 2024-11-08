@@ -15,7 +15,7 @@ export function Button({
   disabled,
   icon,
   sizeIcon = 20,
-  colorIcon = 'white',
+  colorIcon = Colors.white,
   onPress,
   ...props
 }: ButtonProps) {
