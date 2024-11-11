@@ -1,11 +1,15 @@
 import React from 'react';
+
 import * as S from './UserProfile.styles';
+import { useUserProfileController } from './UserProfile.controller';
+
 import { Colors } from '@/src/constants/Colors';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Button } from '@/src/components/Button/Button';
-import { useUserProfileController } from './UserProfile.controller';
 import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
+
 import { LinearGradient } from 'expo-linear-gradient';
+import { router } from 'expo-router';
 
 export default function UserProfileScreen() {
   const { playerData, isLoading } = useUserProfileController();
@@ -27,6 +31,7 @@ export default function UserProfileScreen() {
               sizeIcon={22}
               colorIcon={Colors.blue}
               style={{ width: 32, height: 32, backgroundColor: Colors.white }}
+              onPress={() => router.push('/GeneralSettings.stack')}
             />
           </S.ButtonSettings>
           <S.Profile>

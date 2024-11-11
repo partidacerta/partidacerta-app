@@ -89,6 +89,14 @@ export default function RootLayout() {
           name="RegisterUserSports.stack"
           options={{ headerShown: true }}
         />
+        <Stack.Screen
+          name="GeneralSettings.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="AccountSettings.stack"
+          options={{ headerShown: true }}
+        />
       </Stack>
     </ThemeProvider>
   );
