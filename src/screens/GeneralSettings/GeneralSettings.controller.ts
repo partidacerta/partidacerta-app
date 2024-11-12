@@ -33,6 +33,7 @@ export const useGeneralSettingsController = (): IUseGeneralSettingsProps => {
     {
       iconName: 'remove-circle-outline',
       label: 'Desativar conta',
+      action: () => router.push('/DisableAccount.stack'),
     },
     {
       iconName: 'document-text-outline',

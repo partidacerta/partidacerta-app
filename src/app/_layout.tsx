@@ -97,6 +97,10 @@ export default function RootLayout() {
           name="AccountSettings.stack"
           options={{ headerShown: true }}
         />
+        <Stack.Screen
+          name="DisableAccount.stack"
+          options={{ headerShown: true }}
+        />
       </Stack>
     </ThemeProvider>
   );
