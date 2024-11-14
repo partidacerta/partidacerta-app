@@ -55,8 +55,10 @@ export const ContainerDivider = styled.View`
 export const ButtonGoogle = styled.TouchableOpacity``;
 
 export const FooterScreen = styled.View`
-  margin-top: 40px;
-  gap: 30px;
   width: 100%;
+  flex: 1;
+  min-height: 50%;
   align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 30px;
 `;
