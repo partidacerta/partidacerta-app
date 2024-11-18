@@ -84,7 +84,7 @@ export default function RegisterUserScreen() {
               value={value}
               error={errors?.password && errors?.password?.message}
               secureTextEntry={isVisiblePassword}
-              maxLength={8}
+              maxLength={20}
               autoCapitalize="none"
             />
           )}
@@ -113,7 +113,7 @@ export default function RegisterUserScreen() {
                 errors?.confirmPassword && errors?.confirmPassword?.message
               }
               secureTextEntry={isVisibleConfirmPassword}
-              maxLength={8}
+              maxLength={20}
               autoCapitalize="none"
             />
           )}
@@ -147,14 +147,14 @@ export default function RegisterUserScreen() {
           disabled={!handleFormIsValid()}
           onPress={onSubmitRegisterUser}
         />
-        <S.ContainerDivider>
+        {/* <S.ContainerDivider>
           <S.Divider />
           <ThemedText>ou cadastra-se com</ThemedText>
           <S.Divider />
         </S.ContainerDivider>
         <S.ButtonGoogle>
           <Google />
-        </S.ButtonGoogle>
+        </S.ButtonGoogle> */}
       </S.FooterScreen>
     </S.ContainerScreen>
   );
