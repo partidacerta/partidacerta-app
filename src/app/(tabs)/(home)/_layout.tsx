@@ -25,12 +25,6 @@ export default function RootLayout() {
           headerTitle: 'Home',
         }}
       />
-      <Stack.Screen
-        name="UserProfile.stack"
-        options={{
-          headerTitle: 'Perfil',
-        }}
-      />
     </Stack>
   );
 }

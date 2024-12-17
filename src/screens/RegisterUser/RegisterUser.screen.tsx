@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-import { Text } from 'react-native';
 
 import { router } from 'expo-router';
 
@@ -11,7 +10,7 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
 import { validateInputPassword } from '@/src/utils/validateInputPassword';
 
-import Google from '../../assets/svgs/images/google.svg';
+// import Google from '../../assets/svgs/images/google.svg';
 import { useRegisteUserController } from './RegisterUser.controller';
 import * as S from './RegisterUser.styles';
 
