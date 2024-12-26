@@ -1,20 +1,25 @@
-import { IUseAccountSettingsProps } from './AccountSettings.types';
+import { useEffect } from 'react';
 
-export const useAccountSettingsController = (): IUseAccountSettingsProps => {
-  const uf = [
-    { label: 'RS', value: 'RS' },
-    { label: 'SP', value: 'SP' },
-    { label: 'RJ', value: 'RJ' },
-  ];
+import useUserStore from '@/src/store/user/user.store';
+import useAuthStore from '@/src/store/auth/auth.store';
 
-  const cities = [
-    { label: 'Cidade 1', value: 'citie1' },
-    { label: 'Cidade 2', value: 'citie2' },
-    { label: 'Cidade 3', value: 'citie3' },
-  ];
+import { states } from '@/src/constants/States';
+import { formatPhone } from '@/src/utils/formatPhone';
+
+export const useAccountSettingsController = () => {
+  const { userData, isLoading, getUserById } = useUserStore();
+  const { userAuth } = useAuthStore();
+
+  useEffect(() => {
+    if (userAuth?.id) {
+      getUserById(userAuth.id);
+    }
+  }, [userAuth?.id, getUserById]);
 
   return {
-    uf,
-    cities,
+    userData,
+    isLoading,
+    states,
+    formatPhone,
   };
 };

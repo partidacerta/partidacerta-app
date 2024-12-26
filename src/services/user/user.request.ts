@@ -1,4 +1,18 @@
 import { instance } from '../api/api';
+import { IUserDTO } from './user.dto';
+
+export const getUserByIdRequest = async ({
+  userId,
+}: {
+  userId: string;
+}): Promise<IUserDTO> => {
+  try {
+    const { data } = await instance.get(`/user/${userId}`);
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao buscar dados do usuário');
+  }
+};
 
 export const deleteUserAccountRequest = async ({
   userId,

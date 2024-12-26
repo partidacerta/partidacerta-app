@@ -8,7 +8,6 @@ export const EditAccount = styled.View`
 
 export const ContainerSelect = styled.View`
   flex-direction: row;
-  align-items: center;
   gap: 24px;
 `;
 
