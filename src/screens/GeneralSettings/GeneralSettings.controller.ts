@@ -29,6 +29,11 @@ export const useGeneralSettingsController = (): IUseGeneralSettingsProps => {
     {
       iconName: 'key-outline',
       label: 'Alterar senha',
+      action: () =>
+        router.push({
+          pathname: '/NewPassword.stack',
+          params: { fromScreen: 'GeneralSettings.stack' },
+        }),
     },
     {
       iconName: 'remove-circle-outline',
@@ -38,6 +43,11 @@ export const useGeneralSettingsController = (): IUseGeneralSettingsProps => {
     {
       iconName: 'document-text-outline',
       label: 'Política de privacidade',
+      action: () =>
+        router.push({
+          pathname: '/PrivacyPolicies.stack',
+          params: { fromScreen: 'GeneralSettings.stack' },
+        }),
     },
     {
       iconName: 'log-out-outline',

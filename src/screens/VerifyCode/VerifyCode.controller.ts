@@ -41,7 +41,10 @@ export const useVerifyCodeController = (): IUseVerifyCodeControllerProps => {
 
     setCodeResetPassword({ resetCode: code });
 
-    router.push('./NewPassword.stack');
+    router.push({
+      pathname: './NewPassword.stack',
+      params: { fromScreen: 'VerifyCode.stack' },
+    });
   };
 
   const handleResendResetCode = () => {

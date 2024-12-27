@@ -27,6 +27,7 @@ export default function NewPasswordScreen() {
     dataValidateCharacteres,
     watchPassword,
     isLoading,
+    subTitle,
   } = useNewPasswordController();
 
   return (
@@ -36,7 +37,7 @@ export default function NewPasswordScreen() {
       <S.ContainerText>
         <ThemedText type="title">Alterando senha</ThemedText>
         <ThemedText>
-          Digite o código e altere sua senha para efetuar login.
+          <ThemedText>{subTitle}</ThemedText>
         </ThemedText>
       </S.ContainerText>
       <S.ContainerInputs>

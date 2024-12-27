@@ -4,7 +4,6 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 
 export const ContainerText = styled.View`
   gap: 10px;
-  width: 70%;
 `;
 
 export const ContainerInputs = styled.View`

@@ -19,7 +19,12 @@ export default function ModalDisableAccount({
   return (
     <Modal visible={isVisible} onClose={onClose}>
       <S.ModalContent>
-        <ThemedText>Tem certeza que deseja sair?</ThemedText>
+        <ThemedText type="title" textAlign="center">
+          Tem certeza que deseja{' '}
+          <ThemedText type="title" colorText={Colors.red}>
+            desativar sua conta?
+          </ThemedText>
+        </ThemedText>
         <S.ButtonModal>
           <Button
             type="secondary"

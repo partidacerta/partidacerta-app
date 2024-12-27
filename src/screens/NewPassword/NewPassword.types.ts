@@ -13,6 +13,7 @@ export interface IUseNewPasswordControllerProps {
   dataValidateCharacteres: DataValidateCharacteres[];
   watchPassword: string;
   isLoading: boolean;
+  subTitle: string;
 }
 
 export interface FormRequiredNewPassword {

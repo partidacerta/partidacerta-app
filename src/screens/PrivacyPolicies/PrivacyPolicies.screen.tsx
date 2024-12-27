@@ -8,6 +8,7 @@ import * as S from './PrivacyPolicies.styles';
 
 export default function PrivacyPoliciesScreen() {
   const {
+    fromScreen,
     isCheckedPrivacyPolicies,
     setIsCheckedPrivacyPolicies,
     onSubmitConfirmPrivacyPolicies,
@@ -50,19 +51,25 @@ export default function PrivacyPoliciesScreen() {
           termos
         </ThemedText>
       </S.ContainerText>
-      <Checkbox
-        label="Li e concordo com os termos"
-        value={isCheckedPrivacyPolicies}
-        onValueChange={setIsCheckedPrivacyPolicies}
-        isChecked={isCheckedPrivacyPolicies}
-      />
-      <S.ContainerButton>
-        <Button
-          type="primary"
-          text="Continuar"
-          disabled={!isCheckedPrivacyPolicies}
-          onPress={onSubmitConfirmPrivacyPolicies}
+      {fromScreen !== 'GeneralSettings.stack' && (
+        <Checkbox
+          label="Li e concordo com os termos"
+          value={isCheckedPrivacyPolicies}
+          onValueChange={setIsCheckedPrivacyPolicies}
+          isChecked={isCheckedPrivacyPolicies}
         />
+      )}
+      <S.ContainerButton>
+        {fromScreen === 'GeneralSettings.stack' ? (
+          <Button type="primary" text="Baixar PDF" />
+        ) : (
+          <Button
+            type="primary"
+            text="Continuar"
+            disabled={!isCheckedPrivacyPolicies}
+            onPress={onSubmitConfirmPrivacyPolicies}
+          />
+        )}
       </S.ContainerButton>
     </ThemedView>
   );

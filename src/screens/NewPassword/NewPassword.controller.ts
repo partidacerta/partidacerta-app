@@ -7,6 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import useAuthStore from '@/src/store/auth/auth.store';
 
+import { useRoute } from '@react-navigation/native';
+
 import {
   FormRequiredNewPassword,
   IUseNewPasswordControllerProps,
@@ -14,6 +16,14 @@ import {
 
 export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
   const { resetPasswordFinalStep, isLoading } = useAuthStore();
+
+  const route = useRoute();
+  const { fromScreen } = (route.params || {}) as { fromScreen?: string };
+
+  const subTitle =
+    fromScreen === 'VerifyCode.stack'
+      ? 'Digite o código e altere sua senha para efetuar login.'
+      : 'A senha deve incluir uma combinação de letras, números e caracteres especiais.';
 
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
   const [isVisibleConfirmPassword, setIsVisibleConfirmPassword] =
@@ -107,5 +117,6 @@ export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
     dataValidateCharacteres,
     watchPassword,
     isLoading,
+    subTitle,
   };
 };
