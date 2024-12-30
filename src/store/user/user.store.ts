@@ -4,10 +4,18 @@ import { create } from 'zustand';
 import {
   deleteUserAccountRequest,
   getUserByIdRequest,
+  updateUserByIdRequest,
 } from '@/src/services/user/user.request';
+import { IUserDTO } from '@/src/services/user/user.dto';
+import { showMessageSuccess } from '@/src/helpers/showMessage';
 
 import { triggerError } from '../../helpers/triggerError';
-import { FailedRequestDeleteUser, FailedRequestGetUser } from './user.message';
+import {
+  FailedRequestDeleteUser,
+  FailedRequestUpdateUser,
+  FailedRequestGetUser,
+  SuccessRequestUpdateUser,
+} from './user.message';
 import { UserStoreProps } from './user.types';
 
 const initialState = {
@@ -35,6 +43,33 @@ const useUserStore = create<UserStoreProps>((set, get) => ({
     };
 
     void makeAsync({ handle, onError });
+  },
+
+  updateUser: async (userId: string, userData: Partial<IUserDTO>) => {
+    const { makeAsync } = get();
+    const handle = async (): Promise<void> => {
+      set({ isLoading: true });
+      try {
+        const updatedData = await updateUserByIdRequest({ userId, userData });
+        set({ userData: updatedData });
+
+        showMessageSuccess(SuccessRequestUpdateUser.message);
+      } catch (error) {
+        triggerError(FailedRequestUpdateUser.message);
+      } finally {
+        set({ isLoading: false });
+      }
+    };
+
+    const onError = (): void => {
+      triggerError(FailedRequestUpdateUser.message);
+    };
+
+    const onFinally = (): void => {
+      set({ isLoading: false });
+    };
+
+    void makeAsync({ handle, onError, onFinally });
   },
 
   deleteUserAccount: async (userId: string) => {

@@ -14,18 +14,36 @@ import { Ionicons } from '@expo/vector-icons';
 import * as S from './AccountSettings.styles';
 
 export default function AccountSettingsScreen() {
-  const { userData, isLoading, states, formatPhone } =
-    useAccountSettingsController();
+  const {
+    formData,
+    setFormData,
+    isLoading,
+    states,
+    formatPhone,
+    handleUpdate,
+  } = useAccountSettingsController();
 
   return (
     <ThemedScrollView>
       <S.Container>
         <LoadingScreen isLoading={isLoading} />
         <ThemedText type="title">Configurações da conta</ThemedText>
-        <ThemedText>Informações gerais do jogador , dados pessoais.</ThemedText>
+        <ThemedText>Informações gerais do jogador, dados pessoais.</ThemedText>
         <S.EditAccount>
-          <Input placeholder="Nome" value={userData?.name} />
-          <Input placeholder="Nickname" value={userData?.nickname} />
+          <Input
+            placeholder="Nome"
+            value={formData.name}
+            onChangeText={value =>
+              setFormData(prev => ({ ...prev, name: value }))
+            }
+          />
+          <Input
+            placeholder="Nickname"
+            value={formData.nickname}
+            onChangeText={value =>
+              setFormData(prev => ({ ...prev, nickname: value }))
+            }
+          />
           <Input
             placeholder="E-mail"
             icon={
@@ -35,7 +53,10 @@ export default function AccountSettingsScreen() {
                 color={Colors.gray300}
               />
             }
-            value={userData?.email}
+            value={formData.email}
+            onChangeText={value =>
+              setFormData(prev => ({ ...prev, email: value }))
+            }
           />
           <Input
             placeholder="Data de nascimento"
@@ -46,33 +67,45 @@ export default function AccountSettingsScreen() {
                 color={Colors.gray300}
               />
             }
-            value={userData?.birthdate || ''}
+            value={formData.birthdate}
+            onChangeText={value =>
+              setFormData(prev => ({ ...prev, birthdate: value }))
+            }
           />
           <Input
             placeholder="Telefone"
             icon={
               <Ionicons name="call-outline" size={24} color={Colors.gray300} />
             }
-            value={formatPhone(userData?.phone)}
+            value={formatPhone(formData.phone)}
+            onChangeText={value =>
+              setFormData(prev => ({ ...prev, phone: value }))
+            }
           />
           <S.ContainerSelect>
             <SelectDropdown
               data={states}
               placeholder="UF"
               defaultOption={{
-                key: userData?.uf,
-                value: userData?.uf,
+                key: formData.uf,
+                value: formData.uf,
               }}
               setSelected={(value: string) => {
-                return value;
+                setFormData(prev => ({ ...prev, uf: value }));
               }}
             />
             <S.FullWidthInputt>
-              <Input placeholder="Cidade" value={userData?.city} />
+              <Input
+                placeholder="Cidade"
+                value={formData.city}
+                onChangeText={value =>
+                  setFormData(prev => ({ ...prev, city: value }))
+                }
+              />
             </S.FullWidthInputt>
           </S.ContainerSelect>
           <S.ContainerButton>
-            <Button text="Salvar" disabled />
+            <Button text="Salvar" onPress={handleUpdate} disabled={isLoading} />
           </S.ContainerButton>
         </S.EditAccount>
       </S.Container>

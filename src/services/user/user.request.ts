@@ -14,6 +14,21 @@ export const getUserByIdRequest = async ({
   }
 };
 
+export const updateUserByIdRequest = async ({
+  userId,
+  userData,
+}: {
+  userId: string;
+  userData: Partial<IUserDTO>;
+}): Promise<IUserDTO> => {
+  try {
+    const { data } = await instance.put(`/user/${userId}`, userData);
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao atualizar os dados do usuário');
+  }
+};
+
 export const deleteUserAccountRequest = async ({
   userId,
 }: {

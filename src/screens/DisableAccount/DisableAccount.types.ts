@@ -7,7 +7,7 @@ export interface IUseDisableAccountProps {
   handleShowPassword: () => void;
   handleOpenModal: () => void;
   handleCloseModal: () => void;
-  handleDisableAccount: (e?: React.BaseSyntheticEvent) => Promise<void>; // Tipo ajustado aqui
+  handleDisableAccount: (e?: React.BaseSyntheticEvent) => Promise<void>;
   control: Control<FormRequiredDisableAccount>;
   errors: FieldErrors<FormRequiredDisableAccount>;
   isValid: boolean;
