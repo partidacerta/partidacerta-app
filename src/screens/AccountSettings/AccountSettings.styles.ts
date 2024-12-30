@@ -8,11 +8,11 @@ export const EditAccount = styled.View`
 
 export const ContainerSelect = styled.View`
   flex-direction: row;
-  gap: 24px;
 `;
 
-export const FullWidthSelect = styled.View`
+export const FullWidthInputt = styled.View`
   flex: 1;
+  margin-left: 20px;
 `;
 
 export const ContainerButton = styled.View`

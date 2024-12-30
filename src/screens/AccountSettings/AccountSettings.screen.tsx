@@ -1,16 +1,17 @@
-import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
-import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import Input from '@/src/components/Input/Input';
+import SelectDropdown from '@/src/components/SelectDropdown/SelectDropdown';
 import { Button } from '@/src/components/Button/Button';
-import Select from '@/src/components/Select/Select';
+import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
+import { ThemedText } from '@/src/components/ThemedText/ThemedText';
+
+import { useAccountSettingsController } from './AccountSettings.controller';
 
 import { Colors } from '@/src/constants/Colors';
 
 import { Ionicons } from '@expo/vector-icons';
 
 import * as S from './AccountSettings.styles';
-import { useAccountSettingsController } from './AccountSettings.controller';
 
 export default function AccountSettingsScreen() {
   const { userData, isLoading, states, formatPhone } =
@@ -55,15 +56,20 @@ export default function AccountSettingsScreen() {
             value={formatPhone(userData?.phone)}
           />
           <S.ContainerSelect>
-            <Select
-              items={states}
+            <SelectDropdown
+              data={states}
               placeholder="UF"
-              style={{ width: 130 }}
-              value={userData?.uf}
+              defaultOption={{
+                key: userData?.uf,
+                value: userData?.uf,
+              }}
+              setSelected={(value: string) => {
+                return value;
+              }}
             />
-            <S.FullWidthSelect>
+            <S.FullWidthInputt>
               <Input placeholder="Cidade" value={userData?.city} />
-            </S.FullWidthSelect>
+            </S.FullWidthInputt>
           </S.ContainerSelect>
           <S.ContainerButton>
             <Button text="Salvar" disabled />
