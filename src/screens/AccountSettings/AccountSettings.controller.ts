@@ -4,7 +4,6 @@ import useUserStore from '@/src/store/user/user.store';
 import useAuthStore from '@/src/store/auth/auth.store';
 
 import { states } from '@/src/constants/States';
-import { formatPhone } from '@/src/utils/formatPhone';
 import { IUseAccountSettingsProps } from './AccountSettings.types';
 
 export const useAccountSettingsController = (): IUseAccountSettingsProps => {
@@ -33,7 +32,9 @@ export const useAccountSettingsController = (): IUseAccountSettingsProps => {
         name: userData.name,
         nickname: userData.nickname,
         email: userData.email,
-        birthdate: userData.birthdate ?? '',
+        birthdate: userData.birthdate
+          ? userData.birthdate.split('-').reverse().join('/')
+          : '',
         phone: userData.phone,
         uf: userData.uf,
         city: userData.city,
@@ -43,7 +44,15 @@ export const useAccountSettingsController = (): IUseAccountSettingsProps => {
 
   const handleUpdate = async () => {
     if (userAuth?.id) {
-      await updateUser(userAuth.id, formData);
+      const formattedData = {
+        ...formData,
+        phone: formData.phone.replace(/\D/g, ''),
+        birthdate: formData.birthdate
+          ? formData.birthdate.split('/').reverse().join('-')
+          : '',
+      };
+
+      await updateUser(userAuth.id, formattedData);
     }
   };
 
@@ -52,7 +61,6 @@ export const useAccountSettingsController = (): IUseAccountSettingsProps => {
     setFormData,
     isLoading,
     states,
-    formatPhone,
     handleUpdate,
   };
 };

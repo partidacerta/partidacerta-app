@@ -20,6 +20,5 @@ export interface IUseAccountSettingsProps {
   setFormData: Dispatch<SetStateAction<IFormData>>;
   isLoading: boolean;
   states: IState[];
-  formatPhone: (phone: string) => string;
   handleUpdate: () => Promise<void>;
 }

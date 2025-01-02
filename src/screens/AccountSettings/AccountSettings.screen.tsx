@@ -9,19 +9,16 @@ import { useAccountSettingsController } from './AccountSettings.controller';
 
 import { Colors } from '@/src/constants/Colors';
 
+import { formatPhone } from '@/src/utils/formatPhone';
+import { formatBirthdate } from '@/src/utils/formatBirthdate';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import * as S from './AccountSettings.styles';
 
 export default function AccountSettingsScreen() {
-  const {
-    formData,
-    setFormData,
-    isLoading,
-    states,
-    formatPhone,
-    handleUpdate,
-  } = useAccountSettingsController();
+  const { formData, setFormData, isLoading, states, handleUpdate } =
+    useAccountSettingsController();
 
   return (
     <ThemedScrollView>
@@ -43,6 +40,7 @@ export default function AccountSettingsScreen() {
             onChangeText={value =>
               setFormData(prev => ({ ...prev, nickname: value }))
             }
+            maxLength={20}
           />
           <Input
             placeholder="E-mail"
@@ -68,9 +66,11 @@ export default function AccountSettingsScreen() {
               />
             }
             value={formData.birthdate}
-            onChangeText={value =>
-              setFormData(prev => ({ ...prev, birthdate: value }))
-            }
+            onChangeText={value => {
+              const formattedDate = formatBirthdate(value);
+              setFormData(prev => ({ ...prev, birthdate: formattedDate }));
+            }}
+            maxLength={10}
           />
           <Input
             placeholder="Telefone"
@@ -78,9 +78,11 @@ export default function AccountSettingsScreen() {
               <Ionicons name="call-outline" size={24} color={Colors.gray300} />
             }
             value={formatPhone(formData.phone)}
-            onChangeText={value =>
-              setFormData(prev => ({ ...prev, phone: value }))
-            }
+            onChangeText={value => {
+              const formattedPhone = formatPhone(value);
+              setFormData(prev => ({ ...prev, phone: formattedPhone }));
+            }}
+            maxLength={15}
           />
           <S.ContainerSelect>
             <SelectDropdown
