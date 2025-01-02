@@ -35,7 +35,7 @@ export const usePrivacyPoliciesController =
     const handleDownloadPdf = async () => {
       try {
         const pdfUrl =
-          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'; //alterar para o link do s3 quando o contrato estiver pronto
+          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'; //alterar para a url do backend quando o contrato estiver pronto
         const fileUri = FileSystem.documentDirectory + 'privacy_policies.pdf';
 
         const { uri } = await FileSystem.downloadAsync(pdfUrl, fileUri);
@@ -44,7 +44,7 @@ export const usePrivacyPoliciesController =
           await Sharing.shareAsync(uri);
         }
 
-        showErrorMessage('O PDF foi baixado com sucesso!', 'success');
+        showErrorMessage('Arquivo baixado com sucesso!', 'success');
       } catch (error) {
         console.error('Erro ao baixar o PDF:', error);
         showErrorMessage('Não foi possível baixar o arquivo.', 'error');
