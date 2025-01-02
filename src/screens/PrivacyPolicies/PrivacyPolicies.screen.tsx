@@ -4,6 +4,7 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { ThemedView } from '@/src/components/ThemedView/ThemedView';
 
 import { usePrivacyPoliciesController } from './PrivacyPolicies.controller';
+
 import * as S from './PrivacyPolicies.styles';
 
 export default function PrivacyPoliciesScreen() {
@@ -12,6 +13,7 @@ export default function PrivacyPoliciesScreen() {
     isCheckedPrivacyPolicies,
     setIsCheckedPrivacyPolicies,
     onSubmitConfirmPrivacyPolicies,
+    handleDownloadPdf,
   } = usePrivacyPoliciesController();
 
   return (
@@ -61,7 +63,11 @@ export default function PrivacyPoliciesScreen() {
       )}
       <S.ContainerButton>
         {fromScreen === 'GeneralSettings.stack' ? (
-          <Button type="primary" text="Baixar PDF" />
+          <Button
+            type="primary"
+            text="Baixar PDF"
+            onPress={handleDownloadPdf}
+          />
         ) : (
           <Button
             type="primary"

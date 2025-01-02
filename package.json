@@ -60,7 +60,9 @@
     "reactotron-react-native": "^5.1.8",
     "styled-components": "^6.1.12",
     "yup": "^1.4.0",
-    "zustand": "^4.5.5"
+    "zustand": "^4.5.5",
+    "expo-file-system": "~17.0.1",
+    "expo-sharing": "~12.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
