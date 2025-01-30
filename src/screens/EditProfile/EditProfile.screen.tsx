@@ -4,6 +4,9 @@ import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
 import SelectDropdown from '@/src/components/SelectDropdown/SelectDropdown';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
+import { GENDER_OPTIONS } from '@/src/constants/Genders';
+import { SPORTS_OPTIONS } from '@/src/constants/Sports';
+import { SPORTS_MODALITIES_OPTIONS } from '@/src/constants/SportsModalities';
 
 import { useEditProfileController } from './EditProfile.controller';
 import * as S from './EditProfile.styles';
@@ -14,8 +17,10 @@ export default function EditProfileScreen() {
     handleSubmit,
     control,
     errors,
-    genderOptions,
     shouldDisabledButton,
+    shouldShowSelectModality,
+    shouldShowSelectPosition,
+    handleOptionsSelectPositions,
   } = useEditProfileController();
 
   return (
@@ -57,11 +62,11 @@ export default function EditProfileScreen() {
         control={control}
         render={({ field: { value, onChange } }) => (
           <SelectDropdown
-            data={genderOptions}
+            data={GENDER_OPTIONS}
             label="Gênero"
             placeholder="Selecione o gênero"
             setSelected={onChange}
-            defaultOption={genderOptions.find(option => option.key === value)}
+            defaultOption={GENDER_OPTIONS.find(option => option.key === value)}
           />
         )}
       />
@@ -109,10 +114,62 @@ export default function EditProfileScreen() {
           )}
         />
       </S.RowInputs>
+      <S.ContainerSports>
+        <Controller
+          name="sport"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <SelectDropdown
+              data={SPORTS_OPTIONS}
+              label="Esportes de interesse"
+              placeholder="Selecione um esporte"
+              setSelected={onChange}
+              defaultOption={SPORTS_OPTIONS.find(
+                option => option.key === value
+              )}
+            />
+          )}
+        />
+        {shouldShowSelectModality && (
+          <Controller
+            name="modality"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <SelectDropdown
+                data={SPORTS_MODALITIES_OPTIONS}
+                label="Modalidade"
+                placeholder="Selecione um esporte"
+                setSelected={onChange}
+                defaultOption={SPORTS_MODALITIES_OPTIONS.find(
+                  option => option.key === value
+                )}
+              />
+            )}
+          />
+        )}
+        {shouldShowSelectPosition && (
+          <Controller
+            name="position"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <SelectDropdown
+                data={handleOptionsSelectPositions()}
+                label="Posição"
+                placeholder="Selecione um esporte"
+                setSelected={onChange}
+                defaultOption={handleOptionsSelectPositions().find(
+                  (option: { key: string }) => option.key === value
+                )}
+              />
+            )}
+          />
+        )}
+      </S.ContainerSports>
       <Button
         text="Salvar"
         disabled={shouldDisabledButton}
         // onPress={handleSubmit(onSubmitForgotPassword)}
+        style={{ marginTop: 30, marginBottom: 50 }}
       />
     </ThemedScrollView>
   );

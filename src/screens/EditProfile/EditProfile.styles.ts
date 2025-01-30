@@ -21,3 +21,9 @@ export const RowInputs = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+export const ContainerSports = styled.View`
+  background-color: ${Colors.darkOpacity};
+  padding: 18px;
+  border-radius: 12px;
+`;

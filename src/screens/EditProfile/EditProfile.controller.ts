@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 
 import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { SPORTS } from '@/src/constants/Sports';
+import { SPORTS_POSITIONS } from '@/src/constants/SportsPositions';
 import usePlayerStore from '@/src/store/player/player.store';
 
 import {
@@ -15,10 +17,10 @@ import {
 export const useEditProfileController = (): IUseEditProfileControllerProps => {
   const { playerData } = usePlayerStore();
 
-  const genderOptions = [
-    { key: '1', value: 'Feminino' },
-    { key: '2', value: 'Masculino' },
-  ];
+  const [shouldShowSelectModality, setShouldShowSelectModality] =
+    useState(false);
+  const [shouldShowSelectPosition, setShouldShowSelectPosition] =
+    useState(false);
 
   const schema = yup.object().shape({
     name: yup.string().required('O nome é obrigatório'),
@@ -26,9 +28,9 @@ export const useEditProfileController = (): IUseEditProfileControllerProps => {
     gender: yup.string().required('O gênero é obrigatório'),
     height: yup.string().required('A altura é obrigatório'),
     shirtNumber: yup.string().required('O número da camiseta é obrigatório'),
-    // sports: yup.string().required('O esporte é obrigatório'),
-    // modality: yup.string().required('A modalidade é obrigatória'),
-    // position: yup.string().required('A posição é obrigatória'),
+    sport: yup.string().required('O esporte é obrigatório'),
+    modality: yup.string().required('A modalidade é obrigatória'),
+    position: yup.string().required('A posição é obrigatória'),
   });
 
   const {
@@ -45,17 +47,67 @@ export const useEditProfileController = (): IUseEditProfileControllerProps => {
       gender: '',
       height: playerData?.height || '',
       shirtNumber: playerData?.shirtNumber?.toString() || '',
+      sport: '',
+      modality: '',
+      position: '',
     },
   });
 
   const shouldDisabledButton = !isValid;
+
+  const watchSport = useWatch({
+    control,
+    name: 'sport',
+  });
+
+  const watchModality = useWatch({
+    control,
+    name: 'modality',
+  });
+
+  const handleOptionsSelectPositions = () => {
+    if (!watchSport) return [];
+
+    switch (watchSport) {
+      case SPORTS.SOCCER:
+        return SPORTS_POSITIONS.SOCCER;
+      case SPORTS.VOLLEYBALL:
+        return SPORTS_POSITIONS.VOLLEYBALL;
+      case SPORTS.BASKETBALL:
+        return SPORTS_POSITIONS.BASKETBALL;
+      case SPORTS.HANDBALL:
+        return SPORTS_POSITIONS.HANDBALL;
+      default:
+        return [];
+    }
+  };
+
+  useEffect(() => {
+    if (watchSport === SPORTS.SOCCER) {
+      setShouldShowSelectModality(true);
+    } else {
+      setShouldShowSelectModality(false);
+    }
+
+    if (
+      watchSport !== '' &&
+      watchSport !== SPORTS.TENNIS &&
+      watchSport !== SPORTS.PADEL
+    ) {
+      setShouldShowSelectPosition(true);
+    } else {
+      setShouldShowSelectPosition(false);
+    }
+  }, [watchSport, watchModality]);
 
   return {
     playerData,
     handleSubmit,
     control,
     errors,
-    genderOptions,
     shouldDisabledButton,
+    shouldShowSelectModality,
+    shouldShowSelectPosition,
+    handleOptionsSelectPositions,
   };
 };

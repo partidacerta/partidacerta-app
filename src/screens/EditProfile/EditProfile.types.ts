@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Control, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
 
 import { IPlayerDTO } from '@/src/services/player/player.dto';
@@ -7,8 +8,10 @@ export interface IUseEditProfileControllerProps {
   handleSubmit: UseFormHandleSubmit<FormRequiredEditProfile>;
   control: Control<FormRequiredEditProfile>;
   errors: FieldErrors<FormRequiredEditProfile>;
-  genderOptions: GenderOptions[];
   shouldDisabledButton: boolean;
+  shouldShowSelectModality: boolean;
+  shouldShowSelectPosition: boolean;
+  handleOptionsSelectPositions: () => any;
 }
 
 export interface FormRequiredEditProfile {
@@ -17,12 +20,12 @@ export interface FormRequiredEditProfile {
   gender: string;
   height: string;
   shirtNumber: string;
-  // sports: string;
-  // modality: string;
-  // position: string;
+  sport: string;
+  modality: string;
+  position: string;
 }
 
-interface GenderOptions {
+export interface IPositionOption {
   key: string;
-  value: string;
+  label: string;
 }
