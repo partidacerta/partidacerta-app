@@ -4,7 +4,13 @@ import { Colors } from '@/src/constants/Colors';
 
 import { ThemedText } from '../ThemedText/ThemedText';
 
-export const Container = styled.View``;
+interface InputProps {
+  width?: string | number;
+}
+
+export const Container = styled.View<InputProps>`
+  width: ${({ width }) => (width ? width : '100%')};
+`;
 
 export const ContainerInput = styled.View`
   flex-direction: row;

@@ -16,3 +16,8 @@ export const ProfileImage = styled.Image`
   background-color: ${Colors.white};
   margin-bottom: 40px;
 `;
+
+export const RowInputs = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;

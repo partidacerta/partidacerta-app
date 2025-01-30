@@ -14,10 +14,10 @@ export const useUserProfileController = () => {
   };
 
   useEffect(() => {
-    if (userAuth?.playerId) {
-      getPlayerById(userAuth.playerId);
+    if (userAuth?.playerInfo?.id) {
+      getPlayerById(userAuth?.playerInfo?.id);
     }
-  }, [userAuth?.playerId]);
+  }, [userAuth?.playerInfo?.id]);
 
   return {
     playerData,

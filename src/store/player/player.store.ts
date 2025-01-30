@@ -1,5 +1,7 @@
 import { create } from 'zustand';
+
 import { getPlayerByIdRequest } from '@/src/services/player/player.request';
+
 import { triggerError } from '../../helpers/triggerError';
 import { FailedRequestGetPlayer } from './player.message';
 import { PlayerStoreProps } from './player.types';
@@ -16,10 +18,13 @@ const usePlayerStore = create<PlayerStoreProps>((set, get) => ({
     const { makeAsync } = get();
     const handle = async (): Promise<void> => {
       set({ isLoading: true });
+
       const data = await getPlayerByIdRequest({ playerId });
+
       if (data) {
         set({ playerData: data });
       }
+
       set({ isLoading: false });
     };
 

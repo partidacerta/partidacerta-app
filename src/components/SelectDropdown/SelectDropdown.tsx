@@ -11,6 +11,7 @@ import { SelectDropdownProps } from './SelectDropdown.types';
 const SelectDropdown = ({
   label,
   data,
+  defaultOption,
   setSelected,
   placeholder = 'Selecione uma opção',
   notFoundText = 'Busca não encontrada...',
@@ -27,7 +28,8 @@ const SelectDropdown = ({
         data={data}
         search={search}
         save="value"
-        setSelected={(val: React.SetStateAction<string>) => setSelected(val)}
+        setSelected={setSelected}
+        defaultOption={defaultOption}
         fontFamily="RobotoRegular"
         notFoundText={notFoundText}
         searchPlaceholder=""
@@ -38,10 +40,13 @@ const SelectDropdown = ({
           height: 50,
           borderRadius: 12,
           alignItems: 'center',
+          marginBottom: 28,
         }}
         dropdownStyles={{
           backgroundColor: Colors.darkOpacity,
           borderWidth: 0,
+          marginTop: -20,
+          marginBottom: 28,
         }}
         inputStyles={{
           color: Colors.white,

@@ -6,9 +6,15 @@ import { ThemedText } from '../ThemedText/ThemedText';
 import * as S from './Input.styles';
 import { InputProps } from './Input.types';
 
-const Input: React.FC<InputProps> = ({ icon, error, label, ...props }) => {
+const Input: React.FC<InputProps> = ({
+  icon,
+  error,
+  label,
+  width,
+  ...props
+}) => {
   return (
-    <S.Container>
+    <S.Container width={width}>
       <ThemedText type="semiBold" style={{ fontSize: 12 }}>
         {label}
       </ThemedText>

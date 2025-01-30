@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import * as yup from 'yup';
@@ -14,41 +15,47 @@ import {
 export const useEditProfileController = (): IUseEditProfileControllerProps => {
   const { playerData } = usePlayerStore();
 
+  const genderOptions = [
+    { key: '1', value: 'Feminino' },
+    { key: '2', value: 'Masculino' },
+  ];
+
   const schema = yup.object().shape({
     name: yup.string().required('O nome é obrigatório'),
     nickname: yup.string().required('O nickname é obrigatório'),
     gender: yup.string().required('O gênero é obrigatório'),
     height: yup.string().required('A altura é obrigatório'),
-    shirtNumber: yup.number().required('O número da camiseta é obrigatório'),
-    sports: yup.string().required('O esporte é obrigatório'),
-    modality: yup.string().required('A modalidade é obrigatória'),
-    position: yup.string().required('A posição é obrigatória'),
+    shirtNumber: yup.string().required('O número da camiseta é obrigatório'),
+    // sports: yup.string().required('O esporte é obrigatório'),
+    // modality: yup.string().required('A modalidade é obrigatória'),
+    // position: yup.string().required('A posição é obrigatória'),
   });
 
   const {
     handleSubmit,
     control,
+    getValues,
     formState: { errors, isValid },
   } = useForm<FormRequiredEditProfile>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
     defaultValues: {
       name: playerData?.fullName,
       nickname: playerData?.nickname,
       gender: '',
-      height: playerData?.height,
-      shirtNumber: playerData?.shirtNumber,
-      sports: '',
-      modality: '',
-      position: '',
+      height: playerData?.height || '',
+      shirtNumber: playerData?.shirtNumber?.toString() || '',
     },
-    mode: 'onChange',
-    resolver: yupResolver(schema),
   });
+
+  const shouldDisabledButton = !isValid;
 
   return {
     playerData,
     handleSubmit,
     control,
     errors,
-    isValid,
+    genderOptions,
+    shouldDisabledButton,
   };
 };

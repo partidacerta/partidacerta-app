@@ -7,7 +7,8 @@ export interface IUseEditProfileControllerProps {
   handleSubmit: UseFormHandleSubmit<FormRequiredEditProfile>;
   control: Control<FormRequiredEditProfile>;
   errors: FieldErrors<FormRequiredEditProfile>;
-  isValid: boolean;
+  genderOptions: GenderOptions[];
+  shouldDisabledButton: boolean;
 }
 
 export interface FormRequiredEditProfile {
@@ -15,8 +16,13 @@ export interface FormRequiredEditProfile {
   nickname: string;
   gender: string;
   height: string;
-  shirtNumber: number;
-  sports: string;
-  modality: string;
-  position: string;
+  shirtNumber: string;
+  // sports: string;
+  // modality: string;
+  // position: string;
+}
+
+interface GenderOptions {
+  key: string;
+  value: string;
 }
