@@ -1,14 +1,18 @@
 import React from 'react';
-import * as S from './UserProfile.styles';
-import { Colors } from '@/src/constants/Colors';
-import { ThemedText } from '@/src/components/ThemedText/ThemedText';
-import { Button } from '@/src/components/Button/Button';
-import { useUserProfileController } from './UserProfile.controller';
-import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
+
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { Button } from '@/src/components/Button/Button';
+import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
+import { ThemedText } from '@/src/components/ThemedText/ThemedText';
+import { Colors } from '@/src/constants/Colors';
+
+import { useUserProfileController } from './UserProfile.controller';
+import * as S from './UserProfile.styles';
+
 export default function UserProfileScreen() {
-  const { playerData, isLoading } = useUserProfileController();
+  const { playerData, isLoading, handleNavigateEditProfile } =
+    useUserProfileController();
 
   return (
     <S.Container>
@@ -43,6 +47,7 @@ export default function UserProfileScreen() {
                 text="Editar perfil"
                 icon="pencil"
                 sizeIcon={16}
+                onPress={handleNavigateEditProfile}
                 style={{ width: 114, height: 34 }}
               />
             </S.BoxProfile>

@@ -2,12 +2,22 @@ import React from 'react';
 
 import { Colors } from '@/src/constants/Colors';
 
+import { ThemedText } from '../ThemedText/ThemedText';
 import * as S from './Input.styles';
 import { InputProps } from './Input.types';
 
-const Input: React.FC<InputProps> = ({ icon, error, ...props }) => {
+const Input: React.FC<InputProps> = ({
+  icon,
+  error,
+  label,
+  width,
+  ...props
+}) => {
   return (
-    <S.Container>
+    <S.Container width={width}>
+      <ThemedText type="semiBold" style={{ fontSize: 12 }}>
+        {label}
+      </ThemedText>
       <S.ContainerInput>
         <S.StyledTextInput placeholderTextColor={Colors.gray300} {...props} />
         {icon && <S.Icon>{icon}</S.Icon>}
