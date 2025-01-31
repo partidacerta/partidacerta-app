@@ -1,15 +1,14 @@
+import { TouchableOpacity } from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
-
 import { Colors } from '@/src/constants/Colors';
 
 import ModalLogout from './components/ModalLogout';
 import { useGeneralSettingsController } from './GeneralSettings.controller';
 import * as S from './GeneralSettings.styles';
-
-import { TouchableOpacity } from 'react-native';
 
 export default function GeneralSettingsScreen() {
   const { handleLogout, isModalVisible, handleCloseModal, menuItems } =

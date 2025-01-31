@@ -103,10 +103,7 @@ export default function RootLayout() {
         />
         <Stack.Screen
           name="EditProfile.stack"
-          options={{
-            headerTitle: '',
-            headerShown: true,
-          }}
+          options={{ headerShown: true }}
         />
       </Stack>
     </ThemeProvider>
