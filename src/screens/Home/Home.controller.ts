@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BackHandler } from 'react-native';
 
 import { router, useFocusEffect } from 'expo-router';
@@ -5,7 +6,6 @@ import { router, useFocusEffect } from 'expo-router';
 import useAuthStore from '@/src/store/auth/auth.store';
 
 import { IUseHomeControllerProps } from './Home.types';
-import { useState } from 'react';
 
 export const useHomeController = (): IUseHomeControllerProps => {
   const { logout } = useAuthStore();

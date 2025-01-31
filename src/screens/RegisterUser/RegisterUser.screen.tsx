@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-import { Text } from 'react-native';
 
 import { router } from 'expo-router';
 
@@ -11,7 +10,7 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
 import { validateInputPassword } from '@/src/utils/validateInputPassword';
 
-import Google from '../../assets/svgs/images/google.svg';
+// import Google from '../../assets/svgs/images/google.svg';
 import { useRegisteUserController } from './RegisterUser.controller';
 import * as S from './RegisterUser.styles';
 
@@ -84,7 +83,7 @@ export default function RegisterUserScreen() {
               value={value}
               error={errors?.password && errors?.password?.message}
               secureTextEntry={isVisiblePassword}
-              maxLength={8}
+              maxLength={20}
               autoCapitalize="none"
             />
           )}
@@ -113,7 +112,7 @@ export default function RegisterUserScreen() {
                 errors?.confirmPassword && errors?.confirmPassword?.message
               }
               secureTextEntry={isVisibleConfirmPassword}
-              maxLength={8}
+              maxLength={20}
               autoCapitalize="none"
             />
           )}
@@ -147,14 +146,14 @@ export default function RegisterUserScreen() {
           disabled={!handleFormIsValid()}
           onPress={onSubmitRegisterUser}
         />
-        <S.ContainerDivider>
+        {/* <S.ContainerDivider>
           <S.Divider />
           <ThemedText>ou cadastra-se com</ThemedText>
           <S.Divider />
         </S.ContainerDivider>
         <S.ButtonGoogle>
           <Google />
-        </S.ButtonGoogle>
+        </S.ButtonGoogle> */}
       </S.FooterScreen>
     </S.ContainerScreen>
   );

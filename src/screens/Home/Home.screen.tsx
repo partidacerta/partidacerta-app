@@ -1,10 +1,10 @@
 import { Button } from '@/src/components/Button/Button';
+import Modal from '@/src/components/Modal/Modal';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 
 import { useHomeController } from './Home.controller';
 import * as S from './Home.styles';
-import Modal from '@/src/components/Modal/Modal';
 
 export default function HomeScreen() {
   const { handleLogout, isModalVisible, handleOpenModal, handleCloseModal } =

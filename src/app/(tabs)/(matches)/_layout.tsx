@@ -12,7 +12,7 @@ export default function RootLayout() {
       screenOptions={{
         animation: 'fade',
         headerShown: true,
-        headerBackTitleVisible: true,
+        headerBackTitleVisible: false,
         headerTintColor: Colors[colorScheme ?? 'light'].text,
         headerStyle: {
           backgroundColor: Colors[colorScheme ?? 'light'].background,
@@ -22,7 +22,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="index"
         options={{
-          headerTitle: 'Home',
+          headerTitle: 'Minhas partidas',
         }}
       />
     </Stack>

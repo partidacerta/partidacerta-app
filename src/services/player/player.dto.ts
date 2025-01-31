@@ -4,10 +4,7 @@ export interface IPlayerDTO {
   fullName: string;
   nickname: string;
   playerImage: string;
-  interestSport: {
-    sportType: string;
-    modality: string;
-  }[];
+  interestSport: IPlayerInterestSport[];
   gender: string;
   height: string;
   shirtNumber: number;
@@ -18,4 +15,10 @@ export interface IPlayerDTO {
   };
   userId: string;
   firstAccess: boolean;
+}
+
+export interface IPlayerInterestSport {
+  sportType: string;
+  modality: string;
+  position: string;
 }

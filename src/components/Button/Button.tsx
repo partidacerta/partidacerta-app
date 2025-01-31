@@ -1,10 +1,11 @@
+import { Ionicons } from '@expo/vector-icons';
+
 import { Colors } from '@/src/constants/Colors';
 import { useThemeColor } from '@/src/hooks/useThemeColor';
 
 import { ThemedText } from '../ThemedText/ThemedText';
 import * as S from './Button.styles';
 import { ButtonProps } from './Button.types';
-import { Ionicons } from '@expo/vector-icons';
 
 export function Button({
   type = 'primary',

@@ -1,19 +1,27 @@
+import { useEffect } from 'react';
+
+import { router } from 'expo-router';
+
 import useAuthStore from '@/src/store/auth/auth.store';
 import usePlayerStore from '@/src/store/player/player.store';
-import { useEffect } from 'react';
 
 export const useUserProfileController = () => {
   const { playerData, getPlayerById, isLoading } = usePlayerStore();
   const { userAuth } = useAuthStore();
 
+  const handleNavigateEditProfile = () => {
+    router.push('/EditProfile.stack');
+  };
+
   useEffect(() => {
-    if (userAuth?.playerId) {
-      getPlayerById(userAuth.playerId);
+    if (userAuth?.playerInfo?.id) {
+      getPlayerById(userAuth?.playerInfo?.id);
     }
-  }, [userAuth?.playerId]);
+  }, [userAuth?.playerInfo?.id]);
 
   return {
     playerData,
     isLoading,
+    handleNavigateEditProfile,
   };
 };

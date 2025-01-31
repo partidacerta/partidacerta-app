@@ -59,7 +59,7 @@ export default function NewPasswordScreen() {
               value={value}
               error={errors?.password && errors?.password?.message}
               secureTextEntry={isVisiblePassword}
-              maxLength={8}
+              maxLength={20}
               autoCapitalize="none"
             />
           )}
@@ -88,7 +88,7 @@ export default function NewPasswordScreen() {
                 errors?.confirmPassword && errors?.confirmPassword?.message
               }
               secureTextEntry={isVisibleConfirmPassword}
-              maxLength={8}
+              maxLength={20}
               autoCapitalize="none"
             />
           )}
