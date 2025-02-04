@@ -1,8 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
 import { StyleProp, ViewStyle, TouchableOpacityProps } from 'react-native';
 
+import { Ionicons } from '@expo/vector-icons';
+
 export interface ButtonProps extends TouchableOpacityProps {
-  type?: 'primary' | 'secondary' | 'link';
+  type?: 'primary' | 'secondary' | 'link' | 'icon';
   text?: string;
   style?: StyleProp<ViewStyle>;
   lightColor?: string;

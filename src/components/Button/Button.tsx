@@ -70,6 +70,17 @@ export function Button({
             <RenderIconButton />
           </S.ButtonLink>
         );
+      case 'icon':
+        return (
+          <S.ButtonIcon
+            {...props}
+            style={style}
+            disabled={disabled}
+            onPress={onPress}
+          >
+            <RenderIconButton />
+          </S.ButtonIcon>
+        );
       default:
         return (
           <S.ButtonSecondary

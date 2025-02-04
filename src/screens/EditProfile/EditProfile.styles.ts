@@ -27,3 +27,9 @@ export const ContainerSports = styled.View`
   padding: 18px;
   border-radius: 12px;
 `;
+
+export const ContainerButtonIcon = styled.View`
+  width: 100%;
+  align-items: flex-end;
+  margin-top: 12px;
+`;

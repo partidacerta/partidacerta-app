@@ -164,7 +164,13 @@ export default function EditProfileScreen() {
             )}
           />
         )}
+        <S.ContainerButtonIcon>
+          <Button type="icon" icon="trash-outline" sizeIcon={24} />
+        </S.ContainerButtonIcon>
       </S.ContainerSports>
+      <S.ContainerButtonIcon>
+        <Button type="icon" icon="add" sizeIcon={28} />
+      </S.ContainerButtonIcon>
       <Button
         text="Salvar"
         disabled={shouldDisabledButton}

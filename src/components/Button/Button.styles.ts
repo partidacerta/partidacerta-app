@@ -32,6 +32,16 @@ export const ButtonSecondary = styled.TouchableOpacity<ButtonProps>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
+export const ButtonIcon = styled.TouchableOpacity<ButtonProps>`
+  height: 48px;
+  width: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: ${Colors.darkOpacity};
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+`;
+
 export const ButtonLink = styled.TouchableOpacity<ButtonProps>`
   flex-direction: row;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
