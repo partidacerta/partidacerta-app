@@ -42,7 +42,7 @@ export const useDisableAccountController = (): IUseDisableAccountProps => {
   const handleDisableAccount = () => {
     const { password } = getValues();
     if (userAuth?.id && password) {
-      useUserStore.getState().deleteUserAccount(userAuth.id);
+      useUserStore.getState().deleteUserAccount(userAuth.id, password);
     }
     setModalVisible(false);
   };

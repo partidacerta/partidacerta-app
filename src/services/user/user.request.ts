@@ -31,11 +31,15 @@ export const updateUserByIdRequest = async ({
 
 export const deleteUserAccountRequest = async ({
   userId,
+  password,
 }: {
   userId: string;
+  password: string;
 }): Promise<void> => {
   try {
-    await instance.delete(`/user/${userId}`);
+    await instance.delete(`/user/${userId}`, {
+      params: { password },
+    });
   } catch (error) {
     throw new Error('Erro ao desativar a conta do usuário');
   }

@@ -14,6 +14,7 @@ import {
   FailedRequestDeleteUser,
   FailedRequestUpdateUser,
   FailedRequestGetUser,
+  SuccessRequestDeleteUser,
   SuccessRequestUpdateUser,
 } from './user.message';
 import { UserStoreProps } from './user.types';
@@ -54,6 +55,8 @@ const useUserStore = create<UserStoreProps>((set, get) => ({
         set({ userData: updatedData });
 
         showMessageSuccess(SuccessRequestUpdateUser.message);
+
+        router.navigate('/GeneralSettings.stack');
       } catch (error) {
         triggerError(FailedRequestUpdateUser.message);
       } finally {
@@ -72,25 +75,22 @@ const useUserStore = create<UserStoreProps>((set, get) => ({
     void makeAsync({ handle, onError, onFinally });
   },
 
-  deleteUserAccount: async (userId: string) => {
+  deleteUserAccount: async (userId: string, password: string) => {
     const { makeAsync } = get();
+
     const handle = async (): Promise<void> => {
-      set({ isLoading: true });
-      await deleteUserAccountRequest({ userId });
-      set({ isAccountDeactivated: true });
-
-      router.push('/Login.stack');
+      try {
+        set({ isLoading: true });
+        await deleteUserAccountRequest({ userId, password });
+        set({ isAccountDeactivated: true });
+        showMessageSuccess(SuccessRequestDeleteUser.message);
+        router.push('/Login.stack');
+      } catch (error) {
+        triggerError(FailedRequestDeleteUser.message);
+      }
     };
 
-    const onError = (): void => {
-      triggerError(FailedRequestDeleteUser.message);
-    };
-
-    const onFinally = (): void => {
-      set({ isLoading: false });
-    };
-
-    void makeAsync({ handle, onError, onFinally });
+    void makeAsync({ handle });
   },
 
   makeAsync: async ({ handle, onError, onFinally }) => {

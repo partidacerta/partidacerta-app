@@ -84,28 +84,24 @@ export default function AccountSettingsScreen() {
             }}
             maxLength={15}
           />
-          <S.ContainerSelect>
-            <SelectDropdown
-              data={states}
-              placeholder="UF"
-              defaultOption={{
-                key: formData.uf,
-                value: formData.uf,
-              }}
-              setSelected={(value: string) => {
-                setFormData(prev => ({ ...prev, uf: value }));
-              }}
-            />
-            <S.FullWidthInputt>
-              <Input
-                placeholder="Cidade"
-                value={formData.city}
-                onChangeText={value =>
-                  setFormData(prev => ({ ...prev, city: value }))
-                }
-              />
-            </S.FullWidthInputt>
-          </S.ContainerSelect>
+          <SelectDropdown
+            data={states}
+            placeholder="UF"
+            defaultOption={{
+              key: formData.uf,
+              value: formData.uf,
+            }}
+            setSelected={(value: string) => {
+              setFormData(prev => ({ ...prev, uf: value }));
+            }}
+          />
+          <Input
+            placeholder="Cidade"
+            value={formData.city}
+            onChangeText={value =>
+              setFormData(prev => ({ ...prev, city: value }))
+            }
+          />
           <S.ContainerButton>
             <Button text="Salvar" onPress={handleUpdate} disabled={isLoading} />
           </S.ContainerButton>

@@ -10,6 +10,10 @@ export const SuccessRequestUpdateUser = {
   message: 'Usuário alterado com sucesso.',
 };
 
+export const SuccessRequestDeleteUser = {
+  message: 'Usuário desativado com sucesso.',
+};
+
 export const FailedRequestDeleteUser = {
   message: 'Erro ao desativar a conta do usuário. Tente novamente!',
 };

@@ -6,7 +6,7 @@ export type UserStoreProps = {
   getUserById: (userId: string) => void;
   updateUser: (userId: string, userData: Partial<IUserDTO>) => Promise<void>;
   isAccountDeactivated: boolean;
-  deleteUserAccount: (userId: string) => void;
+  deleteUserAccount: (userId: string, password: string) => void;
   makeAsync: <T>(props: {
     handle: () => Promise<T>;
     onError?: (error: unknown) => void;
