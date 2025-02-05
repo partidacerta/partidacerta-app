@@ -1,3 +1,5 @@
+import { Controller } from 'react-hook-form';
+
 import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
 import Input from '@/src/components/Input/Input';
 import SelectDropdown from '@/src/components/SelectDropdown/SelectDropdown';
@@ -8,17 +10,24 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { useAccountSettingsController } from './AccountSettings.controller';
 
 import { Colors } from '@/src/constants/Colors';
+import { states } from '@/src/constants/States';
 
+import { formatDate, formatDateInput } from '@/src/utils/formatDate';
 import { formatPhone } from '@/src/utils/formatPhone';
-import { formatBirthdate } from '@/src/utils/formatBirthdate';
 
 import { Ionicons } from '@expo/vector-icons';
 
 import * as S from './AccountSettings.styles';
 
 export default function AccountSettingsScreen() {
-  const { formData, setFormData, isLoading, states, handleUpdate } =
-    useAccountSettingsController();
+  const {
+    handleSubmit,
+    onSubmitEditUser,
+    control,
+    errors,
+    isLoading,
+    shouldDisabledButton,
+  } = useAccountSettingsController();
 
   return (
     <ThemedScrollView>
@@ -27,83 +36,144 @@ export default function AccountSettingsScreen() {
         <ThemedText type="title">Configurações da conta</ThemedText>
         <ThemedText>Informações gerais do jogador, dados pessoais.</ThemedText>
         <S.EditAccount>
-          <Input
-            placeholder="Nome"
-            value={formData.name}
-            onChangeText={value =>
-              setFormData(prev => ({ ...prev, name: value }))
-            }
-          />
-          <Input
-            placeholder="Nickname"
-            value={formData.nickname}
-            onChangeText={value =>
-              setFormData(prev => ({ ...prev, nickname: value }))
-            }
-            maxLength={20}
-          />
-          <Input
-            placeholder="E-mail"
-            icon={
-              <Ionicons
-                name="person-outline"
-                size={24}
-                color={Colors.gray300}
+          <Controller
+            name="name"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                label="Nome"
+                placeholder="Nome completo"
+                onChangeText={e => onChange(e)}
+                value={value}
+                error={errors?.name && errors?.name?.message}
+                maxLength={50}
               />
-            }
-            value={formData.email}
-            onChangeText={value =>
-              setFormData(prev => ({ ...prev, email: value }))
-            }
+            )}
           />
-          <Input
-            placeholder="Data de nascimento"
-            icon={
-              <Ionicons
-                name="calendar-number-outline"
-                size={24}
-                color={Colors.gray300}
+          <Controller
+            name="nickname"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                label="Nickname"
+                placeholder="Nickname"
+                onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
+                value={value}
+                error={errors?.nickname && errors?.nickname?.message}
+                maxLength={50}
+                autoCapitalize="none"
               />
-            }
-            value={formData.birthdate}
-            onChangeText={value => {
-              const formattedDate = formatBirthdate(value);
-              setFormData(prev => ({ ...prev, birthdate: formattedDate }));
-            }}
-            maxLength={10}
+            )}
           />
-          <Input
-            placeholder="Telefone"
-            icon={
-              <Ionicons name="call-outline" size={24} color={Colors.gray300} />
-            }
-            value={formatPhone(formData.phone)}
-            onChangeText={value => {
-              const formattedPhone = formatPhone(value);
-              setFormData(prev => ({ ...prev, phone: formattedPhone }));
-            }}
-            maxLength={15}
+          <Controller
+            name="email"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                label="E-mail"
+                placeholder="E-mail"
+                icon={
+                  <Ionicons
+                    name="person-outline"
+                    size={24}
+                    color={Colors.gray300}
+                  />
+                }
+                onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
+                value={value}
+                error={errors?.email && errors?.email?.message}
+                maxLength={50}
+                autoCapitalize="none"
+              />
+            )}
           />
-          <SelectDropdown
-            data={states}
-            placeholder="UF"
-            defaultOption={{
-              key: formData.uf,
-              value: formData.uf,
-            }}
-            setSelected={(value: string) => {
-              setFormData(prev => ({ ...prev, uf: value }));
-            }}
+          <Controller
+            name="birthdate"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                label="Data de nascimento"
+                placeholder="Data de nascimento"
+                icon={
+                  <Ionicons
+                    name="calendar-number-outline"
+                    size={24}
+                    color={Colors.gray300}
+                  />
+                }
+                onChangeText={e => {
+                  const formattedDate = formatDateInput(e);
+                  onChange(formattedDate);
+                }}
+                value={formatDate(value)}
+                error={errors?.birthdate && errors?.birthdate?.message}
+                maxLength={10}
+                autoCapitalize="none"
+              />
+            )}
           />
-          <Input
-            placeholder="Cidade"
-            value={formData.city}
-            onChangeText={value =>
-              setFormData(prev => ({ ...prev, city: value }))
-            }
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                label="Telefone"
+                placeholder="Telefone"
+                icon={
+                  <Ionicons
+                    name="call-outline"
+                    size={24}
+                    color={Colors.gray300}
+                  />
+                }
+                onChangeText={e => {
+                  const formattedPhone = formatPhone(e);
+                  onChange(formattedPhone);
+                }}
+                value={formatPhone(value || '')}
+                error={errors?.phone && errors?.phone?.message}
+                maxLength={15}
+                autoCapitalize="none"
+              />
+            )}
+          />
+          <Controller
+            name="uf"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <SelectDropdown
+                data={states}
+                label="UF"
+                placeholder="Selecione o estado"
+                setSelected={onChange}
+                defaultOption={
+                  value
+                    ? states.find(option => option.value === value)
+                    : undefined
+                }
+              />
+            )}
+          />
+          <Controller
+            name="city"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                label="Cidade"
+                placeholder="Cidade"
+                onChangeText={e => onChange(e)}
+                value={value}
+                error={errors?.city && errors?.city?.message}
+                maxLength={30}
+              />
+            )}
           />
           <S.ContainerButton>
-            <Button text="Salvar" onPress={handleUpdate} disabled={isLoading} />
+            <Button
+              text="Salvar"
+              disabled={shouldDisabledButton}
+              onPress={handleSubmit(onSubmitEditUser)}
+            />
           </S.ContainerButton>
         </S.EditAccount>
       </S.Container>

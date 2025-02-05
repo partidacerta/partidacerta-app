@@ -1,66 +1,67 @@
-import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import * as yup from 'yup';
+
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import useUserStore from '@/src/store/user/user.store';
-import useAuthStore from '@/src/store/auth/auth.store';
 
-import { states } from '@/src/constants/States';
-import { IUseAccountSettingsProps } from './AccountSettings.types';
+import {
+  FormRequiredEditAccount,
+  IUseAccountSettingsProps,
+} from './AccountSettings.types';
+import { normalizeDate } from '@/src/utils/formatDate';
 
 export const useAccountSettingsController = (): IUseAccountSettingsProps => {
-  const { userData, isLoading, getUserById, updateUser } = useUserStore();
-  const { userAuth } = useAuthStore();
+  const { userData, isLoading, updateUser } = useUserStore();
 
-  const [formData, setFormData] = useState({
-    name: userData?.name || '',
-    nickname: userData?.nickname || '',
-    email: userData?.email || '',
-    birthdate: userData?.birthdate || '',
-    phone: userData?.phone || '',
-    uf: userData?.uf || '',
-    city: userData?.city || '',
+  const schema = yup.object().shape({
+    name: yup.string().required('O nome é obrigatório'),
+    nickname: yup.string().required('O nickname é obrigatório'),
+    email: yup.string().required('O e-mail é obrigatório'),
+    birthdate: yup.string().required('A data de nascimento é obrigatório'),
+    phone: yup.string().required('O telefone é obrigatório'),
+    uf: yup.string().required('A UF é obrigatório'),
+    city: yup.string().required('A cidade é obrigatória'),
   });
 
-  useEffect(() => {
-    if (userAuth?.id) {
-      getUserById(userAuth.id);
-    }
-  }, [userAuth?.id, getUserById]);
+  const {
+    handleSubmit,
+    control,
+    getValues,
+    formState: { errors, isValid },
+  } = useForm<FormRequiredEditAccount>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+    defaultValues: {
+      name: userData?.name,
+      nickname: userData?.nickname,
+      email: userData?.email,
+      birthdate: userData?.birthdate || '',
+      phone: userData?.phone,
+      uf: userData?.uf,
+      city: userData?.city,
+    },
+  });
 
-  useEffect(() => {
-    if (userData) {
-      setFormData({
-        name: userData.name,
-        nickname: userData.nickname,
-        email: userData.email,
-        birthdate: userData.birthdate
-          ? userData.birthdate.split('-').reverse().join('/')
-          : '',
-        phone: userData.phone,
-        uf: userData.uf,
-        city: userData.city,
-      });
-    }
-  }, [userData]);
+  const shouldDisabledButton = !isValid;
 
-  const handleUpdate = async () => {
-    if (userAuth?.id) {
-      const formattedData = {
-        ...formData,
-        phone: formData.phone.replace(/\D/g, ''),
-        birthdate: formData.birthdate
-          ? formData.birthdate.split('/').reverse().join('-')
-          : '',
-      };
-
-      await updateUser(userAuth.id, formattedData);
-    }
+  const onSubmitEditUser = async (formData: FormRequiredEditAccount) => {
+    const formattedData = {
+      ...formData,
+      phone: formData.phone.replace(/\D/g, ''),
+      birthdate: normalizeDate(formData.birthdate),
+    };
+    updateUser(userData?.id || '', formattedData);
   };
 
   return {
-    formData,
-    setFormData,
+    userData,
+    handleSubmit,
+    onSubmitEditUser,
+    control,
+    errors,
     isLoading,
-    states,
-    handleUpdate,
+    shouldDisabledButton,
   };
 };

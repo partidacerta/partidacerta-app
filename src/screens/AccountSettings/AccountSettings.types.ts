@@ -1,6 +1,18 @@
-import { Dispatch, SetStateAction } from 'react';
+import { IUserDTO } from '@/src/services/user/user.dto';
 
-export interface IFormData {
+import { Control, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
+
+export interface IUseAccountSettingsProps {
+  userData: IUserDTO | undefined;
+  handleSubmit: UseFormHandleSubmit<FormRequiredEditAccount>;
+  onSubmitEditUser: (data: FormRequiredEditAccount) => void;
+  control: Control<FormRequiredEditAccount>;
+  errors: FieldErrors<FormRequiredEditAccount>;
+  isLoading: boolean;
+  shouldDisabledButton: boolean;
+}
+
+export interface FormRequiredEditAccount {
   name: string;
   nickname: string;
   email: string;
@@ -8,17 +20,4 @@ export interface IFormData {
   phone: string;
   uf: string;
   city: string;
-}
-
-export interface IState {
-  label: string;
-  value: string;
-}
-
-export interface IUseAccountSettingsProps {
-  formData: IFormData;
-  setFormData: Dispatch<SetStateAction<IFormData>>;
-  isLoading: boolean;
-  states: IState[];
-  handleUpdate: () => Promise<void>;
 }
