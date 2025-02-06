@@ -29,6 +29,27 @@ export const updateUserByIdRequest = async ({
   }
 };
 
+export const updateUserPasswordRequest = async ({
+  userId,
+  oldPassword,
+  newPassword,
+}: {
+  userId: string;
+  oldPassword: string;
+  newPassword: string;
+}): Promise<void> => {
+  try {
+    const params = new URLSearchParams({
+      oldPassword,
+      newPassword,
+    });
+
+    await instance.put(`/user/${userId}/password?${params.toString()}`);
+  } catch (error) {
+    throw new Error('Erro ao atualizar a senha do usuário');
+  }
+};
+
 export const deleteUserAccountRequest = async ({
   userId,
   password,

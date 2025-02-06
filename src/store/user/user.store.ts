@@ -1,13 +1,14 @@
 import { router } from 'expo-router';
 import { create } from 'zustand';
 
+import { showMessageSuccess } from '@/src/helpers/showMessage';
+import { IUserDTO } from '@/src/services/user/user.dto';
 import {
   deleteUserAccountRequest,
   getUserByIdRequest,
   updateUserByIdRequest,
+  updateUserPasswordRequest,
 } from '@/src/services/user/user.request';
-import { IUserDTO } from '@/src/services/user/user.dto';
-import { showMessageSuccess } from '@/src/helpers/showMessage';
 
 import { triggerError } from '../../helpers/triggerError';
 import {
@@ -16,6 +17,8 @@ import {
   FailedRequestGetUser,
   SuccessRequestDeleteUser,
   SuccessRequestUpdateUser,
+  SuccessRequestUpdateUserPassword,
+  FailedRequestUpdateUserPassword,
 } from './user.message';
 import { UserStoreProps } from './user.types';
 
@@ -66,6 +69,37 @@ const useUserStore = create<UserStoreProps>((set, get) => ({
 
     const onError = (): void => {
       triggerError(FailedRequestUpdateUser.message);
+    };
+
+    const onFinally = (): void => {
+      set({ isLoading: false });
+    };
+
+    void makeAsync({ handle, onError, onFinally });
+  },
+
+  updateUserPassword: async (
+    userId: string,
+    oldPassword: string,
+    newPassword: string
+  ) => {
+    const { makeAsync } = get();
+
+    const handle = async (): Promise<void> => {
+      set({ isLoading: true });
+      try {
+        await updateUserPasswordRequest({ userId, oldPassword, newPassword });
+        showMessageSuccess(SuccessRequestUpdateUserPassword.message);
+        router.navigate('/GeneralSettings.stack');
+      } catch (error) {
+        triggerError(FailedRequestUpdateUserPassword.message);
+      } finally {
+        set({ isLoading: false });
+      }
+    };
+
+    const onError = (): void => {
+      triggerError(FailedRequestUpdateUserPassword.message);
     };
 
     const onFinally = (): void => {

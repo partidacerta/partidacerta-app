@@ -10,6 +10,14 @@ export const SuccessRequestUpdateUser = {
   message: 'Usuário alterado com sucesso.',
 };
 
+export const SuccessRequestUpdateUserPassword = {
+  message: 'Senha alterada com sucesso.',
+};
+
+export const FailedRequestUpdateUserPassword = {
+  message: 'Erro ao editar a senha do usuário. Tente novamente!',
+};
+
 export const SuccessRequestDeleteUser = {
   message: 'Usuário desativado com sucesso.',
 };
