@@ -6,11 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import useUserStore from '@/src/store/user/user.store';
 
+import { formatDate, normalizeDate } from '@/src/utils/formatDate';
+
 import {
   FormRequiredEditAccount,
   IUseAccountSettingsProps,
 } from './AccountSettings.types';
-import { normalizeDate } from '@/src/utils/formatDate';
 
 export const useAccountSettingsController = (): IUseAccountSettingsProps => {
   const { userData, isLoading, updateUser } = useUserStore();
@@ -37,7 +38,7 @@ export const useAccountSettingsController = (): IUseAccountSettingsProps => {
       name: userData?.name,
       nickname: userData?.nickname,
       email: userData?.email,
-      birthdate: userData?.birthdate || '',
+      birthdate: userData?.birthdate ? formatDate(userData?.birthdate) : '',
       phone: userData?.phone,
       uf: userData?.uf,
       city: userData?.city,
@@ -49,8 +50,8 @@ export const useAccountSettingsController = (): IUseAccountSettingsProps => {
   const onSubmitEditUser = async (formData: FormRequiredEditAccount) => {
     const formattedData = {
       ...formData,
-      phone: formData.phone.replace(/\D/g, ''),
       birthdate: normalizeDate(formData.birthdate),
+      phone: formData.phone.replace(/\D/g, ''),
     };
     updateUser(userData?.id || '', formattedData);
   };

@@ -12,7 +12,7 @@ import { useAccountSettingsController } from './AccountSettings.controller';
 import { Colors } from '@/src/constants/Colors';
 import { states } from '@/src/constants/States';
 
-import { formatDate, formatDateInput } from '@/src/utils/formatDate';
+import { formatDateInput } from '@/src/utils/formatDate';
 import { formatPhone } from '@/src/utils/formatPhone';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -105,7 +105,7 @@ export default function AccountSettingsScreen() {
                   const formattedDate = formatDateInput(e);
                   onChange(formattedDate);
                 }}
-                value={formatDate(value)}
+                value={value}
                 error={errors?.birthdate && errors?.birthdate?.message}
                 maxLength={10}
                 autoCapitalize="none"

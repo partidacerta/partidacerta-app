@@ -1,29 +1,30 @@
-export const formatDate = (value: string): string => {
-  if (!value) return '';
-  const parts = value.split('-');
-  if (parts.length === 3) {
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
-  }
-  return value;
+export const formatDate = (date: string) => {
+  const d = new Date(date);
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const year = d.getFullYear();
+
+  return `${day}/${month}/${year}`;
 };
 
-export const formatDateInput = (value: string): string => {
-  let cleanValue = value.replace(/\D/g, '');
+export const formatDateInput = (input: string) => {
+  const onlyNumbers = input.replace(/\D/g, '');
 
-  cleanValue = cleanValue.slice(0, 8);
+  let formattedDate = onlyNumbers;
 
-  if (cleanValue.length >= 5) {
-    return `${cleanValue.slice(0, 2)}/${cleanValue.slice(
-      2,
-      4
-    )}/${cleanValue.slice(4)}`;
-  } else if (cleanValue.length >= 3) {
-    return `${cleanValue.slice(0, 2)}/${cleanValue.slice(2)}`;
-  } else {
-    return cleanValue;
+  if (formattedDate.length > 2) {
+    formattedDate = formattedDate.slice(0, 2) + '/' + formattedDate.slice(2);
   }
+  if (formattedDate.length > 5) {
+    formattedDate = formattedDate.slice(0, 5) + '/' + formattedDate.slice(5, 9);
+  }
+
+  return formattedDate;
 };
 
-export const normalizeDate = (value: string): string => {
-  return value.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$3-$2-$1');
+export const normalizeDate = (date: string) => {
+  if (!date) return '';
+
+  const [day, month, year] = date.split('/');
+  return `${year}-${month}-${day}T00:00:00`;
 };
