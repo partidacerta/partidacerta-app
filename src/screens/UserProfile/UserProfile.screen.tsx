@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { LinearGradient } from 'expo-linear-gradient';
+import { router } from 'expo-router';
 
 import { Button } from '@/src/components/Button/Button';
 import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
@@ -31,6 +32,7 @@ export default function UserProfileScreen() {
               sizeIcon={22}
               colorIcon={Colors.blue}
               style={{ width: 32, height: 32, backgroundColor: Colors.white }}
+              onPress={() => router.push('/GeneralSettings.stack')}
             />
           </S.ButtonSettings>
           <S.Profile>

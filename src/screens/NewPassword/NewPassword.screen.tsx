@@ -19,14 +19,20 @@ export default function NewPasswordScreen() {
     handleSubmit,
     errors,
     handleFormIsValid,
-    onSubmitNewPassword,
+    onSubmitResetPassword,
+    onSubmitEditPassword,
+    isVisibleOldPassword,
     isVisiblePassword,
     isVisibleConfirmPassword,
+    handleShowOldPassword,
     handleShowPassword,
     handleShowConfirmPassword,
     dataValidateCharacteres,
     watchPassword,
     isLoading,
+    subTitle,
+    fromScreen,
+    isGeneralSettings,
   } = useNewPasswordController();
 
   return (
@@ -36,10 +42,37 @@ export default function NewPasswordScreen() {
       <S.ContainerText>
         <ThemedText type="title">Alterando senha</ThemedText>
         <ThemedText>
-          Digite o código e altere sua senha para efetuar login.
+          <ThemedText>{subTitle}</ThemedText>
         </ThemedText>
       </S.ContainerText>
-      <S.ContainerInputs>
+      <S.ContainerInputs isGeneralSettings={isGeneralSettings}>
+        {fromScreen === 'GeneralSettings.stack' && (
+          <Controller
+            name="oldPassword"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="Senha atual"
+                icon={
+                  <Ionicons
+                    name={
+                      !isVisibleOldPassword ? 'eye-off-outline' : 'eye-outline'
+                    }
+                    size={24}
+                    color={Colors.gray300}
+                    onPress={handleShowOldPassword}
+                  />
+                }
+                onChangeText={onChange}
+                value={value}
+                error={errors?.oldPassword && errors?.oldPassword?.message}
+                secureTextEntry={isVisibleOldPassword}
+                maxLength={20}
+                autoCapitalize="none"
+              />
+            )}
+          />
+        )}
         <Controller
           name="password"
           control={control}
@@ -93,7 +126,7 @@ export default function NewPasswordScreen() {
           )}
         />
       </S.ContainerInputs>
-      <S.ContainerValidatorPassword>
+      <S.ContainerValidatorPassword isGeneralSettings={isGeneralSettings}>
         {dataValidateCharacteres.map((item, index) => (
           <S.Row key={index}>
             <S.TextCheckPassword>{item.label}</S.TextCheckPassword>
@@ -118,8 +151,12 @@ export default function NewPasswordScreen() {
       </S.ContainerValidatorPassword>
       <Button
         text="Alterar senha"
-        onPress={handleSubmit(onSubmitNewPassword)}
-        disabled={!handleFormIsValid()}
+        onPress={handleSubmit(
+          fromScreen === 'GeneralSettings.stack'
+            ? onSubmitEditPassword
+            : onSubmitResetPassword
+        )}
+        // disabled={!handleFormIsValid()}
       />
     </ThemedScrollView>
   );

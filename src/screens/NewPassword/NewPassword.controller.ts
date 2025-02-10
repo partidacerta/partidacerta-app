@@ -4,8 +4,10 @@ import { useForm, useWatch } from 'react-hook-form';
 import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRoute } from '@react-navigation/native';
 
 import useAuthStore from '@/src/store/auth/auth.store';
+import useUserStore from '@/src/store/user/user.store';
 
 import {
   FormRequiredNewPassword,
@@ -13,11 +15,25 @@ import {
 } from './NewPassword.types';
 
 export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
-  const { resetPasswordFinalStep, isLoading } = useAuthStore();
+  const { resetPasswordFinalStep, isLoading, userAuth } = useAuthStore();
+  const { updateUserPassword } = useUserStore();
+  const route = useRoute();
+  const { fromScreen } = (route.params || {}) as { fromScreen?: string };
+  const isGeneralSettings = fromScreen === 'GeneralSettings.stack';
 
+  const subTitle =
+    fromScreen === 'VerifyCode.stack'
+      ? 'Digite o código e altere sua senha para efetuar login.'
+      : 'A senha deve incluir uma combinação de letras, números e caracteres especiais.';
+
+  const [isVisibleOldPassword, setIsVisibleOldPassword] = useState(true);
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
   const [isVisibleConfirmPassword, setIsVisibleConfirmPassword] =
     useState(true);
+
+  const handleShowOldPassword = () => {
+    setIsVisibleOldPassword(prev => !prev);
+  };
 
   const handleShowPassword = () => {
     setIsVisiblePassword(prev => !prev);
@@ -27,13 +43,27 @@ export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
     setIsVisibleConfirmPassword(prev => !prev);
   };
 
-  const schema = yup.object().shape({
+  const schemaEditPassword = yup.object().shape({
+    oldPassword: yup.string().required('A senha atual é obrigatória'),
     password: yup.string().required('A senha é obrigatória'),
     confirmPassword: yup
       .string()
       .required('A confirmação de senha é obrigatória')
       .oneOf([yup.ref('password')], 'A senha e a confirmação devem ser iguais'),
   });
+
+  const schemaResetPassword = yup.object().shape({
+    password: yup.string().required('A senha é obrigatória'),
+    confirmPassword: yup
+      .string()
+      .required('A confirmação de senha é obrigatória')
+      .oneOf([yup.ref('password')], 'A senha e a confirmação devem ser iguais'),
+  });
+
+  const schema =
+    fromScreen === 'VerifyCode.stack'
+      ? schemaResetPassword
+      : schemaEditPassword;
 
   const {
     handleSubmit,
@@ -42,6 +72,7 @@ export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
     formState: { errors, isValid },
   } = useForm<FormRequiredNewPassword>({
     defaultValues: {
+      oldPassword: fromScreen === 'VerifyCode.stack' ? undefined : '',
       password: '',
       confirmPassword: '',
     },
@@ -54,7 +85,17 @@ export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
     name: 'password',
   });
 
-  const onSubmitNewPassword = async (): Promise<void> => {
+  const onSubmitEditPassword = async (): Promise<void> => {
+    const { oldPassword, confirmPassword } = getValues();
+
+    if (userAuth?.id && oldPassword) {
+      updateUserPassword(userAuth.id, oldPassword, confirmPassword);
+    } else {
+      console.error('ID do usuário não encontrado');
+    }
+  };
+
+  const onSubmitResetPassword = async (): Promise<void> => {
     const { confirmPassword } = getValues();
 
     resetPasswordFinalStep({ newPassword: confirmPassword });
@@ -98,14 +139,20 @@ export const useNewPasswordController = (): IUseNewPasswordControllerProps => {
     handleFormIsValid,
     errors,
     control,
+    isVisibleOldPassword,
     isVisiblePassword,
     isVisibleConfirmPassword,
+    handleShowOldPassword,
     handleShowPassword,
     handleShowConfirmPassword,
     handleSubmit,
-    onSubmitNewPassword,
+    onSubmitResetPassword,
+    onSubmitEditPassword,
     dataValidateCharacteres,
     watchPassword,
     isLoading,
+    subTitle,
+    fromScreen,
+    isGeneralSettings,
   };
 };

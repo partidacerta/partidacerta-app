@@ -90,11 +90,20 @@ export default function RootLayout() {
           options={{ headerShown: true }}
         />
         <Stack.Screen
+          name="GeneralSettings.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="AccountSettings.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="DisableAccount.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
           name="EditProfile.stack"
-          options={{
-            headerTitle: '',
-            headerShown: true,
-          }}
+          options={{ headerShown: true }}
         />
       </Stack>
     </ThemeProvider>

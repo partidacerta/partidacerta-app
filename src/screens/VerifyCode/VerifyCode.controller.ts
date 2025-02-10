@@ -19,7 +19,7 @@ export const useVerifyCodeController = (): IUseVerifyCodeControllerProps => {
   const schema = yup.object().shape({
     code: yup
       .string()
-      .length(6, 'O código deve ter 6 dígitos')
+      .length(8, 'O código deve ter 8 dígitos')
       .required('O código é obrigatório'),
   });
 
@@ -41,7 +41,10 @@ export const useVerifyCodeController = (): IUseVerifyCodeControllerProps => {
 
     setCodeResetPassword({ resetCode: code });
 
-    router.push('./NewPassword.stack');
+    router.push({
+      pathname: './NewPassword.stack',
+      params: { fromScreen: 'VerifyCode.stack' },
+    });
   };
 
   const handleResendResetCode = () => {

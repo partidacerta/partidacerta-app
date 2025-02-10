@@ -36,7 +36,7 @@ export default function VerifyCodeScreen() {
             <Input
               placeholder="Código de verificação"
               keyboardType="numeric"
-              maxLength={6}
+              maxLength={8}
               value={value}
               onChangeText={onChange}
               error={errors?.code && errors?.code?.message}
