@@ -113,18 +113,28 @@ const useUserStore = create<UserStoreProps>((set, get) => ({
     const { makeAsync } = get();
 
     const handle = async (): Promise<void> => {
+      set({ isLoading: true });
       try {
-        set({ isLoading: true });
         await deleteUserAccountRequest({ userId, password });
         set({ isAccountDeactivated: true });
         showMessageSuccess(SuccessRequestDeleteUser.message);
         router.push('/Login.stack');
       } catch (error) {
         triggerError(FailedRequestDeleteUser.message);
+      } finally {
+        set({ isLoading: false });
       }
     };
 
-    void makeAsync({ handle });
+    const onError = (): void => {
+      triggerError(FailedRequestDeleteUser.message);
+    };
+
+    const onFinally = (): void => {
+      set({ isLoading: false });
+    };
+
+    void makeAsync({ handle, onError, onFinally });
   },
 
   makeAsync: async ({ handle, onError, onFinally }) => {
