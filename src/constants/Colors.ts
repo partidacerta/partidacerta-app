@@ -43,12 +43,14 @@ export const Colors = {
   gray900: '#121214',
 
   blue: bluePrimary,
+  blue700: '#0D6EFD',
   blueOpacity50: '#0D6EFD80',
 
   darkBlue: darkBlue,
   darkBlue900: '#161842',
   darkBlueOpacity50: '#0A306780',
   darkOpacity: '#22262F80',
+  darkOverlay: 'rgba(16, 18, 22, 0.5)',
 
   green: '#32C07C',
   lightGreen: '#E3F5E1',
