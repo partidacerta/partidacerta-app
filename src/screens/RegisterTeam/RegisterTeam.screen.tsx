@@ -107,7 +107,6 @@ export default function RegisterTeamScreen() {
             right: 20,
             width: 46,
             height: 46,
-            backgroundColor: Colors.blue,
           }}
         />
       </S.Container>

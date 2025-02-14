@@ -43,7 +43,7 @@ export const useRegisterTeamController = (): IUseRegisterTeamProps => {
   const onSubmitRegisterTeam = async (): Promise<void> => {
     const { name, modality, uf, city } = getValues();
 
-    // router.push('/.stack');
+    router.push('/RegisterTeamInvite.stack');
   };
 
   return {

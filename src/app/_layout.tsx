@@ -109,6 +109,10 @@ export default function RootLayout() {
           name="RegisterTeam.stack"
           options={{ headerShown: true }}
         />
+        <Stack.Screen
+          name="RegisterTeamInvite.stack"
+          options={{ headerShown: true }}
+        />
       </Stack>
     </ThemeProvider>
   );
