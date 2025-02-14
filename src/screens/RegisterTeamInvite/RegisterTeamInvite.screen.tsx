@@ -1,20 +1,28 @@
 import { Controller } from 'react-hook-form';
 
+import Crown from '@/src/assets/svgs/images/crown.svg';
 import { Button } from '@/src/components/Button/Button';
 import SelectDropdown from '@/src/components/SelectDropdown/SelectDropdown';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
-import { Colors } from '@/src/constants/Colors';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
+import { Colors } from '@/src/constants/Colors';
 import { GENDERTEAM_OPTIONS } from '@/src/constants/GenderTeam';
 
-import Crown from '@/src/assets/svgs/images/crown.svg';
-
+import ModalInvitePlayers from './components/ModalInvitePlayers';
+import { useRegisterTeamInviteController } from './RegisterTeamInvite.controller';
 import * as S from './RegisterTeamInvite.styles';
-import { useRegisterTeamController } from './RegisterTeamInvite.controller';
 
 export default function RegisterTeamInviteScreen() {
-  const { userAuth, errors, control, isValid, onSubmitRegisterTeamInvite } =
-    useRegisterTeamController();
+  const {
+    userAuth,
+    isModalVisible,
+    handleOpenModal,
+    handleCloseModal,
+    errors,
+    control,
+    isValid,
+    onSubmitRegisterTeamInvite,
+  } = useRegisterTeamInviteController();
 
   return (
     <ThemedScrollView>
@@ -60,6 +68,7 @@ export default function RegisterTeamInviteScreen() {
         <Button
           text="Convidar para o time"
           icon="add"
+          onPress={handleOpenModal}
           style={{ backgroundColor: Colors.green900 }}
         />
         <S.ContainerPlayers>
@@ -110,6 +119,11 @@ export default function RegisterTeamInviteScreen() {
             height: 46,
           }}
         /> */}
+
+        <ModalInvitePlayers
+          isVisible={isModalVisible}
+          onClose={handleCloseModal}
+        />
       </S.Container>
     </ThemedScrollView>
   );

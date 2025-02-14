@@ -1,9 +1,12 @@
-import { IUserAuthMeDTO } from '@/src/services/auth/auth.dto';
-
 import { Control, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
+
+import { IUserAuthMeDTO } from '@/src/services/auth/auth.dto';
 
 export interface IUseRegisterTeamInviteProps {
   userAuth: IUserAuthMeDTO | undefined;
+  isModalVisible: boolean;
+  handleOpenModal: () => void;
+  handleCloseModal: () => void;
   control: Control<FormRequiredRegisterTeamInvite>;
   errors: FieldErrors<FormRequiredRegisterTeamInvite>;
   isValid: boolean;

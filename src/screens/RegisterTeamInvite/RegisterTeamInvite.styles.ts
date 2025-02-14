@@ -63,3 +63,5 @@ export const Position = styled.View`
 `;
 
 export const RightSide = styled.View``;
+
+export const ModalContent = styled.View``;
