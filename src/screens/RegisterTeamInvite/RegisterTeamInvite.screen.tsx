@@ -87,7 +87,7 @@ export default function RegisterTeamInviteScreen() {
                 </ThemedText>
               </S.Position>
               <S.InfoPresident>
-                <S.Image
+                <S.ImagePlayer
                   source={{
                     uri: userAuth?.playerInfo?.playerImage,
                   }}

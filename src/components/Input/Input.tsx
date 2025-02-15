@@ -11,6 +11,7 @@ const Input: React.FC<InputProps> = ({
   error,
   label,
   width,
+  backgroundColor,
   ...props
 }) => {
   return (
@@ -18,7 +19,7 @@ const Input: React.FC<InputProps> = ({
       <ThemedText type="semiBold" style={{ fontSize: 12 }}>
         {label}
       </ThemedText>
-      <S.ContainerInput>
+      <S.ContainerInput backgroundColor={backgroundColor}>
         <S.StyledTextInput placeholderTextColor={Colors.gray300} {...props} />
         {icon && <S.Icon>{icon}</S.Icon>}
       </S.ContainerInput>

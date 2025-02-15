@@ -62,6 +62,26 @@ export const Position = styled.View`
   background-color: ${Colors.darkBlue};
 `;
 
+export const ImagePlayer = styled.Image`
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+`;
+
 export const RightSide = styled.View``;
 
 export const ModalContent = styled.View``;
+
+export const ModalHeader = styled.View`
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+`;
+
+export const ModalPlayers = styled.View`
+  height: 270px;
+`;
+
+export const ModalFooter = styled.View`
+  flex-direction: row;
+`;
