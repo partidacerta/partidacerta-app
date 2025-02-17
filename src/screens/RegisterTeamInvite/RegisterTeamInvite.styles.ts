@@ -79,9 +79,27 @@ export const ModalHeader = styled.View`
 `;
 
 export const ModalPlayers = styled.View`
+  gap: 10px;
   height: 270px;
+`;
+
+export const BoxPlayer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-radius: 12px;
+  background-color: ${Colors.darkBlue700};
+  align-items: center;
+`;
+
+export const InfoPlayer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
 `;
 
 export const ModalFooter = styled.View`
   flex-direction: row;
+  margin-top: 10px;
 `;

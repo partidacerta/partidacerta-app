@@ -67,7 +67,6 @@ export default function RegisterTeamInviteScreen() {
         />
         <Button
           text="Convidar para o time"
-          icon="add"
           onPress={handleOpenModal}
           style={{ backgroundColor: Colors.green900 }}
         />

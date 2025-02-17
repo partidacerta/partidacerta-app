@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 
 import {
@@ -9,7 +9,7 @@ import {
 export const useModalizeController = ({
   visible,
 }: ModalizeControllerProps): IUseModalizeControllerProps => {
-  const translateY = new Animated.Value(100);
+  const translateY = useRef(new Animated.Value(100)).current;
 
   useEffect(() => {
     Animated.timing(translateY, {
@@ -17,7 +17,7 @@ export const useModalizeController = ({
       duration: 300,
       useNativeDriver: true,
     }).start();
-  }, [visible, translateY]);
+  }, [visible]);
 
   return { translateY };
 };

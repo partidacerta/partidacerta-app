@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import useAuthStore from '@/src/store/auth/auth.store';
+import usePlayerStore from '@/src/store/player/player.store';
 
 import {
   FormRequiredRegisterTeamInvite,
@@ -16,6 +17,13 @@ import {
 export const useRegisterTeamInviteController =
   (): IUseRegisterTeamInviteProps => {
     const { userAuth } = useAuthStore();
+    const { players, isLoading, getPlayers } = usePlayerStore();
+
+    const [searchPlayer, setSearchPlayer] = useState('');
+
+    const handleSearchPlayer = async () => {
+      await getPlayers(searchPlayer, searchPlayer);
+    };
 
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -55,5 +63,10 @@ export const useRegisterTeamInviteController =
       isValid,
       handleSubmit,
       onSubmitRegisterTeamInvite,
+      players,
+      isLoading,
+      searchPlayer,
+      setSearchPlayer,
+      handleSearchPlayer,
     };
   };
