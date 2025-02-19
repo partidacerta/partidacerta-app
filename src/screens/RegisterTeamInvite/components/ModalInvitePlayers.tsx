@@ -1,4 +1,4 @@
-import { ScrollView } from 'react-native';
+import { ScrollView, ActivityIndicator } from 'react-native';
 
 import Modalize from '@/src/components/Modalize/Modalize';
 import Input from '@/src/components/Input/Input';
@@ -6,25 +6,47 @@ import { Colors } from '@/src/constants/Colors';
 import { Button } from '@/src/components/Button/Button';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 
+import { IPlayer } from '@/src/services/player/player.dto';
+
 import * as S from '../RegisterTeamInvite.styles';
 import { useRegisterTeamInviteController } from '../RegisterTeamInvite.controller';
 
 interface ModalInvitePlayersProps {
   isVisible: boolean;
   onClose: () => void;
+  onInvitePlayer: (player: IPlayer) => void;
+  onRemovePlayer: (playerId: string) => void;
 }
 
 export default function ModalInvitePlayers({
   isVisible,
   onClose,
+  onInvitePlayer,
+  onRemovePlayer,
 }: ModalInvitePlayersProps) {
   const {
+    userAuth,
     players,
     isLoading,
     searchPlayer,
     setSearchPlayer,
     handleSearchPlayer,
+    selectedPlayers,
+    setSelectedPlayers,
+    handleInvitePlayer,
   } = useRegisterTeamInviteController();
+
+  const handleRemovePlayer = (playerId: string) => {
+    setSelectedPlayers(prevState =>
+      prevState.filter(player => player.id !== playerId)
+    );
+    onRemovePlayer(playerId);
+  };
+
+  const handleCompleteInvitation = () => {
+    selectedPlayers.forEach(player => onInvitePlayer(player));
+    onClose();
+  };
 
   return (
     <Modalize visible={isVisible} onClose={onClose}>
@@ -46,10 +68,37 @@ export default function ModalInvitePlayers({
             onPress={handleSearchPlayer}
           />
         </S.ModalHeader>
+
+        {selectedPlayers.length > 0 && (
+          <ScrollView horizontal>
+            <S.SelectedPlayer>
+              {selectedPlayers.map(player => (
+                <S.PlayerItem key={player.id}>
+                  <S.Image source={{ uri: player?.playerImage }} />
+                  <Button
+                    icon="close"
+                    sizeIcon={16}
+                    colorIcon={Colors.black}
+                    style={{
+                      position: 'absolute',
+                      bottom: -18,
+                      right: 0,
+                      width: 18,
+                      height: 18,
+                      backgroundColor: Colors.white,
+                    }}
+                    onPress={() => handleRemovePlayer(player.id)}
+                  />
+                </S.PlayerItem>
+              ))}
+            </S.SelectedPlayer>
+          </ScrollView>
+        )}
+
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <S.ModalPlayers>
             {isLoading ? (
-              <ThemedText>loading</ThemedText>
+              <ActivityIndicator style={{ marginTop: 30 }} />
             ) : players?.content?.length === 0 ? (
               <ThemedText style={{ textAlign: 'center', marginTop: 30 }}>
                 Nenhum jogador encontrado
@@ -75,6 +124,13 @@ export default function ModalInvitePlayers({
                       height: 36,
                       backgroundColor: Colors.green900,
                     }}
+                    disabled={
+                      player.nickname === userAuth?.nickname ||
+                      selectedPlayers.some(
+                        selected => selected.id === player.id
+                      )
+                    }
+                    onPress={() => handleInvitePlayer(player)}
                   />
                 </S.BoxPlayer>
               ))
@@ -88,7 +144,11 @@ export default function ModalInvitePlayers({
             style={{ width: '45%' }}
             onPress={onClose}
           />
-          <Button text="Concluir" style={{ width: '45%' }} />
+          <Button
+            text="Concluir"
+            style={{ width: '45%' }}
+            onPress={handleCompleteInvitation}
+          />
         </S.ModalFooter>
       </S.ModalContent>
     </Modalize>

@@ -4,6 +4,7 @@ import { Colors } from '@/src/constants/Colors';
 
 export const Container = styled.View`
   justify-content: center;
+  padding-bottom: 20px;
 `;
 
 export const ContainerPresident = styled.View`
@@ -36,7 +37,7 @@ export const NamePresident = styled.View``;
 
 export const ContainerPlayers = styled.View`
   padding: 10px 16px 30px 16px;
-  margin-top: 30px;
+  margin: 30px 0;
   border-radius: 12px;
   background-color: ${Colors.darkBlue800};
 `;
@@ -78,6 +79,16 @@ export const ModalHeader = styled.View`
   align-items: center;
 `;
 
+export const SelectedPlayer = styled.View`
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+`;
+
+export const PlayerItem = styled.View``;
+
 export const ModalPlayers = styled.View`
   gap: 10px;
   height: 270px;
@@ -102,4 +113,14 @@ export const InfoPlayer = styled.View`
 export const ModalFooter = styled.View`
   flex-direction: row;
   margin-top: 10px;
+`;
+
+export const Divider = styled.View`
+  height: 1px;
+  background-color: ${Colors.gray500};
+`;
+
+export const ModalDetails = styled.View`
+  gap: 20px;
+  margin: 20px 0;
 `;

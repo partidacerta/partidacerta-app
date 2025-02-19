@@ -1,5 +1,7 @@
 import { Controller } from 'react-hook-form';
 
+import { TouchableWithoutFeedback } from 'react-native';
+
 import Crown from '@/src/assets/svgs/images/crown.svg';
 import { Button } from '@/src/components/Button/Button';
 import SelectDropdown from '@/src/components/SelectDropdown/SelectDropdown';
@@ -8,20 +10,25 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
 import { GENDERTEAM_OPTIONS } from '@/src/constants/GenderTeam';
 
-import ModalInvitePlayers from './components/ModalInvitePlayers';
 import { useRegisterTeamInviteController } from './RegisterTeamInvite.controller';
+import ModalInvitePlayers from './components/ModalInvitePlayers';
+import ModalPlayerDetails from './components/ModalPlayerDetails';
+
 import * as S from './RegisterTeamInvite.styles';
 
 export default function RegisterTeamInviteScreen() {
   const {
     userAuth,
-    isModalVisible,
+    modalType,
     handleOpenModal,
     handleCloseModal,
     errors,
     control,
     isValid,
     onSubmitRegisterTeamInvite,
+    selectedPlayers,
+    handleInvitePlayer,
+    handleRemovePlayer,
   } = useRegisterTeamInviteController();
 
   return (
@@ -67,7 +74,7 @@ export default function RegisterTeamInviteScreen() {
         />
         <Button
           text="Convidar para o time"
-          onPress={handleOpenModal}
+          onPress={() => handleOpenModal('invite')}
           style={{ backgroundColor: Colors.green900 }}
         />
         <S.ContainerPlayers>
@@ -76,8 +83,9 @@ export default function RegisterTeamInviteScreen() {
             colorText={Colors.gray200}
             style={{ fontSize: 12 }}
           >
-            Jogadores: 1
+            Jogadores: {selectedPlayers.length + 1}
           </ThemedText>
+
           <S.BoxPlayers>
             <S.LeftSide>
               <S.Position>
@@ -102,6 +110,35 @@ export default function RegisterTeamInviteScreen() {
               <Crown />
             </S.RightSide>
           </S.BoxPlayers>
+
+          {selectedPlayers.map((player, index) => (
+            <TouchableWithoutFeedback
+              key={player.id}
+              onLongPress={() => handleOpenModal('details')}
+            >
+              <S.BoxPlayers>
+                <S.LeftSide>
+                  <S.Position>
+                    <ThemedText type="bold" style={{ fontSize: 14 }}>
+                      #{index + 2}{' '}
+                    </ThemedText>
+                  </S.Position>
+                  <S.InfoPresident>
+                    <S.ImagePlayer
+                      source={{
+                        uri: player?.playerImage,
+                      }}
+                    />
+                    <S.NamePresident>
+                      <ThemedText type="bold" style={{ fontSize: 14 }}>
+                        {player.nickname}
+                      </ThemedText>
+                    </S.NamePresident>
+                  </S.InfoPresident>
+                </S.LeftSide>
+              </S.BoxPlayers>
+            </TouchableWithoutFeedback>
+          ))}
         </S.ContainerPlayers>
         {/* <Button
           type="primary"
@@ -120,9 +157,16 @@ export default function RegisterTeamInviteScreen() {
         /> */}
 
         <ModalInvitePlayers
-          isVisible={isModalVisible}
+          isVisible={modalType === 'invite'}
           onClose={handleCloseModal}
+          onInvitePlayer={handleInvitePlayer}
+          onRemovePlayer={handleRemovePlayer}
         />
+
+        {/* <ModalPlayerDetails
+          isVisible={modalType === 'details'}
+          onClose={handleCloseModal}
+        /> */}
       </S.Container>
     </ThemedScrollView>
   );

@@ -9,6 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import useAuthStore from '@/src/store/auth/auth.store';
 import usePlayerStore from '@/src/store/player/player.store';
 
+import { IPlayer } from '@/src/services/player/player.dto';
+
 import {
   FormRequiredRegisterTeamInvite,
   IUseRegisterTeamInviteProps,
@@ -20,15 +22,35 @@ export const useRegisterTeamInviteController =
     const { players, isLoading, getPlayers } = usePlayerStore();
 
     const [searchPlayer, setSearchPlayer] = useState('');
+    const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
 
     const handleSearchPlayer = async () => {
       await getPlayers(searchPlayer, searchPlayer);
     };
 
-    const [isModalVisible, setModalVisible] = useState(false);
+    const handleInvitePlayer = (player: IPlayer) => {
+      if (!selectedPlayers.some(selected => selected.id === player.id)) {
+        setSelectedPlayers(prevState => [...prevState, player]);
+      }
+    };
 
-    const handleOpenModal = () => setModalVisible(true);
-    const handleCloseModal = () => setModalVisible(false);
+    const handleRemovePlayer = (playerId: string) => {
+      setSelectedPlayers(prevState =>
+        prevState.filter(player => player.id !== playerId)
+      );
+    };
+
+    const [modalType, setModalType] = useState<'invite' | 'details' | null>(
+      null
+    );
+
+    const handleOpenModal = (type: 'invite' | 'details') => {
+      setModalType(type);
+    };
+
+    const handleCloseModal = () => {
+      setModalType(null);
+    };
 
     const schema = yup.object().shape({
       genderTeam: yup.string().required('O gênero é obrigatório'),
@@ -55,7 +77,7 @@ export const useRegisterTeamInviteController =
 
     return {
       userAuth,
-      isModalVisible,
+      modalType,
       handleOpenModal,
       handleCloseModal,
       errors,
@@ -68,5 +90,9 @@ export const useRegisterTeamInviteController =
       searchPlayer,
       setSearchPlayer,
       handleSearchPlayer,
+      selectedPlayers,
+      setSelectedPlayers,
+      handleInvitePlayer,
+      handleRemovePlayer,
     };
   };

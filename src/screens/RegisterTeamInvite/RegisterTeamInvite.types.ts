@@ -1,12 +1,12 @@
 import { Control, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
 
 import { IUserAuthMeDTO } from '@/src/services/auth/auth.dto';
-import { IPlayerDTO } from '@/src/services/player/player.dto';
+import { IPlayer, IPlayerDTO } from '@/src/services/player/player.dto';
 
 export interface IUseRegisterTeamInviteProps {
   userAuth: IUserAuthMeDTO | undefined;
-  isModalVisible: boolean;
-  handleOpenModal: () => void;
+  modalType: 'invite' | 'details' | null;
+  handleOpenModal: (type: 'invite' | 'details') => void;
   handleCloseModal: () => void;
   control: Control<FormRequiredRegisterTeamInvite>;
   errors: FieldErrors<FormRequiredRegisterTeamInvite>;
@@ -18,6 +18,10 @@ export interface IUseRegisterTeamInviteProps {
   searchPlayer: string;
   setSearchPlayer: (value: string) => void;
   handleSearchPlayer: () => Promise<void>;
+  selectedPlayers: IPlayer[];
+  setSelectedPlayers: React.Dispatch<React.SetStateAction<IPlayer[]>>;
+  handleInvitePlayer: (player: IPlayer) => void;
+  handleRemovePlayer: (playerId: string) => void;
 }
 
 export interface FormRequiredRegisterTeamInvite {
