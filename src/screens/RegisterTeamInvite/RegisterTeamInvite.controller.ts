@@ -72,7 +72,7 @@ export const useRegisterTeamInviteController =
     const onSubmitRegisterTeamInvite = async (): Promise<void> => {
       const { genderTeam } = getValues();
 
-      // router.push('');
+      router.push('/RegisterTeamInfo.stack');
     };
 
     return {

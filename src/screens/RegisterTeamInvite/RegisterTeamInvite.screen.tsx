@@ -140,7 +140,7 @@ export default function RegisterTeamInviteScreen() {
             </TouchableWithoutFeedback>
           ))}
         </S.ContainerPlayers>
-        {/* <Button
+        <Button
           type="primary"
           icon="chevron-forward"
           sizeIcon={24}
@@ -154,7 +154,7 @@ export default function RegisterTeamInviteScreen() {
             width: 46,
             height: 46,
           }}
-        /> */}
+        />
 
         <ModalInvitePlayers
           isVisible={modalType === 'invite'}

@@ -12,6 +12,7 @@ const Input: React.FC<InputProps> = ({
   label,
   width,
   backgroundColor,
+  multiline = false,
   ...props
 }) => {
   return (
@@ -19,8 +20,12 @@ const Input: React.FC<InputProps> = ({
       <ThemedText type="semiBold" style={{ fontSize: 12 }}>
         {label}
       </ThemedText>
-      <S.ContainerInput backgroundColor={backgroundColor}>
-        <S.StyledTextInput placeholderTextColor={Colors.gray300} {...props} />
+      <S.ContainerInput backgroundColor={backgroundColor} multiline={multiline}>
+        <S.StyledTextInput
+          placeholderTextColor={Colors.gray300}
+          multiline={multiline}
+          {...props}
+        />
         {icon && <S.Icon>{icon}</S.Icon>}
       </S.ContainerInput>
       <S.MessageError>{error}</S.MessageError>

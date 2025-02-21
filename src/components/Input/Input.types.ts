@@ -7,4 +7,5 @@ export interface InputProps extends TextInputProps {
   label?: string;
   width?: string | number;
   backgroundColor?: string;
+  multiline?: boolean;
 }
