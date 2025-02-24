@@ -10,13 +10,13 @@ export interface ITeamRequest {
     uf: string;
   };
   teamGender?: string;
-  // players: string[];
-  // contact: {
-  //   email: string;
-  //   phone: string;
-  // };
-  // description: string;
-  // manager: {
+  players?: string[];
+  contact?: {
+    email: string;
+    phone: string;
+  };
+  description?: string;
+  // manager?: {
   //   managerId: string;
   // };
 }

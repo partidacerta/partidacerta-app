@@ -7,10 +7,10 @@ export const postTeamRegisterRequest = async ({
   interestSport,
   location,
   teamGender,
-}: // players,
-// contact,
-// description,
-// manager,
+  players,
+  contact,
+  description,
+}: // manager,
 {
   logo?: string;
   name?: string;
@@ -23,13 +23,13 @@ export const postTeamRegisterRequest = async ({
     uf: string;
   };
   teamGender?: string;
-  // players: string[];
-  // contact: {
-  //   email: string;
-  //   phone: string;
-  // };
-  // description: string;
-  // manager: {
+  players: string[];
+  contact?: {
+    email: string;
+    phone: string;
+  };
+  description?: string;
+  // manager?: {
   //   managerId: string;
   // };
 }): Promise<ITeamRequest> => {
@@ -40,9 +40,9 @@ export const postTeamRegisterRequest = async ({
       interestSport,
       location,
       teamGender,
-      // players,
-      // contact,
-      // description,
+      players,
+      contact,
+      description,
       // manager,
     });
 

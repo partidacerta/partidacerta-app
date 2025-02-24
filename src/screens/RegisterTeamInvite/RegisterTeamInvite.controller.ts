@@ -75,6 +75,7 @@ export const useRegisterTeamInviteController =
 
       setTeamData({
         teamGender,
+        players: selectedPlayers.map(player => player.id),
       });
 
       router.push('/RegisterTeamInfo.stack');

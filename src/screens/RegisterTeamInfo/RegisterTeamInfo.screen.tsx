@@ -6,6 +6,7 @@ import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScroll
 
 import { useRegisterTeamInfoController } from './RegisterTeamInfo.controller';
 import * as S from './RegisterTeamInfo.styles';
+import { formatPhone } from '@/src/utils/formatPhone';
 
 export default function RegisterTeamInfoScreen() {
   const { errors, control, isValid, onSubmitRegisterTeamInfo } =
@@ -24,10 +25,10 @@ export default function RegisterTeamInfoScreen() {
               <Input
                 label="Email contato"
                 placeholder="E-mail"
-                onChangeText={e => onChange(e)}
+                onChangeText={e => onChange(e.trim().replace(/ /g, ''))}
                 value={value}
                 error={errors?.email && errors?.email?.message}
-                maxLength={30}
+                maxLength={50}
               />
             )}
           />
@@ -38,7 +39,10 @@ export default function RegisterTeamInfoScreen() {
               <Input
                 label="Telefone contato"
                 placeholder="Telefone"
-                onChangeText={e => onChange(e)}
+                onChangeText={e => {
+                  const formattedPhone = formatPhone(e);
+                  onChange(formattedPhone);
+                }}
                 value={value}
                 error={errors?.phone && errors?.phone?.message}
                 maxLength={15}

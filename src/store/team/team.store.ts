@@ -26,6 +26,9 @@ const useTeamStore = create<TeamStoreProps>((set, get) => ({
         interestSport: teamData.interestSport,
         location: teamData.location,
         teamGender: teamData.teamGender,
+        players: teamData.players || [],
+        contact: teamData.contact,
+        description: teamData.description,
       });
 
       if (data) {
@@ -52,6 +55,9 @@ const useTeamStore = create<TeamStoreProps>((set, get) => ({
     interestSport,
     location,
     teamGender,
+    players,
+    contact,
+    description,
   }: TeamDataProps) => {
     set(state => ({
       teamData: {
@@ -61,6 +67,9 @@ const useTeamStore = create<TeamStoreProps>((set, get) => ({
         ...(interestSport !== undefined && { interestSport }),
         ...(location !== undefined && { location }),
         ...(teamGender !== undefined && { teamGender }),
+        ...(players !== undefined && { players }),
+        ...(contact !== undefined && { contact }),
+        ...(description !== undefined && { description }),
       },
     }));
   },
