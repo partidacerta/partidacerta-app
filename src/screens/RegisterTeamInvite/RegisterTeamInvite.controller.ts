@@ -6,10 +6,10 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { IPlayer } from '@/src/services/player/player.dto';
 import useAuthStore from '@/src/store/auth/auth.store';
 import usePlayerStore from '@/src/store/player/player.store';
-
-import { IPlayer } from '@/src/services/player/player.dto';
+import useTeamStore from '@/src/store/team/team.store';
 
 import {
   FormRequiredRegisterTeamInvite,
@@ -20,6 +20,7 @@ export const useRegisterTeamInviteController =
   (): IUseRegisterTeamInviteProps => {
     const { userAuth } = useAuthStore();
     const { players, isLoading, getPlayers } = usePlayerStore();
+    const { setTeamData } = useTeamStore();
 
     const [searchPlayer, setSearchPlayer] = useState('');
     const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
@@ -53,7 +54,7 @@ export const useRegisterTeamInviteController =
     };
 
     const schema = yup.object().shape({
-      genderTeam: yup.string().required('O gênero é obrigatório'),
+      teamGender: yup.string().required('O gênero é obrigatório'),
     });
 
     const {
@@ -63,14 +64,18 @@ export const useRegisterTeamInviteController =
       formState: { errors, isValid },
     } = useForm<FormRequiredRegisterTeamInvite>({
       defaultValues: {
-        genderTeam: '',
+        teamGender: '',
       },
       mode: 'onChange',
       resolver: yupResolver(schema),
     });
 
     const onSubmitRegisterTeamInvite = async (): Promise<void> => {
-      const { genderTeam } = getValues();
+      const { teamGender } = getValues();
+
+      setTeamData({
+        teamGender,
+      });
 
       router.push('/RegisterTeamInfo.stack');
     };

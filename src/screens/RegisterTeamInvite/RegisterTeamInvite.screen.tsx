@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-
 import { TouchableWithoutFeedback } from 'react-native';
 
 import Crown from '@/src/assets/svgs/images/crown.svg';
@@ -10,10 +9,9 @@ import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
 import { GENDERTEAM_OPTIONS } from '@/src/constants/GenderTeam';
 
-import { useRegisterTeamInviteController } from './RegisterTeamInvite.controller';
 import ModalInvitePlayers from './components/ModalInvitePlayers';
 import ModalPlayerDetails from './components/ModalPlayerDetails';
-
+import { useRegisterTeamInviteController } from './RegisterTeamInvite.controller';
 import * as S from './RegisterTeamInvite.styles';
 
 export default function RegisterTeamInviteScreen() {
@@ -22,7 +20,6 @@ export default function RegisterTeamInviteScreen() {
     modalType,
     handleOpenModal,
     handleCloseModal,
-    errors,
     control,
     isValid,
     onSubmitRegisterTeamInvite,
@@ -58,7 +55,7 @@ export default function RegisterTeamInviteScreen() {
           </S.BoxPresident>
         </S.ContainerPresident>
         <Controller
-          name="genderTeam"
+          name="teamGender"
           control={control}
           render={({ field: { value, onChange } }) => (
             <SelectDropdown

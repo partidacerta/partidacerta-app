@@ -14,14 +14,14 @@ import { useRegisterTeamController } from './RegisterTeam.controller';
 import * as S from './RegisterTeam.styles';
 
 export default function RegisterTeamScreen() {
-  const { image, setImage, errors, control, isValid, onSubmitRegisterTeam } =
+  const { logo, setLogo, errors, control, isValid, onSubmitRegisterTeam } =
     useRegisterTeamController();
 
   return (
     <ThemedScrollView>
       <S.Container>
         <S.ContainerImage>
-          <ProfileImage imageUri={image} onImageChange={setImage} />
+          <ProfileImage imageUri={logo} onImageChange={setLogo} />
         </S.ContainerImage>
         <Controller
           name="name"
@@ -38,13 +38,13 @@ export default function RegisterTeamScreen() {
           )}
         />
         <Controller
-          name="sport"
+          name="sportType"
           control={control}
           render={({ field: { value, onChange } }) => (
             <SelectSport
               selectedSport={value}
               onSelectSport={onChange}
-              error={errors?.sport?.message}
+              error={errors?.sportType?.message}
             />
           )}
         />

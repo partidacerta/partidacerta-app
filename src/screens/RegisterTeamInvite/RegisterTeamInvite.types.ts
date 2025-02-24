@@ -25,5 +25,5 @@ export interface IUseRegisterTeamInviteProps {
 }
 
 export interface FormRequiredRegisterTeamInvite {
-  genderTeam: string;
+  teamGender: string;
 }

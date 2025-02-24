@@ -6,19 +6,23 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import useTeamStore from '@/src/store/team/team.store';
+
 import {
   FormRequiredRegisterTeam,
   IUseRegisterTeamProps,
 } from './RegisterTeam.types';
 
 export const useRegisterTeamController = (): IUseRegisterTeamProps => {
-  const [image, setImage] = useState(
+  const { setTeamData } = useTeamStore();
+
+  const [logo, setLogo] = useState(
     'https://s3.amazonaws.com/camila.bucket/ProfileImage.jpg'
   );
 
   const schema = yup.object().shape({
     name: yup.string().required('O nome é obrigatório'),
-    sport: yup.string().required('O esporte é obrigatório'),
+    sportType: yup.string().required('O esporte é obrigatório'),
     modality: yup.string().required('A modalidade é obrigatória'),
     uf: yup.string().required('O UF é obrigatório'),
     city: yup.string().required('A cidade é obrigatória'),
@@ -41,14 +45,27 @@ export const useRegisterTeamController = (): IUseRegisterTeamProps => {
   });
 
   const onSubmitRegisterTeam = async (): Promise<void> => {
-    const { name, modality, uf, city } = getValues();
+    const { name, sportType, modality, uf, city } = getValues();
+
+    setTeamData({
+      logo,
+      name,
+      interestSport: {
+        sportType,
+        modality,
+      },
+      location: {
+        uf,
+        city,
+      },
+    });
 
     router.push('/RegisterTeamInvite.stack');
   };
 
   return {
-    image,
-    setImage,
+    logo,
+    setLogo,
     errors,
     control,
     isValid,

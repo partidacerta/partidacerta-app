@@ -1,8 +1,8 @@
 import { Control, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
 
 export interface IUseRegisterTeamProps {
-  image: string;
-  setImage: (newImage: string) => void;
+  logo: string;
+  setLogo: (newImage: string) => void;
   control: Control<FormRequiredRegisterTeam>;
   errors: FieldErrors<FormRequiredRegisterTeam>;
   isValid: boolean;
@@ -12,7 +12,7 @@ export interface IUseRegisterTeamProps {
 
 export interface FormRequiredRegisterTeam {
   name: string;
-  sport: string;
+  sportType: string;
   modality: string;
   uf: string;
   city: string;
