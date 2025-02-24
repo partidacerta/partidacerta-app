@@ -7,11 +7,11 @@ export const postTeamRegisterRequest = async ({
   interestSport,
   location,
   teamGender,
+  manager,
   players,
   contact,
   description,
-}: // manager,
-{
+}: {
   logo?: string;
   name?: string;
   interestSport?: {
@@ -23,15 +23,15 @@ export const postTeamRegisterRequest = async ({
     uf: string;
   };
   teamGender?: string;
+  manager?: {
+    managerId: string;
+  };
   players: string[];
   contact?: {
     email: string;
     phone: string;
   };
   description?: string;
-  // manager?: {
-  //   managerId: string;
-  // };
 }): Promise<ITeamRequest> => {
   try {
     const { data } = await instance.post('/team', {
@@ -40,10 +40,10 @@ export const postTeamRegisterRequest = async ({
       interestSport,
       location,
       teamGender,
+      manager,
       players,
       contact,
       description,
-      // manager,
     });
 
     return data;

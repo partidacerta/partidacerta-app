@@ -28,13 +28,13 @@ export interface TeamDataProps {
     uf: string;
   };
   teamGender?: string;
+  manager?: {
+    managerId: string;
+  };
   players?: string[];
   contact?: {
     email: string;
     phone: string;
   };
   description?: string;
-  // manager?: {
-  //   managerId: string;
-  // };
 }

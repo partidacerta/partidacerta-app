@@ -25,6 +25,8 @@ export const useRegisterTeamInviteController =
     const [searchPlayer, setSearchPlayer] = useState('');
     const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
 
+    const managerId = userAuth?.id;
+
     const handleSearchPlayer = async () => {
       await getPlayers(searchPlayer, searchPlayer);
     };
@@ -75,7 +77,12 @@ export const useRegisterTeamInviteController =
 
       setTeamData({
         teamGender,
-        players: selectedPlayers.map(player => player.id),
+        manager: {
+          managerId: managerId ?? '',
+        },
+        players: userAuth
+          ? [userAuth.id, ...selectedPlayers.map(player => player.id)]
+          : selectedPlayers.map(player => player.id),
       });
 
       router.push('/RegisterTeamInfo.stack');
