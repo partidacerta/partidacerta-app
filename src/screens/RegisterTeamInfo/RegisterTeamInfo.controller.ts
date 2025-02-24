@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 
-import { router } from 'expo-router';
 import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,7 +12,7 @@ import {
 } from './RegisterTeamInfo.types';
 
 export const useRegisterTeamInfoController = (): IUseRegisterTeamInfoProps => {
-  const { setTeamData } = useTeamStore();
+  const { setTeamData, RegisterTeam } = useTeamStore();
 
   const schema = yup.object().shape({
     email: yup
@@ -50,7 +49,7 @@ export const useRegisterTeamInfoController = (): IUseRegisterTeamInfoProps => {
       description,
     });
 
-    router.push('/(home)');
+    RegisterTeam();
   };
 
   return { errors, control, isValid, handleSubmit, onSubmitRegisterTeamInfo };

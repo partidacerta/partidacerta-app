@@ -18,12 +18,12 @@ const SelectSport: React.FC<SelectSportProps> = ({
   error,
 }) => {
   const sports = [
-    { name: 'Futebol', icon: <Soccer2 />, value: 'Futebol' },
-    { name: 'Vôlei', icon: <Volleyball2 />, value: 'Volei' },
-    { name: 'Padel', icon: <Tennis />, value: 'Padel' },
-    { name: 'Tênis', icon: <Tennis />, value: 'Tenis' },
-    { name: 'Basquete', icon: <Basketball />, value: 'Basquete' },
-    { name: 'Handebol', icon: <Soccer2 />, value: 'Handebol' },
+    { name: 'Futebol', icon: <Soccer2 />, value: 'SOCCER' },
+    { name: 'Vôlei', icon: <Volleyball2 />, value: 'VOLLEYBALL' },
+    { name: 'Padel', icon: <Tennis />, value: 'PADEL' },
+    { name: 'Tênis', icon: <Tennis />, value: 'TENNIS' },
+    { name: 'Basquete', icon: <Basketball />, value: 'BASKETBALL' },
+    { name: 'Handebol', icon: <Soccer2 />, value: 'HANDBALL' },
   ];
 
   return (
