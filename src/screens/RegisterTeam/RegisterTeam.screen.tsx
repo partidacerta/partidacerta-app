@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { View } from 'react-native';
 
 import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
@@ -18,82 +19,86 @@ export default function RegisterTeamScreen() {
     useRegisterTeamController();
 
   return (
-    <ThemedScrollView>
-      <S.Container>
-        <S.ContainerImage>
-          <ProfileImage imageUri={logo} onImageChange={setLogo} />
-        </S.ContainerImage>
-        <Controller
-          name="name"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <Input
-              label="Nome"
-              placeholder="Nome do time"
-              onChangeText={e => onChange(e)}
-              value={value}
-              error={errors?.name && errors?.name?.message}
-              maxLength={30}
-            />
-          )}
-        />
-        <Controller
-          name="sportType"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <SelectSport
-              selectedSport={value}
-              onSelectSport={onChange}
-              error={errors?.sportType?.message}
-            />
-          )}
-        />
-        <Controller
-          name="modality"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <SelectDropdown
-              data={SPORTS_MODALITIES_OPTIONS}
-              label="Modalidade"
-              placeholder="Selecione um esporte"
-              setSelected={onChange}
-              defaultOption={SPORTS_MODALITIES_OPTIONS.find(
-                option => option.key === value
-              )}
-            />
-          )}
-        />
-        <Controller
-          name="uf"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <SelectDropdown
-              data={states}
-              label="UF"
-              placeholder="Selecione o estado"
-              setSelected={onChange}
-              defaultOption={
-                value
-                  ? states.find(option => option.value === value)
-                  : undefined
-              }
-            />
-          )}
-        />
-        <Controller
-          name="city"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <Input
-              label="Cidade"
-              placeholder="Nome da cidade"
-              onChangeText={e => onChange(e)}
-              value={value}
-              error={errors?.city && errors?.city?.message}
-              maxLength={30}
-            />
-          )}
-        />
+    <View style={{ flex: 1 }}>
+      <ThemedScrollView>
+        <S.Container>
+          <S.ContainerImage>
+            <ProfileImage imageUri={logo} onImageChange={setLogo} />
+          </S.ContainerImage>
+          <Controller
+            name="name"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                label="Nome"
+                placeholder="Nome do time"
+                onChangeText={e => onChange(e)}
+                value={value}
+                error={errors?.name && errors?.name?.message}
+                maxLength={30}
+              />
+            )}
+          />
+          <Controller
+            name="sportType"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <SelectSport
+                selectedSport={value}
+                onSelectSport={onChange}
+                error={errors?.sportType?.message}
+              />
+            )}
+          />
+          <Controller
+            name="modality"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <SelectDropdown
+                data={SPORTS_MODALITIES_OPTIONS}
+                label="Modalidade"
+                placeholder="Selecione um esporte"
+                setSelected={onChange}
+                defaultOption={SPORTS_MODALITIES_OPTIONS.find(
+                  option => option.key === value
+                )}
+              />
+            )}
+          />
+          <Controller
+            name="uf"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <SelectDropdown
+                data={states}
+                label="UF"
+                placeholder="Selecione o estado"
+                setSelected={onChange}
+                defaultOption={
+                  value
+                    ? states.find(option => option.value === value)
+                    : undefined
+                }
+              />
+            )}
+          />
+          <Controller
+            name="city"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                label="Cidade"
+                placeholder="Nome da cidade"
+                onChangeText={e => onChange(e)}
+                value={value}
+                error={errors?.city && errors?.city?.message}
+                maxLength={30}
+              />
+            )}
+          />
+        </S.Container>
+      </ThemedScrollView>
+      <S.Button>
         <Button
           type="primary"
           icon="chevron-forward"
@@ -109,7 +114,7 @@ export default function RegisterTeamScreen() {
             height: 46,
           }}
         />
-      </S.Container>
-    </ThemedScrollView>
+      </S.Button>
+    </View>
   );
 }

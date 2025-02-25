@@ -1,5 +1,5 @@
 import { Controller } from 'react-hook-form';
-import { TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback, View } from 'react-native';
 
 import Crown from '@/src/assets/svgs/images/crown.svg';
 import { Button } from '@/src/components/Button/Button';
@@ -29,69 +29,16 @@ export default function RegisterTeamInviteScreen() {
   } = useRegisterTeamInviteController();
 
   return (
-    <ThemedScrollView>
-      <S.Container>
-        <S.ContainerPresident>
-          <ThemedText type="semiBold" style={{ fontSize: 12 }}>
-            Presidente
-          </ThemedText>
-          <S.BoxPresident>
-            <S.InfoPresident>
-              <S.Image
-                source={{
-                  uri: userAuth?.playerInfo?.playerImage,
-                }}
-              />
-              <S.NamePresident>
-                <ThemedText type="bold" style={{ fontSize: 14 }}>
-                  {userAuth?.nickname}
-                </ThemedText>
-                <ThemedText type="semiBold" style={{ fontSize: 12 }}>
-                  {userAuth?.name}
-                </ThemedText>
-              </S.NamePresident>
-            </S.InfoPresident>
-            <Crown />
-          </S.BoxPresident>
-        </S.ContainerPresident>
-        <Controller
-          name="teamGender"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <SelectDropdown
-              data={GENDERTEAM_OPTIONS}
-              label="Gênero do time"
-              placeholder="Selecione o gênero"
-              setSelected={onChange}
-              defaultOption={GENDERTEAM_OPTIONS.find(
-                option => option.key === value
-              )}
-            />
-          )}
-        />
-        <Button
-          text="Convidar para o time"
-          onPress={() => handleOpenModal('invite')}
-          style={{ backgroundColor: Colors.green900 }}
-        />
-        <S.ContainerPlayers>
-          <ThemedText
-            type="semiBold"
-            colorText={Colors.gray200}
-            style={{ fontSize: 12 }}
-          >
-            Jogadores: {selectedPlayers.length + 1}
-          </ThemedText>
-
-          <S.BoxPlayers>
-            <S.LeftSide>
-              <S.Position>
-                <ThemedText type="bold" style={{ fontSize: 14 }}>
-                  #1
-                </ThemedText>
-              </S.Position>
+    <View style={{ flex: 1 }}>
+      <ThemedScrollView>
+        <S.Container>
+          <S.ContainerPresident>
+            <ThemedText type="semiBold" style={{ fontSize: 12 }}>
+              Presidente
+            </ThemedText>
+            <S.BoxPresident>
               <S.InfoPresident>
-                <S.ImagePlayer
+                <S.Image
                   source={{
                     uri: userAuth?.playerInfo?.playerImage,
                   }}
@@ -100,43 +47,112 @@ export default function RegisterTeamInviteScreen() {
                   <ThemedText type="bold" style={{ fontSize: 14 }}>
                     {userAuth?.nickname}
                   </ThemedText>
+                  <ThemedText type="semiBold" style={{ fontSize: 12 }}>
+                    {userAuth?.name}
+                  </ThemedText>
                 </S.NamePresident>
               </S.InfoPresident>
-            </S.LeftSide>
-            <S.RightSide>
               <Crown />
-            </S.RightSide>
-          </S.BoxPlayers>
-
-          {selectedPlayers.map((player, index) => (
-            <TouchableWithoutFeedback
-              key={player.id}
-              onLongPress={() => handleOpenModal('details')}
+            </S.BoxPresident>
+          </S.ContainerPresident>
+          <Controller
+            name="teamGender"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <SelectDropdown
+                data={GENDERTEAM_OPTIONS}
+                label="Gênero do time"
+                placeholder="Selecione o gênero"
+                setSelected={onChange}
+                defaultOption={GENDERTEAM_OPTIONS.find(
+                  option => option.key === value
+                )}
+              />
+            )}
+          />
+          <Button
+            text="Convidar para o time"
+            onPress={() => handleOpenModal('invite')}
+            style={{ backgroundColor: Colors.green900 }}
+          />
+          <S.ContainerPlayers>
+            <ThemedText
+              type="semiBold"
+              colorText={Colors.gray200}
+              style={{ fontSize: 12 }}
             >
-              <S.BoxPlayers>
-                <S.LeftSide>
-                  <S.Position>
+              Jogadores: {selectedPlayers.length + 1}
+            </ThemedText>
+
+            <S.BoxPlayers>
+              <S.LeftSide>
+                <S.Position>
+                  <ThemedText type="bold" style={{ fontSize: 14 }}>
+                    #1
+                  </ThemedText>
+                </S.Position>
+                <S.InfoPresident>
+                  <S.ImagePlayer
+                    source={{
+                      uri: userAuth?.playerInfo?.playerImage,
+                    }}
+                  />
+                  <S.NamePresident>
                     <ThemedText type="bold" style={{ fontSize: 14 }}>
-                      #{index + 2}{' '}
+                      {userAuth?.nickname}
                     </ThemedText>
-                  </S.Position>
-                  <S.InfoPresident>
-                    <S.ImagePlayer
-                      source={{
-                        uri: player?.playerImage,
-                      }}
-                    />
-                    <S.NamePresident>
+                  </S.NamePresident>
+                </S.InfoPresident>
+              </S.LeftSide>
+              <S.RightSide>
+                <Crown />
+              </S.RightSide>
+            </S.BoxPlayers>
+
+            {selectedPlayers.map((player, index) => (
+              <TouchableWithoutFeedback
+                key={player.id}
+                onLongPress={() => handleOpenModal('details')}
+              >
+                <S.BoxPlayers>
+                  <S.LeftSide>
+                    <S.Position>
                       <ThemedText type="bold" style={{ fontSize: 14 }}>
-                        {player.nickname}
+                        #{index + 2}{' '}
                       </ThemedText>
-                    </S.NamePresident>
-                  </S.InfoPresident>
-                </S.LeftSide>
-              </S.BoxPlayers>
-            </TouchableWithoutFeedback>
-          ))}
-        </S.ContainerPlayers>
+                    </S.Position>
+                    <S.InfoPresident>
+                      <S.ImagePlayer
+                        source={{
+                          uri: player?.playerImage,
+                        }}
+                      />
+                      <S.NamePresident>
+                        <ThemedText type="bold" style={{ fontSize: 14 }}>
+                          {player.nickname}
+                        </ThemedText>
+                      </S.NamePresident>
+                    </S.InfoPresident>
+                  </S.LeftSide>
+                </S.BoxPlayers>
+              </TouchableWithoutFeedback>
+            ))}
+          </S.ContainerPlayers>
+
+          <ModalInvitePlayers
+            isVisible={modalType === 'invite'}
+            onClose={handleCloseModal}
+            onInvitePlayer={handleInvitePlayer}
+            onRemovePlayer={handleRemovePlayer}
+          />
+
+          <ModalPlayerDetails
+            isVisible={modalType === 'details'}
+            onClose={handleCloseModal}
+          />
+        </S.Container>
+      </ThemedScrollView>
+      <S.Button>
         <Button
           type="primary"
           icon="chevron-forward"
@@ -145,26 +161,11 @@ export default function RegisterTeamInviteScreen() {
           onPress={onSubmitRegisterTeamInvite}
           disabled={!isValid}
           style={{
-            position: 'absolute',
-            bottom: 0,
-            right: 20,
             width: 46,
             height: 46,
           }}
         />
-
-        <ModalInvitePlayers
-          isVisible={modalType === 'invite'}
-          onClose={handleCloseModal}
-          onInvitePlayer={handleInvitePlayer}
-          onRemovePlayer={handleRemovePlayer}
-        />
-
-        {/* <ModalPlayerDetails
-          isVisible={modalType === 'details'}
-          onClose={handleCloseModal}
-        /> */}
-      </S.Container>
-    </ThemedScrollView>
+      </S.Button>
+    </View>
   );
 }

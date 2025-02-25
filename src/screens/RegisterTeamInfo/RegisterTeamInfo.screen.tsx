@@ -13,9 +13,7 @@ export default function RegisterTeamInfoScreen() {
     useRegisterTeamInfoController();
 
   return (
-    <ThemedScrollView
-      contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}
-    >
+    <ThemedScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <S.Container>
         <S.ContainerInput>
           <Controller

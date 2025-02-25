@@ -3,8 +3,7 @@ import styled from 'styled-components/native';
 import { Colors } from '@/src/constants/Colors';
 
 export const Container = styled.View`
-  justify-content: center;
-  padding-bottom: 20px;
+  flex: 1;
 `;
 
 export const ContainerPresident = styled.View`
@@ -37,9 +36,15 @@ export const NamePresident = styled.View``;
 
 export const ContainerPlayers = styled.View`
   padding: 10px 16px 30px 16px;
-  margin: 30px 0;
+  margin: 30px 0 60px 0;
   border-radius: 12px;
   background-color: ${Colors.darkBlue800};
+`;
+
+export const Button = styled.View`
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
 `;
 
 export const BoxPlayers = styled.View`
