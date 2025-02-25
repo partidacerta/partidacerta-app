@@ -1,10 +1,14 @@
 import { router } from 'expo-router';
 import { create } from 'zustand';
 
+import { showMessageSuccess } from '@/src/helpers/showMessage';
 import { triggerError } from '@/src/helpers/triggerError';
 import { postTeamRegisterRequest } from '@/src/services/team/team.request';
 
-import { FailedRequestTeamRegister } from './team.message';
+import {
+  FailedRequestTeamRegister,
+  SuccessRequestCreateTeam,
+} from './team.message';
 import { TeamDataProps, TeamStoreProps } from './team.types';
 
 const initialState = {
@@ -37,6 +41,8 @@ const useTeamStore = create<TeamStoreProps>((set, get) => ({
           teamData: data,
         });
       }
+
+      showMessageSuccess(SuccessRequestCreateTeam.message);
 
       router.push('/(home)');
 

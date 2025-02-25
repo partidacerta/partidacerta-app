@@ -25,7 +25,7 @@ export const useRegisterTeamInviteController =
     const [searchPlayer, setSearchPlayer] = useState('');
     const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
 
-    const managerId = userAuth?.id;
+    const managerId = userAuth?.playerInfo?.id;
 
     const handleSearchPlayer = async () => {
       await getPlayers(searchPlayer, searchPlayer);
@@ -81,7 +81,10 @@ export const useRegisterTeamInviteController =
           managerId: managerId ?? '',
         },
         players: userAuth
-          ? [userAuth.id, ...selectedPlayers.map(player => player.id)]
+          ? [
+              userAuth?.playerInfo?.id,
+              ...selectedPlayers.map(player => player.id),
+            ]
           : selectedPlayers.map(player => player.id),
       });
 
