@@ -63,13 +63,21 @@ export default function RegisterTeamInviteScreen() {
                 data={GENDERTEAM_OPTIONS}
                 label="Gênero do time"
                 placeholder="Selecione o gênero"
-                setSelected={onChange}
+                setSelected={(selected: string) => {
+                  const selectedOption = GENDERTEAM_OPTIONS.find(
+                    option => option.value === selected
+                  );
+                  if (selectedOption) {
+                    onChange(selectedOption.apiValue);
+                  }
+                }}
                 defaultOption={GENDERTEAM_OPTIONS.find(
-                  option => option.key === value
+                  option => option.apiValue === value
                 )}
               />
             )}
           />
+
           <Button
             text="Convidar para o time"
             onPress={() => handleOpenModal('invite')}

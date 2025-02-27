@@ -1,20 +1,23 @@
 export const GENDERTEAM = {
-  MISTO: 'Misto',
-  FEMININO: 'Feminino',
-  MASCULINO: 'Masculino',
+  MIXED: 'Misto',
+  FEMALE: 'Feminino',
+  MALE: 'Masculino',
 };
 
 export const GENDERTEAM_OPTIONS = [
   {
     key: '1',
-    value: GENDERTEAM.MISTO,
+    value: GENDERTEAM.MIXED,
+    apiValue: 'MIXED',
   },
   {
     key: '2',
-    value: GENDERTEAM.FEMININO,
+    value: GENDERTEAM.FEMALE,
+    apiValue: 'FEMALE',
   },
   {
     key: '3',
-    value: GENDERTEAM.MASCULINO,
+    value: GENDERTEAM.MALE,
+    apiValue: 'MALE',
   },
 ];
