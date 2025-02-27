@@ -9,7 +9,6 @@ export const Container = styled.View`
 `;
 
 export const Content = styled.View`
-  padding: 20px;
   border-radius: 20px;
   background-color: ${Colors.gray800};
 `;

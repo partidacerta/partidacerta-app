@@ -16,7 +16,7 @@ export default function ModalPlayerDetails({
 }: ModalPlayerDetailsProps) {
   return (
     <Modalize visible={isVisible} onClose={onClose}>
-      <S.ModalContent>
+      <S.ModalDetails>
         <ThemedText
           type="semiBold"
           style={{ fontSize: 14, marginVertical: 22 }}
@@ -24,7 +24,7 @@ export default function ModalPlayerDetails({
           Nome do jogador
         </ThemedText>
         <S.Divider />
-        <S.ModalDetails>
+        <S.BoxDetails>
           <TouchableOpacity>
             <ThemedText type="semiBold" style={{ fontSize: 12 }}>
               Ir para perfil
@@ -35,8 +35,8 @@ export default function ModalPlayerDetails({
               Remover Jogador
             </ThemedText>
           </TouchableOpacity>
-        </S.ModalDetails>
-      </S.ModalContent>
+        </S.BoxDetails>
+      </S.ModalDetails>
     </Modalize>
   );
 }

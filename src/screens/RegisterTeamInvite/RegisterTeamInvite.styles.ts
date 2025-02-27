@@ -82,27 +82,29 @@ export const ModalHeader = styled.View`
   flex-direction: row;
   gap: 6px;
   align-items: center;
+  padding: 10px 10px 0 10px;
 `;
 
 export const SelectedPlayer = styled.View`
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  position: relative;
-  margin-bottom: 20px;
+  margin: 0 10px 25px 0;
+`;
+
+export const ContainerPlayersSelected = styled.View`
+  padding: 0 0 0 10px;
 `;
 
 export const PlayerItem = styled.View``;
 
 export const ModalPlayers = styled.View`
-  gap: 10px;
   height: 270px;
+  padding: 0 10px 0 10px;
 `;
 
 export const BoxPlayer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: 0 12px;
+  margin-bottom: 12px;
   border-radius: 12px;
   background-color: ${Colors.darkBlue700};
   align-items: center;
@@ -117,7 +119,12 @@ export const InfoPlayer = styled.View`
 
 export const ModalFooter = styled.View`
   flex-direction: row;
+  padding: 0 10px 20px 10px;
   margin-top: 10px;
+`;
+
+export const ModalDetails = styled.View`
+  padding: 20px;
 `;
 
 export const Divider = styled.View`
@@ -125,7 +132,7 @@ export const Divider = styled.View`
   background-color: ${Colors.gray500};
 `;
 
-export const ModalDetails = styled.View`
+export const BoxDetails = styled.View`
   gap: 20px;
   margin: 20px 0;
 `;
