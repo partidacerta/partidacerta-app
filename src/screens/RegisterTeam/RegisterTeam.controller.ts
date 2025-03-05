@@ -16,7 +16,7 @@ import {
 export const useRegisterTeamController = (): IUseRegisterTeamProps => {
   const { setTeamData } = useTeamStore();
 
-  const [logo, setLogo] = useState(
+  const [logo, setLogo] = useState<string | undefined>(
     'https://s3.amazonaws.com/camila.bucket/ProfileImage.jpg'
   );
 
@@ -47,8 +47,13 @@ export const useRegisterTeamController = (): IUseRegisterTeamProps => {
   const onSubmitRegisterTeam = async (): Promise<void> => {
     const { name, sportType, modality, uf, city } = getValues();
 
+    const finalLogo =
+      logo === 'https://s3.amazonaws.com/camila.bucket/ProfileImage.jpg'
+        ? undefined
+        : logo;
+
     setTeamData({
-      logo,
+      logo: finalLogo,
       name,
       interestSport: {
         sportType,

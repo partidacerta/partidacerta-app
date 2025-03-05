@@ -1,7 +1,7 @@
 import { Control, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
 
 export interface IUseRegisterTeamProps {
-  logo: string;
+  logo: string | undefined;
   setLogo: (newImage: string) => void;
   control: Control<FormRequiredRegisterTeam>;
   errors: FieldErrors<FormRequiredRegisterTeam>;
