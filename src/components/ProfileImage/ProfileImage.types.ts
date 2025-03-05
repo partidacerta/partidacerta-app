@@ -1,5 +1,5 @@
 export interface ProfileImageProps {
-  imageUri: string;
+  imageUri: string | undefined;
   onImageChange: (uri: string) => void;
 }
 
