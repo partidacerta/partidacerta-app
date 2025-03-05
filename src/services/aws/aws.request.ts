@@ -1,7 +1,7 @@
 import { instanceImage } from '../api/api';
 import { FileData } from './aws.dto';
 
-export const uploadImageToS3 = async (fileUri: string): Promise<string> => {
+export const uploadFileRequest = async (fileUri: string): Promise<string> => {
   try {
     const formData = new FormData();
     const fileName = fileUri.split('/').pop() || 'image.jpg';

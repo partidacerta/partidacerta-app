@@ -1,8 +1,8 @@
-import { useState } from 'react';
-
 import * as ImagePicker from 'expo-image-picker';
 
-import { uploadImageToS3 } from '@/src/services/aws/aws.request';
+import { useEffect } from 'react';
+
+import useAwsStore from '@/src/store/aws/aws.store';
 
 import {
   IUseProfileImageControllerProps,
@@ -12,7 +12,7 @@ import {
 export const useProfileImageController = ({
   onImageChange,
 }: ProfileImageControllerProps): IUseProfileImageControllerProps => {
-  const [loading, setloading] = useState(false);
+  const { uploadFile, uploadedFileUrl, isLoading } = useAwsStore();
 
   const pickImage = async () => {
     const permissionResult =
@@ -31,17 +31,15 @@ export const useProfileImageController = ({
     });
 
     if (!pickerResult.canceled) {
-      setloading(true);
-      try {
-        const s3ImageUrl = await uploadImageToS3(pickerResult.assets[0].uri);
-        onImageChange(s3ImageUrl);
-      } catch (error) {
-        alert('Erro ao fazer upload da imagem');
-      } finally {
-        setloading(false);
-      }
+      uploadFile(pickerResult.assets[0].uri);
     }
   };
 
-  return { pickImage, loading };
+  useEffect(() => {
+    if (uploadedFileUrl) {
+      onImageChange(uploadedFileUrl);
+    }
+  }, [uploadedFileUrl]);
+
+  return { pickImage, loading: isLoading };
 };
