@@ -35,6 +35,7 @@ const SelectSport: React.FC<SelectSportProps> = ({
         {sports.map(sport => (
           <TouchableOpacity
             key={sport.value}
+            activeOpacity={0.7}
             onPress={() => onSelectSport(sport.value)}
           >
             <S.Box>

@@ -7,10 +7,12 @@ export const SPORTS_MODALITIES_SOCCER_OPTIONS = [
   {
     key: '1',
     value: SPORTS_MODALITIES_SOCCER.FUTSAL,
+    apiValue: 'FUTSAL',
   },
   {
     key: '2',
     value: SPORTS_MODALITIES_SOCCER.FOOTBALL_SOCIETY,
+    apiValue: 'FOOTBALL_SOCIETY',
   },
 ];
 
@@ -24,14 +26,17 @@ export const SPORTS_MODALITIES_VOLLEYBALL_OPTIONS = [
   {
     key: '1',
     value: SPORTS_MODALITIES_VOLLEYBALL.INDOOR_VOLLEYBALL,
+    apiValue: 'INDOOR_VOLLEYBALL',
   },
   {
     key: '2',
     value: SPORTS_MODALITIES_VOLLEYBALL.BEACH_VOLLEYBALL,
+    apiValue: 'BEACH_VOLLEYBALL',
   },
   {
     key: '3',
     value: SPORTS_MODALITIES_VOLLEYBALL.FOOTVOLLEY,
+    apiValue: 'FOOTVOLLEY',
   },
 ];
 
@@ -44,10 +49,12 @@ export const SPORTS_MODALITIES_BASKETBALL_OPTIONS = [
   {
     key: '1',
     value: SPORTS_MODALITIES_BASKETBALL.BASKETBALL_3X3,
+    apiValue: 'BASKETBALL_3X3',
   },
   {
     key: '2',
     value: SPORTS_MODALITIES_BASKETBALL.BASKETBALL_5X5,
+    apiValue: 'BASKETBALL_5X5',
   },
 ];
 
@@ -60,10 +67,12 @@ export const SPORTS_MODALITIES_TENNIS_OPTIONS = [
   {
     key: '1',
     value: SPORTS_MODALITIES_TENNIS.TABLE_TENNIS,
+    apiValue: 'TABLE_TENNIS',
   },
   {
     key: '2',
     value: SPORTS_MODALITIES_TENNIS.BEACH_TENNIS,
+    apiValue: 'BEACH_TENNIS',
   },
 ];
 
@@ -76,10 +85,12 @@ export const SPORTS_MODALITIES_PADEL_OPTIONS = [
   {
     key: '1',
     value: SPORTS_MODALITIES_PADEL.SINGLE_PADEL,
+    apiValue: 'SINGLE_PADEL',
   },
   {
     key: '2',
     value: SPORTS_MODALITIES_PADEL.DOUBLE_PADEL,
+    apiValue: 'DOUBLE_PADEL',
   },
 ];
 

@@ -6,11 +6,14 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { SPORTS_MODALITIES } from '@/src/constants/SportsModalities';
 import useTeamStore from '@/src/store/team/team.store';
 
 import {
   FormRequiredRegisterTeam,
   IUseRegisterTeamProps,
+  ModalityOption,
+  Sport,
 } from './RegisterTeam.types';
 
 export const useRegisterTeamController = (): IUseRegisterTeamProps => {
@@ -19,6 +22,16 @@ export const useRegisterTeamController = (): IUseRegisterTeamProps => {
   const [logo, setLogo] = useState<string | undefined>(
     'https://s3.amazonaws.com/camila.bucket/ProfileImage.jpg'
   );
+
+  const [modalityOptions, setModalityOptions] = useState<ModalityOption[]>([]);
+
+  const handleSportChange = (sport: string) => {
+    if (sport in SPORTS_MODALITIES) {
+      setModalityOptions(SPORTS_MODALITIES[sport as Sport] || []);
+    } else {
+      setModalityOptions([]);
+    }
+  };
 
   const schema = yup.object().shape({
     name: yup.string().required('O nome é obrigatório'),
@@ -76,5 +89,7 @@ export const useRegisterTeamController = (): IUseRegisterTeamProps => {
     isValid,
     handleSubmit,
     onSubmitRegisterTeam,
+    modalityOptions,
+    handleSportChange,
   };
 };

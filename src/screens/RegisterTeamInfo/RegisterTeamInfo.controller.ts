@@ -20,7 +20,6 @@ export const useRegisterTeamInfoController = (): IUseRegisterTeamInfoProps => {
       .email('Digite um e-mail válido')
       .required('O e-mail é obrigatório'),
     phone: yup.string().required('O telefone é obrigatório'),
-    description: yup.string().required('A descrição é obrigatória'),
   });
 
   const {

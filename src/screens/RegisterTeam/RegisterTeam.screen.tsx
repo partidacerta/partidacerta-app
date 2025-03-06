@@ -8,15 +8,22 @@ import SelectDropdown from '@/src/components/SelectDropdown/SelectDropdown';
 import SelectSport from '@/src/components/SelectSport/SelectSport';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { Colors } from '@/src/constants/Colors';
-import { SPORTS_MODALITIES_SOCCER_OPTIONS } from '@/src/constants/SportsModalities';
 import { states } from '@/src/constants/States';
 
 import { useRegisterTeamController } from './RegisterTeam.controller';
 import * as S from './RegisterTeam.styles';
 
 export default function RegisterTeamScreen() {
-  const { logo, setLogo, errors, control, isValid, onSubmitRegisterTeam } =
-    useRegisterTeamController();
+  const {
+    logo,
+    setLogo,
+    errors,
+    control,
+    isValid,
+    onSubmitRegisterTeam,
+    modalityOptions,
+    handleSportChange,
+  } = useRegisterTeamController();
 
   return (
     <View style={{ flex: 1 }}>
@@ -45,7 +52,10 @@ export default function RegisterTeamScreen() {
             render={({ field: { value, onChange } }) => (
               <SelectSport
                 selectedSport={value}
-                onSelectSport={onChange}
+                onSelectSport={sport => {
+                  onChange(sport);
+                  handleSportChange(sport);
+                }}
                 error={errors?.sportType?.message}
               />
             )}
@@ -55,11 +65,18 @@ export default function RegisterTeamScreen() {
             control={control}
             render={({ field: { value, onChange } }) => (
               <SelectDropdown
-                data={SPORTS_MODALITIES_SOCCER_OPTIONS}
+                data={modalityOptions}
                 label="Modalidade"
-                placeholder="Selecione um esporte"
-                setSelected={onChange}
-                defaultOption={SPORTS_MODALITIES_SOCCER_OPTIONS.find(
+                placeholder="Selecione uma modalidade"
+                setSelected={(selected: string) => {
+                  const selectedOption = modalityOptions.find(
+                    option => option.value === selected
+                  );
+                  if (selectedOption) {
+                    onChange(selectedOption.apiValue);
+                  }
+                }}
+                defaultOption={modalityOptions.find(
                   option => option.key === value
                 )}
               />

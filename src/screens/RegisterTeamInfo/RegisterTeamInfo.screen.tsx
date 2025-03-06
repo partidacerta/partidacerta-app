@@ -3,10 +3,10 @@ import { Controller } from 'react-hook-form';
 import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
+import { formatPhone } from '@/src/utils/formatPhone';
 
 import { useRegisterTeamInfoController } from './RegisterTeamInfo.controller';
 import * as S from './RegisterTeamInfo.styles';
-import { formatPhone } from '@/src/utils/formatPhone';
 
 export default function RegisterTeamInfoScreen() {
   const { errors, control, isValid, onSubmitRegisterTeamInfo } =
@@ -58,7 +58,6 @@ export default function RegisterTeamInfoScreen() {
                 numberOfLines={4}
                 onChangeText={e => onChange(e)}
                 value={value}
-                error={errors?.description && errors?.description?.message}
                 maxLength={500}
               />
             )}

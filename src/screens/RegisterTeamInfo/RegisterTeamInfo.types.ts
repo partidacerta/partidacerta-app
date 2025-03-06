@@ -11,5 +11,5 @@ export interface IUseRegisterTeamInfoProps {
 export interface FormRequiredRegisterTeamInfo {
   email: string;
   phone: string;
-  description: string;
+  description?: string;
 }

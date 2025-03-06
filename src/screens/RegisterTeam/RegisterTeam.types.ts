@@ -1,5 +1,7 @@
 import { Control, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
 
+import { SPORTS_MODALITIES } from '@/src/constants/SportsModalities';
+
 export interface IUseRegisterTeamProps {
   logo: string | undefined;
   setLogo: (newImage: string) => void;
@@ -8,6 +10,8 @@ export interface IUseRegisterTeamProps {
   isValid: boolean;
   handleSubmit: UseFormHandleSubmit<FormRequiredRegisterTeam>;
   onSubmitRegisterTeam: () => Promise<void>;
+  modalityOptions: ModalityOption[];
+  handleSportChange: (sport: string) => void;
 }
 
 export interface FormRequiredRegisterTeam {
@@ -17,3 +21,11 @@ export interface FormRequiredRegisterTeam {
   uf: string;
   city: string;
 }
+
+export type ModalityOption = {
+  key: string;
+  value: string;
+  apiValue: string;
+};
+
+export type Sport = keyof typeof SPORTS_MODALITIES;
