@@ -24,12 +24,15 @@ export const useRegisterTeamController = (): IUseRegisterTeamProps => {
   );
 
   const [modalityOptions, setModalityOptions] = useState<ModalityOption[]>([]);
+  const [isModalityDisabled, setIsModalityDisabled] = useState(true);
 
   const handleSportChange = (sport: string) => {
     if (sport in SPORTS_MODALITIES) {
       setModalityOptions(SPORTS_MODALITIES[sport as Sport] || []);
+      setIsModalityDisabled(false);
     } else {
       setModalityOptions([]);
+      setIsModalityDisabled(true);
     }
   };
 
@@ -91,5 +94,6 @@ export const useRegisterTeamController = (): IUseRegisterTeamProps => {
     onSubmitRegisterTeam,
     modalityOptions,
     handleSportChange,
+    isModalityDisabled,
   };
 };

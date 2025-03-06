@@ -4,9 +4,7 @@ import { Colors } from '@/src/constants/Colors';
 
 import { ThemedText } from '../ThemedText/ThemedText';
 
-export const ContainerSport = styled.View`
-  align-self: flex-start;
-`;
+export const ContainerSport = styled.View``;
 
 export const ContainerBox = styled.View`
   flex-direction: row;

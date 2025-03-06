@@ -23,6 +23,7 @@ export default function RegisterTeamScreen() {
     onSubmitRegisterTeam,
     modalityOptions,
     handleSportChange,
+    isModalityDisabled,
   } = useRegisterTeamController();
 
   return (
@@ -79,6 +80,7 @@ export default function RegisterTeamScreen() {
                 defaultOption={modalityOptions.find(
                   option => option.key === value
                 )}
+                disabled={isModalityDisabled}
               />
             )}
           />

@@ -23,7 +23,6 @@ const SelectSport: React.FC<SelectSportProps> = ({
     { name: 'Padel', icon: <Tennis />, value: 'PADEL' },
     { name: 'Tênis', icon: <Tennis />, value: 'TENNIS' },
     { name: 'Basquete', icon: <Basketball />, value: 'BASKETBALL' },
-    { name: 'Handebol', icon: <Soccer2 />, value: 'HANDBALL' },
   ];
 
   return (

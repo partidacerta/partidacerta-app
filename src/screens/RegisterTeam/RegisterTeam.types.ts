@@ -12,6 +12,7 @@ export interface IUseRegisterTeamProps {
   onSubmitRegisterTeam: () => Promise<void>;
   modalityOptions: ModalityOption[];
   handleSportChange: (sport: string) => void;
+  isModalityDisabled: boolean;
 }
 
 export interface FormRequiredRegisterTeam {
