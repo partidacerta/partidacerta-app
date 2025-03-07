@@ -23,9 +23,10 @@ export default function RegisterTeamInviteScreen() {
     control,
     isValid,
     onSubmitRegisterTeamInvite,
-    selectedPlayers,
-    handleInvitePlayer,
     handleRemovePlayer,
+    selectedPlayers,
+    selectedPlayer,
+    setSelectedPlayer,
   } = useRegisterTeamInviteController();
 
   return (
@@ -120,7 +121,10 @@ export default function RegisterTeamInviteScreen() {
             {selectedPlayers.map((player, index) => (
               <TouchableWithoutFeedback
                 key={player.id}
-                onLongPress={() => handleOpenModal('details')}
+                onLongPress={() => {
+                  setSelectedPlayer(player);
+                  handleOpenModal('details');
+                }}
               >
                 <S.BoxPlayers>
                   <S.LeftSide>
@@ -150,13 +154,13 @@ export default function RegisterTeamInviteScreen() {
           <ModalInvitePlayers
             isVisible={modalType === 'invite'}
             onClose={handleCloseModal}
-            onInvitePlayer={handleInvitePlayer}
-            onRemovePlayer={handleRemovePlayer}
           />
 
           <ModalPlayerDetails
             isVisible={modalType === 'details'}
             onClose={handleCloseModal}
+            onRemovePlayer={handleRemovePlayer}
+            player={selectedPlayer}
           />
         </S.Container>
       </ThemedScrollView>

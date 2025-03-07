@@ -5,7 +5,8 @@ import Input from '@/src/components/Input/Input';
 import Modalize from '@/src/components/Modalize/Modalize';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
-import { IPlayer } from '@/src/services/player/player.dto';
+
+import useTeamStore from '@/src/store/team/team.store';
 
 import { useRegisterTeamInviteController } from '../RegisterTeamInvite.controller';
 import * as S from '../RegisterTeamInvite.styles';
@@ -13,15 +14,11 @@ import * as S from '../RegisterTeamInvite.styles';
 interface ModalInvitePlayersProps {
   isVisible: boolean;
   onClose: () => void;
-  onInvitePlayer: (player: IPlayer) => void;
-  onRemovePlayer: (playerId: string) => void;
 }
 
 export default function ModalInvitePlayers({
   isVisible,
   onClose,
-  onInvitePlayer,
-  onRemovePlayer,
 }: ModalInvitePlayersProps) {
   const {
     userAuth,
@@ -30,22 +27,9 @@ export default function ModalInvitePlayers({
     searchPlayer,
     setSearchPlayer,
     handleSearchPlayer,
-    selectedPlayers,
-    setSelectedPlayers,
-    handleInvitePlayer,
   } = useRegisterTeamInviteController();
 
-  const handleRemovePlayer = (playerId: string) => {
-    setSelectedPlayers(prevState =>
-      prevState.filter(player => player.id !== playerId)
-    );
-    onRemovePlayer(playerId);
-  };
-
-  const handleCompleteInvitation = () => {
-    selectedPlayers.forEach(player => onInvitePlayer(player));
-    onClose();
-  };
+  const { selectedPlayers, addPlayer, removePlayer } = useTeamStore();
 
   return (
     <Modalize visible={isVisible} onClose={onClose}>
@@ -91,7 +75,7 @@ export default function ModalInvitePlayers({
                         height: 18,
                         backgroundColor: Colors.white,
                       }}
-                      onPress={() => handleRemovePlayer(player.id)}
+                      onPress={() => removePlayer(player.id)}
                     />
                   </S.PlayerItem>
                 </S.SelectedPlayer>
@@ -138,7 +122,7 @@ export default function ModalInvitePlayers({
                         selected => selected.id === player.id
                       )
                     }
-                    onPress={() => handleInvitePlayer(player)}
+                    onPress={() => addPlayer(player)}
                   />
                 </S.BoxPlayer>
               )}
@@ -153,11 +137,7 @@ export default function ModalInvitePlayers({
             style={{ width: '45%' }}
             onPress={onClose}
           />
-          <Button
-            text="Concluir"
-            style={{ width: '45%' }}
-            onPress={handleCompleteInvitation}
-          />
+          <Button text="Concluir" style={{ width: '45%' }} onPress={onClose} />
         </S.ModalFooter>
       </S.ModalContent>
     </Modalize>

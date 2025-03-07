@@ -17,9 +17,10 @@ export interface IUseRegisterTeamInviteProps {
   isLoading: boolean;
   searchPlayer: string;
   setSearchPlayer: (value: string) => void;
+  selectedPlayer: IPlayer | null;
+  setSelectedPlayer: (player: IPlayer | null) => void;
   handleSearchPlayer: () => Promise<void>;
   selectedPlayers: IPlayer[];
-  setSelectedPlayers: React.Dispatch<React.SetStateAction<IPlayer[]>>;
   handleInvitePlayer: (player: IPlayer) => void;
   handleRemovePlayer: (playerId: string) => void;
 }

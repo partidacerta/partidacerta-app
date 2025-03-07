@@ -19,6 +19,20 @@ const initialState = {
 const useTeamStore = create<TeamStoreProps>((set, get) => ({
   ...initialState,
 
+  selectedPlayers: [],
+
+  addPlayer: player =>
+    set(state => ({
+      selectedPlayers: state.selectedPlayers.some(p => p.id === player.id)
+        ? state.selectedPlayers
+        : [...state.selectedPlayers, player],
+    })),
+
+  removePlayer: playerId =>
+    set(state => ({
+      selectedPlayers: state.selectedPlayers.filter(p => p.id !== playerId),
+    })),
+
   RegisterTeam: async () => {
     const { makeAsync, teamData } = get();
     const handle = async (): Promise<void> => {

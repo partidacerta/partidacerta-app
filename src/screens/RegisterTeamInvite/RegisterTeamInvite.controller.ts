@@ -20,10 +20,11 @@ export const useRegisterTeamInviteController =
   (): IUseRegisterTeamInviteProps => {
     const { userAuth } = useAuthStore();
     const { players, isLoading, getPlayers } = usePlayerStore();
-    const { setTeamData } = useTeamStore();
+    const { setTeamData, selectedPlayers, addPlayer, removePlayer } =
+      useTeamStore();
 
     const [searchPlayer, setSearchPlayer] = useState('');
-    const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([]);
+    const [selectedPlayer, setSelectedPlayer] = useState<IPlayer | null>(null);
 
     const managerId = userAuth?.playerInfo?.id;
 
@@ -32,15 +33,11 @@ export const useRegisterTeamInviteController =
     };
 
     const handleInvitePlayer = (player: IPlayer) => {
-      if (!selectedPlayers.some(selected => selected.id === player.id)) {
-        setSelectedPlayers(prevState => [...prevState, player]);
-      }
+      addPlayer(player);
     };
 
     const handleRemovePlayer = (playerId: string) => {
-      setSelectedPlayers(prevState =>
-        prevState.filter(player => player.id !== playerId)
-      );
+      removePlayer(playerId);
     };
 
     const [modalType, setModalType] = useState<'invite' | 'details' | null>(
@@ -105,9 +102,10 @@ export const useRegisterTeamInviteController =
       isLoading,
       searchPlayer,
       setSearchPlayer,
+      selectedPlayer,
+      setSelectedPlayer,
       handleSearchPlayer,
       selectedPlayers,
-      setSelectedPlayers,
       handleInvitePlayer,
       handleRemovePlayer,
     };
