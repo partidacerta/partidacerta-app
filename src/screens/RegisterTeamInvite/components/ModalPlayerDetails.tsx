@@ -26,7 +26,7 @@ export default function ModalPlayerDetails({
           type="semiBold"
           style={{ fontSize: 14, marginVertical: 22 }}
         >
-          {player?.nickname}
+          {player?.fullName}
         </ThemedText>
         <S.Divider />
         <S.BoxDetails>
