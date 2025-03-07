@@ -6,6 +6,7 @@ import { Colors } from '@/src/constants/Colors';
 
 interface ButtonProps {
   disabled?: boolean;
+  borderRadius?: string | number;
 }
 
 export const ButtonPrimary = styled.TouchableOpacity<ButtonProps>`
@@ -14,7 +15,8 @@ export const ButtonPrimary = styled.TouchableOpacity<ButtonProps>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-radius: 24px;
+  border-radius: ${({ borderRadius }) =>
+    borderRadius ? borderRadius : '24px'};
   background-color: ${Colors.blue};
   margin: 12px auto;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -26,7 +28,8 @@ export const ButtonSecondary = styled.TouchableOpacity<ButtonProps>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-radius: 24px;
+  border-radius: ${({ borderRadius }) =>
+    borderRadius ? borderRadius : '24px'};
   border: 1px solid ${Colors.blue};
   margin: 12px auto;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};

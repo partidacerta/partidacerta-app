@@ -6,7 +6,9 @@ import useAuthStore from '@/src/store/auth/auth.store';
 import usePlayerStore from '@/src/store/player/player.store';
 import useUserStore from '@/src/store/user/user.store';
 
-export const useUserProfileController = () => {
+import { IUseUserProfileControllerProps } from './UserProfile.types';
+
+export const useUserProfileController = (): IUseUserProfileControllerProps => {
   const { playerData, getPlayerById, isLoading } = usePlayerStore();
   const { getUserById } = useUserStore();
   const { userAuth } = useAuthStore();

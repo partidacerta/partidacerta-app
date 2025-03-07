@@ -19,7 +19,10 @@ export const useAccountSettingsController = (): IUseAccountSettingsProps => {
   const schema = yup.object().shape({
     name: yup.string().required('O nome é obrigatório'),
     nickname: yup.string().required('O nickname é obrigatório'),
-    email: yup.string().required('O e-mail é obrigatório'),
+    email: yup
+      .string()
+      .email('Digite um e-mail válido')
+      .required('O e-mail é obrigatório'),
     birthdate: yup.string().required('A data de nascimento é obrigatório'),
     phone: yup.string().required('O telefone é obrigatório'),
     uf: yup.string().required('A UF é obrigatório'),

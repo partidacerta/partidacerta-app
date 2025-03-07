@@ -11,4 +11,5 @@ export interface ButtonProps extends TouchableOpacityProps {
   icon?: keyof typeof Ionicons.glyphMap;
   sizeIcon?: number;
   colorIcon?: string;
+  borderRadius?: string | number;
 }

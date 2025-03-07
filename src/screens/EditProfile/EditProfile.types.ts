@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { IPlayer } from '@/src/services/player/player.dto';
+
 import { Control, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
 
-import { IPlayerDTO } from '@/src/services/player/player.dto';
-
 export interface IUseEditProfileControllerProps {
-  playerData: IPlayerDTO | undefined;
+  playerData: IPlayer | undefined;
   handleSubmit: UseFormHandleSubmit<FormRequiredEditProfile>;
   control: Control<FormRequiredEditProfile>;
   errors: FieldErrors<FormRequiredEditProfile>;

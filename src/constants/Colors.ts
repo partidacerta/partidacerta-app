@@ -38,19 +38,24 @@ export const Colors = {
   gray500: '#505059',
   gray600: '#333333',
   gray700: '#29292E',
-  gray800: '#202024',
+  gray800: '#25282D',
   gray850: '#22262f',
   gray900: '#121214',
 
   blue: bluePrimary,
+  blue700: '#0D6EFD',
   blueOpacity50: '#0D6EFD80',
 
   darkBlue: darkBlue,
   darkBlue900: '#161842',
+  darkBlue800: '#1f2336',
+  darkBlue700: '#262e42',
   darkBlueOpacity50: '#0A306780',
   darkOpacity: '#22262F80',
+  darkOverlay: 'rgba(16, 18, 22, 0.5)',
 
   green: '#32C07C',
+  green900: '#14AE5C',
   lightGreen: '#E3F5E1',
 
   red: '#E60000',

@@ -1,0 +1,53 @@
+import { instance } from '../api/api';
+import { ITeamRequest } from './team.dto';
+
+export const postTeamRegisterRequest = async ({
+  logo,
+  name,
+  interestSport,
+  location,
+  teamGender,
+  manager,
+  players,
+  contact,
+  description,
+}: {
+  logo?: string;
+  name?: string;
+  interestSport?: {
+    sportType: string;
+    modality: string;
+  };
+  location?: {
+    city: string;
+    uf: string;
+  };
+  teamGender?: string;
+  manager?: {
+    managerId: string;
+  };
+  players: string[];
+  contact?: {
+    email: string;
+    phone: string;
+  };
+  description?: string;
+}): Promise<ITeamRequest> => {
+  try {
+    const { data } = await instance.post('/team', {
+      logo,
+      name,
+      interestSport,
+      location,
+      teamGender,
+      manager,
+      players,
+      contact,
+      description,
+    });
+
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao criar o time');
+  }
+};

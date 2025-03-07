@@ -2,7 +2,6 @@ export const SPORTS = {
   VOLLEYBALL: 'Vôlei',
   BASKETBALL: 'Basketball',
   SOCCER: 'Futebol',
-  HANDBALL: 'Handball',
   PADEL: 'Padel',
   TENNIS: 'Tennis',
 };
@@ -22,14 +21,10 @@ export const SPORTS_OPTIONS = [
   },
   {
     key: '4',
-    value: SPORTS.HANDBALL,
-  },
-  {
-    key: '5',
     value: SPORTS.TENNIS,
   },
   {
-    key: '6',
+    key: '5',
     value: SPORTS.PADEL,
   },
 ];

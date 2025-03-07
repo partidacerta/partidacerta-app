@@ -17,6 +17,7 @@ export function Button({
   icon,
   sizeIcon = 20,
   colorIcon = Colors.white,
+  borderRadius,
   onPress,
   ...props
 }: ButtonProps) {
@@ -48,6 +49,7 @@ export function Button({
             {...props}
             style={style}
             disabled={disabled}
+            borderRadius={borderRadius}
             onPress={onPress}
           >
             <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
@@ -62,6 +64,7 @@ export function Button({
             {...props}
             style={style}
             disabled={disabled}
+            borderRadius={borderRadius}
             onPress={onPress}
           >
             <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
@@ -76,6 +79,7 @@ export function Button({
             {...props}
             style={[{ borderColor }, style]}
             disabled={disabled}
+            borderRadius={borderRadius}
             onPress={onPress}
           >
             <ThemedText size={16} type="bold">

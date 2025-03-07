@@ -6,20 +6,23 @@ import { ThemedText } from '../ThemedText/ThemedText';
 
 interface InputProps {
   width?: string | number;
+  backgroundColor?: string;
+  multiline?: boolean;
 }
 
 export const Container = styled.View<InputProps>`
   width: ${({ width }) => (width ? width : '100%')};
 `;
 
-export const ContainerInput = styled.View`
+export const ContainerInput = styled.View<InputProps>`
   flex-direction: row;
-  align-items: center;
+  align-items: ${({ multiline }) => (multiline ? 'flex-start' : 'center')};
   border: none;
-  padding: 0px 18px;
-  height: 50px;
+  padding: ${({ multiline }) => (multiline ? '10px 18px' : '0px 18px')};
+  height: ${({ multiline }) => (multiline ? '160px' : '50px')};
   border-radius: 12px;
-  background-color: ${Colors.darkOpacity};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? backgroundColor : Colors.darkOpacity};
 `;
 
 export const StyledTextInput = styled.TextInput`

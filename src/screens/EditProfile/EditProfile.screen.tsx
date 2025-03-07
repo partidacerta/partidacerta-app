@@ -6,7 +6,7 @@ import SelectDropdown from '@/src/components/SelectDropdown/SelectDropdown';
 import { ThemedScrollView } from '@/src/components/ThemedScrollView/ThemedScrollView';
 import { GENDER_OPTIONS } from '@/src/constants/Genders';
 import { SPORTS_OPTIONS } from '@/src/constants/Sports';
-import { SPORTS_MODALITIES_OPTIONS } from '@/src/constants/SportsModalities';
+import { SPORTS_MODALITIES_SOCCER_OPTIONS } from '@/src/constants/SportsModalities';
 
 import { useEditProfileController } from './EditProfile.controller';
 import * as S from './EditProfile.styles';
@@ -136,11 +136,11 @@ export default function EditProfileScreen() {
             control={control}
             render={({ field: { value, onChange } }) => (
               <SelectDropdown
-                data={SPORTS_MODALITIES_OPTIONS}
+                data={SPORTS_MODALITIES_SOCCER_OPTIONS}
                 label="Modalidade"
                 placeholder="Selecione um esporte"
                 setSelected={onChange}
-                defaultOption={SPORTS_MODALITIES_OPTIONS.find(
+                defaultOption={SPORTS_MODALITIES_SOCCER_OPTIONS.find(
                   option => option.key === value
                 )}
               />

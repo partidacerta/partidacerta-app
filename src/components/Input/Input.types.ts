@@ -6,4 +6,6 @@ export interface InputProps extends TextInputProps {
   error?: string | undefined;
   label?: string;
   width?: string | number;
+  backgroundColor?: string;
+  multiline?: boolean;
 }

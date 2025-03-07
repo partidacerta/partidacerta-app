@@ -105,6 +105,18 @@ export default function RootLayout() {
           name="EditProfile.stack"
           options={{ headerShown: true }}
         />
+        <Stack.Screen
+          name="RegisterTeam.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="RegisterTeamInvite.stack"
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="RegisterTeamInfo.stack"
+          options={{ headerShown: true }}
+        />
       </Stack>
     </ThemeProvider>
   );
