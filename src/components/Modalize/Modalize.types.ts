@@ -5,6 +5,8 @@ export interface ModalizeProps {
   visible: boolean;
   onClose: () => void;
   children?: ReactNode;
+  backgroundColor?: string;
+  borderRadius?: string;
 }
 
 export interface IUseModalizeControllerProps {

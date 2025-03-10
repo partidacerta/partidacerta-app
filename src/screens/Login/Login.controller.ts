@@ -14,6 +14,11 @@ export const useLoginController = (): IUseLoginControllerProps => {
 
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);
 
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleOpenModal = () => setModalVisible(true);
+  const handleCloseModal = () => setModalVisible(false);
+
   const handleShowPassword = () => {
     setIsVisiblePassword(prev => !prev);
   };
@@ -59,5 +64,8 @@ export const useLoginController = (): IUseLoginControllerProps => {
     handleSubmit,
     onSubmitLogin,
     isLoading,
+    isModalVisible,
+    handleOpenModal,
+    handleCloseModal,
   };
 };
