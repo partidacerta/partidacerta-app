@@ -9,6 +9,9 @@ export interface IUseLoginControllerProps {
   isVisiblePassword: boolean;
   handleShowPassword: () => void;
   isLoading: boolean;
+  isModalVisible: boolean;
+  handleOpenModal: () => void;
+  handleCloseModal: () => void;
 }
 
 export interface FormRequiredLogin {
