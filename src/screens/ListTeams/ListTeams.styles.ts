@@ -39,8 +39,15 @@ export const TeamImage = styled.Image`
 `;
 
 export const TeamInfo = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: start;
 `;
+
+export const BoxLeft = styled.View``;
+
+export const BoxRight = styled.View``;
 
 export const Box = styled.View`
   flex-direction: row;

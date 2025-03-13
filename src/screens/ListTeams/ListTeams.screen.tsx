@@ -5,6 +5,7 @@ import Input from '@/src/components/Input/Input';
 import SportsFilter from '@/src/components/SportsFilter/SportsFilter';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
+import LockTime from '@/src/assets/svgs/images/lockTime.svg';
 
 import { useListTeamsController } from './ListTeams.controller';
 import * as S from './ListTeams.styles';
@@ -66,14 +67,22 @@ export default function ListTeamsScreen() {
                     }}
                   />
                   <S.TeamInfo>
-                    <ThemedText type="bold" style={{ fontSize: 18 }}>
-                      {team?.name}
-                    </ThemedText>
-                    <S.Box>
-                      <ThemedText type="bold" colorText={Colors.gray400}>
-                        {formatTeamInfo(team?.sport, team?.modality)}
+                    <S.BoxLeft>
+                      <ThemedText type="bold" style={{ fontSize: 18 }}>
+                        {team?.name?.length > 20
+                          ? `${team.name.slice(0, 20)}...`
+                          : team.name}
                       </ThemedText>
-                    </S.Box>
+                      <S.Box>
+                        <ThemedText type="bold" colorText={Colors.gray400}>
+                          {formatTeamInfo(team?.sport, team?.modality)}
+                        </ThemedText>
+                      </S.Box>
+                    </S.BoxLeft>
+                    <S.BoxRight>
+                      {(team?.playerLoggedHasBeenInvitedToJoin ||
+                        team?.playerLoggedHasSentRequestToJoin) && <LockTime />}
+                    </S.BoxRight>
                   </S.TeamInfo>
                 </S.ContainerCard>
               </S.TeamCard>
