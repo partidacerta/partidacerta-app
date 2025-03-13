@@ -1,7 +1,6 @@
 import { router } from 'expo-router';
 
 import { Button } from '@/src/components/Button/Button';
-import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
 

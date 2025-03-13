@@ -1,4 +1,5 @@
 import { IPlayer } from '@/src/services/player/player.dto';
+import { IListTeams } from '@/src/services/team/team.dto';
 
 export type TeamStoreProps = {
   teamData: TeamDataProps;
@@ -14,6 +15,8 @@ export type TeamStoreProps = {
   selectedPlayers: IPlayer[];
   addPlayer: (player: IPlayer) => void;
   removePlayer: (playerId: string) => void;
+  teams?: IListTeams;
+  getTeams: (name?: string, location?: string, sport?: string) => Promise<void>;
   makeAsync: <T>(props: {
     handle: () => Promise<T>;
     onError?: (error: unknown) => void;

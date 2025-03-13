@@ -3,9 +3,13 @@ import { create } from 'zustand';
 
 import { showMessageSuccess } from '@/src/helpers/showMessage';
 import { triggerError } from '@/src/helpers/triggerError';
-import { postTeamRegisterRequest } from '@/src/services/team/team.request';
+import {
+  getTeamsRequest,
+  postTeamRegisterRequest,
+} from '@/src/services/team/team.request';
 
 import {
+  FailedRequestGetTeams,
   FailedRequestTeamRegister,
   SuccessRequestCreateTeam,
 } from './team.message';
@@ -13,6 +17,7 @@ import { TeamDataProps, TeamStoreProps } from './team.types';
 
 const initialState = {
   teamData: {},
+  teams: undefined,
   isLoading: false,
 };
 
@@ -95,6 +100,23 @@ const useTeamStore = create<TeamStoreProps>((set, get) => ({
         ...(description !== undefined && { description }),
       },
     }));
+  },
+
+  getTeams: async (name?: string, location?: string, sport?: string) => {
+    const { makeAsync } = get();
+    const handle = async (): Promise<void> => {
+      set({ isLoading: true });
+      try {
+        const data = await getTeamsRequest({ name, sport });
+        set({ teams: data });
+      } catch (error) {
+        triggerError(FailedRequestGetTeams.message);
+      } finally {
+        set({ isLoading: false });
+      }
+    };
+
+    void makeAsync({ handle });
   },
 
   makeAsync: async ({ handle, onError, onFinally }) => {

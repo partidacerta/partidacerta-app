@@ -10,6 +10,10 @@ export default function HomeScreen() {
         text="Criar time"
         onPress={() => router.push('/RegisterTeam.stack')}
       />
+      <Button
+        text="Listar times"
+        onPress={() => router.push('/ListTeams.stack')}
+      />
     </ThemedScrollView>
   );
 }
