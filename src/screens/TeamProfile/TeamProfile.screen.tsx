@@ -1,0 +1,242 @@
+import { ScrollView, View } from 'react-native';
+
+import { Ionicons } from '@expo/vector-icons';
+
+import { Button } from '@/src/components/Button/Button';
+import { LoadingScreen } from '@/src/components/LoadingScreen/LoadingScreen';
+import { ThemedText } from '@/src/components/ThemedText/ThemedText';
+import { Colors } from '@/src/constants/Colors';
+import { formatSportsIcon } from '@/src/utils/formatSportsIcon';
+import { formatSportsModality } from '@/src/utils/formatSportsModality';
+
+import { useTeamProfileController } from './TeamProfile.controller';
+import * as S from './TeamProfile.styles';
+
+export default function TeamProfileScreen() {
+  const { teamData, isLoading, mapTeamGender } = useTeamProfileController();
+
+  return (
+    <View style={{ flex: 1 }}>
+      <S.Container>
+        <ScrollView>
+          <LoadingScreen isLoading={isLoading} />
+          <S.ContainerImage>
+            <S.ProfileImage
+              source={{
+                uri: teamData?.logo,
+              }}
+            />
+            <ThemedText type="title">{teamData?.name}</ThemedText>
+          </S.ContainerImage>
+          <S.ContainerInfo>
+            <S.TeamInfo>
+              <S.ContainerSport>
+                <S.Sport>
+                  {formatSportsIcon(
+                    teamData?.basicInfo?.interestSport?.sportType
+                  )}
+                </S.Sport>
+                <S.TextSport>
+                  <ThemedText type="bold">
+                    {formatSportsModality(
+                      teamData?.basicInfo?.interestSport?.sportType,
+                      teamData?.basicInfo?.interestSport?.modality
+                    )}
+                  </ThemedText>
+                  <ThemedText type="bold" colorText={Colors.gray400}>
+                    {mapTeamGender(teamData?.basicInfo?.teamGender)}
+                  </ThemedText>
+                </S.TextSport>
+              </S.ContainerSport>
+              <S.BoxTeam>
+                <S.Location>
+                  <S.Group>
+                    <Ionicons name="location" size={14} color={Colors.white} />
+                    <ThemedText type="bold">Localização</ThemedText>
+                  </S.Group>
+                  <ThemedText type="bold" colorText={Colors.gray400}>
+                    {teamData?.basicInfo?.location?.city} -{' '}
+                    {teamData?.basicInfo?.location?.uf}
+                  </ThemedText>
+                </S.Location>
+                <S.PlayersActive>
+                  <S.Group>
+                    <Ionicons name="person" size={14} color={Colors.white} />
+                    <ThemedText type="bold">Jogadores</ThemedText>
+                  </S.Group>
+                  <ThemedText type="bold" colorText={Colors.gray400}>
+                    {teamData?.numberOfPlayers} ativos
+                  </ThemedText>
+                </S.PlayersActive>
+              </S.BoxTeam>
+            </S.TeamInfo>
+          </S.ContainerInfo>
+          <S.Stats>
+            <ThemedText type="bold" style={{ marginBottom: 2 }}>
+              Estatísticas
+            </ThemedText>
+            <S.ContainerCards>
+              <S.CardStats>
+                <ThemedText type="bold">Jogos</ThemedText>
+                <ThemedText
+                  type="bold"
+                  style={{ fontSize: 24, marginTop: 10, textAlign: 'center' }}
+                >
+                  27
+                </ThemedText>
+              </S.CardStats>
+              <S.CardStats>
+                <ThemedText type="bold">Vitórias</ThemedText>
+                <ThemedText
+                  type="bold"
+                  colorText={Colors.green}
+                  style={{ fontSize: 24, marginTop: 10, textAlign: 'center' }}
+                >
+                  15
+                </ThemedText>
+              </S.CardStats>
+              <S.CardStats>
+                <ThemedText type="bold">Taxa vitória</ThemedText>
+                <ThemedText
+                  type="bold"
+                  colorText={Colors.yellor900}
+                  style={{ fontSize: 24, marginTop: 10, textAlign: 'center' }}
+                >
+                  50%
+                </ThemedText>
+              </S.CardStats>
+            </S.ContainerCards>
+          </S.Stats>
+          <S.Matches>
+            <S.ViewAll>
+              <ThemedText type="bold">Próximas partidas</ThemedText>
+              <Button type="link" text="Ver todos" textColor={Colors.blue500} />
+            </S.ViewAll>
+            <S.ContainerCards>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <S.CardMatches></S.CardMatches>
+                <S.CardMatches></S.CardMatches>
+                <S.CardMatches></S.CardMatches>
+              </ScrollView>
+            </S.ContainerCards>
+          </S.Matches>
+          <S.Players>
+            <S.ViewAll>
+              <ThemedText type="bold">Jogadores</ThemedText>
+              <Button type="link" text="Ver todos" textColor={Colors.blue500} />
+            </S.ViewAll>
+            <S.ContainerPlayers>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {teamData?.members?.players.map(player => (
+                  <S.ContentPlayer key={player.id}>
+                    <S.PlayerItem>
+                      <S.PlayerImage
+                        source={{
+                          uri: player.playerImage,
+                        }}
+                      />
+                      <S.PlayerInfo>
+                        <ThemedText type="bold">
+                          {player.fullName.split(' ')[0]}
+                        </ThemedText>
+                        {/* <ThemedText type="bold" colorText={Colors.gray400}>
+                        Posição
+                      </ThemedText> */}
+                      </S.PlayerInfo>
+                    </S.PlayerItem>
+                  </S.ContentPlayer>
+                ))}
+              </ScrollView>
+            </S.ContainerPlayers>
+          </S.Players>
+        </ScrollView>
+      </S.Container>
+      <S.Button>
+        {teamData?.playerLoggedHasBeenInvitedToJoin && (
+          <S.ContainerButtons>
+            <Button
+              type="primary"
+              icon="close"
+              sizeIcon={24}
+              colorIcon={Colors.white}
+              style={{
+                position: 'absolute',
+                bottom: 60,
+                right: 4,
+                width: 46,
+                height: 46,
+                backgroundColor: Colors.red500,
+              }}
+            />
+            <Button
+              type="primary"
+              icon="checkmark"
+              sizeIcon={24}
+              colorIcon={Colors.white}
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                right: 4,
+                width: 46,
+                height: 46,
+                backgroundColor: Colors.green900,
+              }}
+            />
+          </S.ContainerButtons>
+        )}
+
+        {teamData?.playerLoggedHasSentRequestToJoin && (
+          <Button
+            type="primary"
+            icon="close"
+            sizeIcon={24}
+            colorIcon={Colors.white}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              right: 4,
+              width: 46,
+              height: 46,
+              backgroundColor: Colors.red500,
+            }}
+          />
+        )}
+
+        {teamData?.playerLoggedWasInTeam && (
+          <Button
+            type="primary"
+            icon="close"
+            sizeIcon={24}
+            colorIcon={Colors.white}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              right: 4,
+              width: 46,
+              height: 46,
+              backgroundColor: Colors.red500,
+            }}
+          />
+        )}
+
+        {!teamData?.playerLoggedHasBeenInvitedToJoin &&
+          !teamData?.playerLoggedHasSentRequestToJoin &&
+          !teamData?.playerLoggedWasInTeam && (
+            <Button
+              type="primary"
+              icon="add"
+              sizeIcon={24}
+              colorIcon={Colors.white}
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                right: 4,
+                width: 46,
+                height: 46,
+              }}
+            />
+          )}
+      </S.Button>
+    </View>
+  );
+}

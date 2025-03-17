@@ -44,6 +44,7 @@ export const Colors = {
 
   blue: bluePrimary,
   blue700: '#0D6EFD',
+  blue500: '#3B82F6',
   blueOpacity50: '#0D6EFD80',
 
   darkBlue: darkBlue,
@@ -59,6 +60,7 @@ export const Colors = {
   lightGreen: '#E3F5E1',
 
   red: '#E60000',
+  red500: '#EA4335',
   lightRed: '#FFF3F2',
 
   yellor900: '#FDCD08',

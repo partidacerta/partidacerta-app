@@ -4,11 +4,13 @@ import { create } from 'zustand';
 import { showMessageSuccess } from '@/src/helpers/showMessage';
 import { triggerError } from '@/src/helpers/triggerError';
 import {
+  getTeamByIdRequest,
   getTeamsRequest,
   postTeamRegisterRequest,
 } from '@/src/services/team/team.request';
 
 import {
+  FailedRequestGetTeam,
   FailedRequestGetTeams,
   FailedRequestTeamRegister,
   SuccessRequestCreateTeam,
@@ -16,8 +18,9 @@ import {
 import { TeamDataProps, TeamStoreProps } from './team.types';
 
 const initialState = {
-  teamData: {},
+  teamDataCreated: {},
   teams: undefined,
+  teamData: undefined,
   isLoading: false,
 };
 
@@ -39,25 +42,25 @@ const useTeamStore = create<TeamStoreProps>((set, get) => ({
     })),
 
   RegisterTeam: async () => {
-    const { makeAsync, teamData } = get();
+    const { makeAsync, teamDataCreated } = get();
     const handle = async (): Promise<void> => {
       set({ isLoading: true });
 
       const data = await postTeamRegisterRequest({
-        logo: teamData.logo,
-        name: teamData.name,
-        interestSport: teamData.interestSport,
-        location: teamData.location,
-        teamGender: teamData.teamGender,
-        manager: teamData.manager,
-        players: teamData.players || [],
-        contact: teamData.contact,
-        description: teamData.description,
+        logo: teamDataCreated.logo,
+        name: teamDataCreated.name,
+        interestSport: teamDataCreated.interestSport,
+        location: teamDataCreated.location,
+        teamGender: teamDataCreated.teamGender,
+        manager: teamDataCreated.manager,
+        players: teamDataCreated.players || [],
+        contact: teamDataCreated.contact,
+        description: teamDataCreated.description,
       });
 
       if (data) {
         set({
-          teamData: data,
+          teamDataCreated: data,
         });
       }
 
@@ -87,8 +90,8 @@ const useTeamStore = create<TeamStoreProps>((set, get) => ({
     description,
   }: TeamDataProps) => {
     set(state => ({
-      teamData: {
-        ...state.teamData,
+      teamDataCreated: {
+        ...state.teamDataCreated,
         ...(logo !== undefined && { logo }),
         ...(name !== undefined && { name }),
         ...(interestSport !== undefined && { interestSport }),
@@ -117,6 +120,27 @@ const useTeamStore = create<TeamStoreProps>((set, get) => ({
     };
 
     void makeAsync({ handle });
+  },
+
+  getTeamById: async (teamId: string) => {
+    const { makeAsync } = get();
+    const handle = async (): Promise<void> => {
+      set({ isLoading: true });
+
+      const data = await getTeamByIdRequest({ teamId });
+
+      if (data) {
+        set({ teamData: data });
+      }
+
+      set({ isLoading: false });
+    };
+
+    const onError = (): void => {
+      triggerError(FailedRequestGetTeam.message);
+    };
+
+    void makeAsync({ handle, onError });
   },
 
   makeAsync: async ({ handle, onError, onFinally }) => {

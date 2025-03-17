@@ -1,5 +1,6 @@
-import { Ionicons } from '@expo/vector-icons';
 import { StyleProp, ViewStyle, TouchableOpacityProps } from 'react-native';
+
+import { Ionicons } from '@expo/vector-icons';
 
 export interface ButtonProps extends TouchableOpacityProps {
   type?: 'primary' | 'secondary' | 'link';
@@ -12,4 +13,5 @@ export interface ButtonProps extends TouchableOpacityProps {
   sizeIcon?: number;
   colorIcon?: string;
   borderRadius?: string | number;
+  textColor?: string;
 }

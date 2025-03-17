@@ -9,3 +9,7 @@ export const FailedRequestTeamRegister = {
 export const FailedRequestGetTeams = {
   message: 'Erro ao buscar dados do time. Tente novamente!',
 };
+
+export const FailedRequestGetTeam = {
+  message: 'Erro ao buscar dados do time. Tente novamente!',
+};

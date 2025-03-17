@@ -6,10 +6,6 @@ export interface IUseListTeamsControllerProps {
   searchTeam: string;
   setSearchTeam: (value: string) => void;
   handleSearchTeam: () => Promise<void>;
-  formatTeamInfo: (
-    sport: string | undefined,
-    modality: string | undefined
-  ) => string;
   selectedSport: string | null;
   setSelectedSport: (value: string | null) => void;
 }

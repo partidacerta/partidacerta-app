@@ -1,11 +1,14 @@
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 
+import { router } from 'expo-router';
+
+import LockTime from '@/src/assets/svgs/images/lockTime.svg';
 import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
 import SportsFilter from '@/src/components/SportsFilter/SportsFilter';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
-import LockTime from '@/src/assets/svgs/images/lockTime.svg';
+import { formatSportsModality } from '@/src/utils/formatSportsModality';
 
 import { useListTeamsController } from './ListTeams.controller';
 import * as S from './ListTeams.styles';
@@ -17,7 +20,6 @@ export default function ListTeamsScreen() {
     handleSearchTeam,
     isLoading,
     teams,
-    formatTeamInfo,
     selectedSport,
     setSelectedSport,
   } = useListTeamsController();
@@ -59,33 +61,40 @@ export default function ListTeamsScreen() {
             contentContainerStyle={{ flexGrow: 1 }}
             showsHorizontalScrollIndicator={false}
             renderItem={({ item: team }) => (
-              <S.TeamCard key={team.id}>
-                <S.ContainerCard>
-                  <S.TeamImage
-                    source={{
-                      uri: team?.logo,
-                    }}
-                  />
-                  <S.TeamInfo>
-                    <S.BoxLeft>
-                      <ThemedText type="bold" style={{ fontSize: 18 }}>
-                        {team?.name?.length > 20
-                          ? `${team.name.slice(0, 20)}...`
-                          : team.name}
-                      </ThemedText>
-                      <S.Box>
-                        <ThemedText type="bold" colorText={Colors.gray400}>
-                          {formatTeamInfo(team?.sport, team?.modality)}
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => router.push(`/TeamProfile.stack?id=${team.id}`)}
+              >
+                <S.TeamCard key={team.id}>
+                  <S.ContainerCard>
+                    <S.TeamImage
+                      source={{
+                        uri: team?.logo,
+                      }}
+                    />
+                    <S.TeamInfo>
+                      <S.BoxLeft>
+                        <ThemedText type="bold" style={{ fontSize: 18 }}>
+                          {team?.name?.length > 20
+                            ? `${team.name.slice(0, 20)}...`
+                            : team.name}
                         </ThemedText>
-                      </S.Box>
-                    </S.BoxLeft>
-                    <S.BoxRight>
-                      {(team?.playerLoggedHasBeenInvitedToJoin ||
-                        team?.playerLoggedHasSentRequestToJoin) && <LockTime />}
-                    </S.BoxRight>
-                  </S.TeamInfo>
-                </S.ContainerCard>
-              </S.TeamCard>
+                        <S.Box>
+                          <ThemedText type="bold" colorText={Colors.gray400}>
+                            {formatSportsModality(team?.sport, team?.modality)}
+                          </ThemedText>
+                        </S.Box>
+                      </S.BoxLeft>
+                      <S.BoxRight>
+                        {(team?.playerLoggedHasBeenInvitedToJoin ||
+                          team?.playerLoggedHasSentRequestToJoin) && (
+                          <LockTime />
+                        )}
+                      </S.BoxRight>
+                    </S.TeamInfo>
+                  </S.ContainerCard>
+                </S.TeamCard>
+              </TouchableOpacity>
             )}
           />
         )}

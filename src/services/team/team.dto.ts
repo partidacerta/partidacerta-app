@@ -66,3 +66,61 @@ export interface IListTeams {
   size: number;
   empty: boolean;
 }
+
+export interface ITeamDTO {
+  id: string;
+  name: string;
+  logo: string;
+  isActive: boolean;
+  playerLoggedHasBeenInvitedToJoin: boolean;
+  playerLoggedHasSentRequestToJoin: boolean;
+  playerLoggedWasInTeam: boolean;
+  playerLoggedIsManagerOrAssistant: boolean;
+  creationDate: string;
+  lastUpdateDate: string;
+  numberOfPlayers: number;
+  numberOfTeamInvitations: number;
+  numberOfPlayerRequests: number;
+  basicInfo: {
+    description: string;
+    teamGender: string;
+    interestSport: {
+      sportType: string;
+      modality: string;
+    };
+    location: {
+      city: string;
+      uf: string;
+    };
+    contact: {
+      email: string;
+      phone: string;
+    };
+  };
+  management: {
+    manager: {
+      id: string;
+      fullName: string;
+      nickname: string;
+      playerImage: string;
+      isActive: boolean;
+    };
+    assistantManager: null | {
+      id: string;
+      fullName: string;
+      nickname: string;
+      playerImage: string;
+      isActive: boolean;
+    };
+  };
+  members: {
+    players: {
+      id: string;
+      fullName: string;
+      nickname: string;
+      playerImage: string;
+      isActive: boolean;
+    }[];
+    requests: null;
+  };
+}

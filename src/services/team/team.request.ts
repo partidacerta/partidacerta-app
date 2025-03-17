@@ -1,5 +1,5 @@
 import { instance } from '../api/api';
-import { IListTeams, ITeamRequest } from './team.dto';
+import { IListTeams, ITeamDTO, ITeamRequest } from './team.dto';
 
 export const postTeamRegisterRequest = async ({
   logo,
@@ -68,5 +68,18 @@ export const getTeamsRequest = async ({
     return data;
   } catch (error) {
     throw new Error('Erro ao buscar times');
+  }
+};
+
+export const getTeamByIdRequest = async ({
+  teamId,
+}: {
+  teamId: string;
+}): Promise<ITeamDTO> => {
+  try {
+    const { data } = await instance.get(`/team/${teamId}`);
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao buscar dados do time');
   }
 };
