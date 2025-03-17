@@ -150,6 +150,25 @@ export const Button = styled.View`
   right: 20px;
 `;
 
-export const ContainerButtons = styled.View`
-  /* flex-direction: row; */
+export const FloatingButton = styled.View`
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+`;
+
+export const Modal = styled.View`
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+`;
+
+export const ModalTitle = styled.View`
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+`;
+
+export const ModalButtons = styled.View`
+  flex-direction: row;
+  gap: 20px;
 `;

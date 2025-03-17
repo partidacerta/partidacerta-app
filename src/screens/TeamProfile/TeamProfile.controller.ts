@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useLocalSearchParams } from 'expo-router';
 
@@ -9,6 +9,18 @@ import { IUseTeamProfileControllerProps } from './TeamProfile.types';
 export const useTeamProfileController = (): IUseTeamProfileControllerProps => {
   const { teamData, getTeamById, isLoading } = useTeamStore();
   const { id } = useLocalSearchParams();
+
+  const [modalType, setModalType] = useState<
+    'logout' | 'cancel' | 'refuse' | 'accept' | null
+  >(null);
+
+  const handleOpenModal = (type: 'logout' | 'cancel' | 'refuse' | 'accept') => {
+    setModalType(type);
+  };
+
+  const handleCloseModal = () => {
+    setModalType(null);
+  };
 
   const mapTeamGender = (gender: string | undefined) => {
     switch (gender) {
@@ -27,5 +39,12 @@ export const useTeamProfileController = (): IUseTeamProfileControllerProps => {
     }
   }, [id, getTeamById]);
 
-  return { teamData, isLoading, mapTeamGender };
+  return {
+    teamData,
+    isLoading,
+    modalType,
+    handleOpenModal,
+    handleCloseModal,
+    mapTeamGender,
+  };
 };

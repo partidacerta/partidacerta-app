@@ -9,11 +9,22 @@ import { Colors } from '@/src/constants/Colors';
 import { formatSportsIcon } from '@/src/utils/formatSportsIcon';
 import { formatSportsModality } from '@/src/utils/formatSportsModality';
 
+import ModalLogoutTeam from './components/ModalLogoutTeam';
+import ModalCancelRequest from './components/ModalCancelRequest';
+import ModalRefuseInvitation from './components/ModalRefuseInvitation';
+import ModalAcceptInvitation from './components/ModalAcceptInvitation';
 import { useTeamProfileController } from './TeamProfile.controller';
 import * as S from './TeamProfile.styles';
 
 export default function TeamProfileScreen() {
-  const { teamData, isLoading, mapTeamGender } = useTeamProfileController();
+  const {
+    teamData,
+    isLoading,
+    modalType,
+    handleOpenModal,
+    handleCloseModal,
+    mapTeamGender,
+  } = useTeamProfileController();
 
   return (
     <View style={{ flex: 1 }}>
@@ -139,9 +150,6 @@ export default function TeamProfileScreen() {
                         <ThemedText type="bold">
                           {player.fullName.split(' ')[0]}
                         </ThemedText>
-                        {/* <ThemedText type="bold" colorText={Colors.gray400}>
-                        Posição
-                      </ThemedText> */}
                       </S.PlayerInfo>
                     </S.PlayerItem>
                   </S.ContentPlayer>
@@ -153,7 +161,7 @@ export default function TeamProfileScreen() {
       </S.Container>
       <S.Button>
         {teamData?.playerLoggedHasBeenInvitedToJoin && (
-          <S.ContainerButtons>
+          <>
             <Button
               type="primary"
               icon="close"
@@ -162,11 +170,12 @@ export default function TeamProfileScreen() {
               style={{
                 position: 'absolute',
                 bottom: 60,
-                right: 4,
+                right: 20,
                 width: 46,
                 height: 46,
                 backgroundColor: Colors.red500,
               }}
+              onPress={() => handleOpenModal('refuse')}
             />
             <Button
               type="primary"
@@ -176,67 +185,87 @@ export default function TeamProfileScreen() {
               style={{
                 position: 'absolute',
                 bottom: 0,
-                right: 4,
+                right: 20,
                 width: 46,
                 height: 46,
                 backgroundColor: Colors.green900,
               }}
+              onPress={() => handleOpenModal('accept')}
             />
-          </S.ContainerButtons>
+          </>
         )}
 
         {teamData?.playerLoggedHasSentRequestToJoin && (
-          <Button
-            type="primary"
-            icon="close"
-            sizeIcon={24}
-            colorIcon={Colors.white}
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              right: 4,
-              width: 46,
-              height: 46,
-              backgroundColor: Colors.red500,
-            }}
-          />
+          <S.FloatingButton>
+            <Button
+              type="primary"
+              icon="close"
+              sizeIcon={24}
+              colorIcon={Colors.white}
+              style={{
+                width: 46,
+                height: 46,
+                backgroundColor: Colors.red500,
+              }}
+              onPress={() => handleOpenModal('cancel')}
+            />
+          </S.FloatingButton>
         )}
 
         {teamData?.playerLoggedWasInTeam && (
-          <Button
-            type="primary"
-            icon="close"
-            sizeIcon={24}
-            colorIcon={Colors.white}
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              right: 4,
-              width: 46,
-              height: 46,
-              backgroundColor: Colors.red500,
-            }}
-          />
+          <S.FloatingButton>
+            <Button
+              type="primary"
+              icon="close"
+              sizeIcon={24}
+              colorIcon={Colors.white}
+              style={{
+                width: 46,
+                height: 46,
+                backgroundColor: Colors.red500,
+              }}
+              onPress={() => handleOpenModal('logout')}
+            />
+          </S.FloatingButton>
         )}
 
         {!teamData?.playerLoggedHasBeenInvitedToJoin &&
           !teamData?.playerLoggedHasSentRequestToJoin &&
           !teamData?.playerLoggedWasInTeam && (
-            <Button
-              type="primary"
-              icon="add"
-              sizeIcon={24}
-              colorIcon={Colors.white}
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                right: 4,
-                width: 46,
-                height: 46,
-              }}
-            />
+            <S.FloatingButton>
+              <Button
+                type="primary"
+                icon="add"
+                sizeIcon={24}
+                colorIcon={Colors.white}
+                style={{
+                  width: 46,
+                  height: 46,
+                }}
+              />
+            </S.FloatingButton>
           )}
       </S.Button>
+
+      <ModalLogoutTeam
+        isVisible={modalType === 'logout'}
+        onClose={handleCloseModal}
+      />
+
+      <ModalCancelRequest
+        isVisible={modalType === 'cancel'}
+        onClose={handleCloseModal}
+      />
+
+      <ModalRefuseInvitation
+        isVisible={modalType === 'refuse'}
+        onClose={handleCloseModal}
+      />
+
+      <ModalAcceptInvitation
+        isVisible={modalType === 'accept'}
+        onClose={handleCloseModal}
+      />
     </View>
   );
 }
