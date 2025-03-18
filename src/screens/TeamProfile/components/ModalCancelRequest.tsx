@@ -1,8 +1,9 @@
+import { Button } from '@/src/components/Button/Button';
 import Modalize from '@/src/components/Modalize/Modalize';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
-import { Button } from '@/src/components/Button/Button';
 import { Colors } from '@/src/constants/Colors';
 
+import { useTeamProfileController } from '../TeamProfile.controller';
 import * as S from '../TeamProfile.styles';
 
 interface ModalCancelRequestProps {
@@ -14,6 +15,8 @@ export default function ModalCancelRequest({
   isVisible,
   onClose,
 }: ModalCancelRequestProps) {
+  const { handlePlayerRequestCancel } = useTeamProfileController();
+
   return (
     <Modalize visible={isVisible} onClose={onClose}>
       <S.Modal>
@@ -34,8 +37,9 @@ export default function ModalCancelRequest({
           />
           <Button
             type="primary"
-            text="Cancelar solicitação?"
+            text="Cancelar solicitação"
             style={{ width: '45%', backgroundColor: Colors.red500 }}
+            onPress={handlePlayerRequestCancel}
           />
         </S.ModalButtons>
       </S.Modal>

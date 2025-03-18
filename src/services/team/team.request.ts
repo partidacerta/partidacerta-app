@@ -83,3 +83,88 @@ export const getTeamByIdRequest = async ({
     throw new Error('Erro ao buscar dados do time');
   }
 };
+
+export const postPlayerRequestJoinRequest = async ({
+  teamId,
+  playerId,
+}: {
+  teamId: string;
+  playerId: string;
+}): Promise<void> => {
+  try {
+    const { data } = await instance.post(
+      `/team/${teamId}/request/player/${playerId}`
+    );
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao enviar solicitação para entrar no time');
+  }
+};
+
+export const deletePlayerRequestCancelRequest = async ({
+  teamId,
+  playerId,
+}: {
+  teamId: string;
+  playerId: string;
+}): Promise<void> => {
+  try {
+    const { data } = await instance.delete(
+      `/team/${teamId}/request/player/${playerId}/decline`
+    );
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao cancelar solicitação para entrar no time');
+  }
+};
+
+export const deleteLeaveTeamRequest = async ({
+  teamId,
+  playerId,
+}: {
+  teamId: string;
+  playerId: string;
+}): Promise<void> => {
+  try {
+    const { data } = await instance.delete(
+      `/team/remove/${teamId}/player/${playerId}`
+    );
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao sair do time');
+  }
+};
+
+export const deleteDeclineTeamInviteRequest = async ({
+  teamId,
+  playerId,
+}: {
+  teamId: string;
+  playerId: string;
+}): Promise<void> => {
+  try {
+    const { data } = await instance.delete(
+      `/team/${teamId}/invite/player/${playerId}/decline`
+    );
+    return data;
+  } catch (error) {
+    throw new Error('Erro para recusar convite de entrar no time');
+  }
+};
+
+export const postAcceptPlayerInTeamRequest = async ({
+  teamId,
+  playerId,
+}: {
+  teamId: string;
+  playerId: string;
+}): Promise<void> => {
+  try {
+    const { data } = await instance.post(
+      `/team/accept/${teamId}/player/${playerId}`
+    );
+    return data;
+  } catch (error) {
+    throw new Error('Erro para aceitar convite de entrar no time');
+  }
+};

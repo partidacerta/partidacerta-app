@@ -19,6 +19,11 @@ export type TeamStoreProps = {
   getTeams: (name?: string, location?: string, sport?: string) => Promise<void>;
   getTeamById: (teamId: string) => void;
   teamData?: ITeamDTO;
+  playerRequestJoin: (teamId: string, playerId: string) => void;
+  playerRequestCancel: (teamId: string, playerId: string) => void;
+  leaveTeam: (teamId: string, playerId: string) => void;
+  declineTeamInvite: (teamId: string, playerId: string) => void;
+  acceptPlayerInTeam: (teamId: string, playerId: string) => void;
   makeAsync: <T>(props: {
     handle: () => Promise<T>;
     onError?: (error: unknown) => void;

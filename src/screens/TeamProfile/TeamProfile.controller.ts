@@ -2,13 +2,24 @@ import { useEffect, useState } from 'react';
 
 import { useLocalSearchParams } from 'expo-router';
 
+import useAuthStore from '@/src/store/auth/auth.store';
 import useTeamStore from '@/src/store/team/team.store';
 
 import { IUseTeamProfileControllerProps } from './TeamProfile.types';
 
 export const useTeamProfileController = (): IUseTeamProfileControllerProps => {
-  const { teamData, getTeamById, isLoading } = useTeamStore();
   const { id } = useLocalSearchParams();
+  const { userAuth } = useAuthStore();
+  const {
+    teamData,
+    getTeamById,
+    isLoading,
+    playerRequestJoin,
+    playerRequestCancel,
+    leaveTeam,
+    declineTeamInvite,
+    acceptPlayerInTeam,
+  } = useTeamStore();
 
   const [modalType, setModalType] = useState<
     'logout' | 'cancel' | 'refuse' | 'accept' | null
@@ -33,6 +44,17 @@ export const useTeamProfileController = (): IUseTeamProfileControllerProps => {
     }
   };
 
+  const handleManageTeamPlayers = (
+    action: (teamId: string, playerId: string) => void
+  ) => {
+    const teamId = String(id);
+    const playerId = userAuth?.playerInfo?.id;
+
+    if (teamId && playerId) {
+      action(teamId, playerId);
+    }
+  };
+
   useEffect(() => {
     if (id && typeof id === 'string') {
       getTeamById(id);
@@ -46,5 +68,11 @@ export const useTeamProfileController = (): IUseTeamProfileControllerProps => {
     handleOpenModal,
     handleCloseModal,
     mapTeamGender,
+    handlePlayerRequestJoin: () => handleManageTeamPlayers(playerRequestJoin),
+    handlePlayerRequestCancel: () =>
+      handleManageTeamPlayers(playerRequestCancel),
+    handleLeaveTeam: () => handleManageTeamPlayers(leaveTeam),
+    handleDeclineTeamInvite: () => handleManageTeamPlayers(declineTeamInvite),
+    handleAcceptPlayerInTeam: () => handleManageTeamPlayers(acceptPlayerInTeam),
   };
 };

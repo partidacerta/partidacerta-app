@@ -1,19 +1,22 @@
+import { Button } from '@/src/components/Button/Button';
 import Modalize from '@/src/components/Modalize/Modalize';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
-import { Button } from '@/src/components/Button/Button';
 import { Colors } from '@/src/constants/Colors';
 
+import { useTeamProfileController } from '../TeamProfile.controller';
 import * as S from '../TeamProfile.styles';
 
-interface ModalAcceptInvitationProps {
+interface ModalDeclineInviteProps {
   isVisible: boolean;
   onClose: () => void;
 }
 
-export default function ModalAcceptInvitation({
+export default function ModalDeclineInvite({
   isVisible,
   onClose,
-}: ModalAcceptInvitationProps) {
+}: ModalDeclineInviteProps) {
+  const { handleDeclineTeamInvite } = useTeamProfileController();
+
   return (
     <Modalize visible={isVisible} onClose={onClose}>
       <S.Modal>
@@ -22,7 +25,7 @@ export default function ModalAcceptInvitation({
             Tem certeza que deseja
           </ThemedText>
           <ThemedText type="bold" style={{ fontSize: 20 }}>
-            aceitar convite?
+            recusar convite?
           </ThemedText>
         </S.ModalTitle>
         <S.ModalButtons>
@@ -34,8 +37,9 @@ export default function ModalAcceptInvitation({
           />
           <Button
             type="primary"
-            text="Aceitar convite"
-            style={{ width: '45%', backgroundColor: Colors.green900 }}
+            text="Recusar convite"
+            style={{ width: '45%', backgroundColor: Colors.red500 }}
+            onPress={handleDeclineTeamInvite}
           />
         </S.ModalButtons>
       </S.Modal>

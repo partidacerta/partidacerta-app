@@ -118,7 +118,7 @@ export const Players = styled.View`
 
 export const ContainerPlayers = styled.View`
   flex-direction: row;
-  padding: 10px 10px 6px 10px;
+  padding: 10px 0 6px 10px;
   margin-top: 4px;
   border-radius: 12px;
   background-color: ${Colors.darkBlue800};

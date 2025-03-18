@@ -9,10 +9,10 @@ import { Colors } from '@/src/constants/Colors';
 import { formatSportsIcon } from '@/src/utils/formatSportsIcon';
 import { formatSportsModality } from '@/src/utils/formatSportsModality';
 
-import ModalLogoutTeam from './components/ModalLogoutTeam';
+import ModalAcceptInvite from './components/ModalAcceptInvite';
 import ModalCancelRequest from './components/ModalCancelRequest';
-import ModalRefuseInvitation from './components/ModalRefuseInvitation';
-import ModalAcceptInvitation from './components/ModalAcceptInvitation';
+import ModalDeclineInvite from './components/ModalDeclineInvite';
+import ModalLeaveTeam from './components/ModalLeaveTeam';
 import { useTeamProfileController } from './TeamProfile.controller';
 import * as S from './TeamProfile.styles';
 
@@ -24,6 +24,7 @@ export default function TeamProfileScreen() {
     handleOpenModal,
     handleCloseModal,
     mapTeamGender,
+    handlePlayerRequestJoin,
   } = useTeamProfileController();
 
   return (
@@ -216,7 +217,7 @@ export default function TeamProfileScreen() {
           <S.FloatingButton>
             <Button
               type="primary"
-              icon="close"
+              icon="log-out-outline"
               sizeIcon={24}
               colorIcon={Colors.white}
               style={{
@@ -242,12 +243,13 @@ export default function TeamProfileScreen() {
                   width: 46,
                   height: 46,
                 }}
+                onPress={handlePlayerRequestJoin}
               />
             </S.FloatingButton>
           )}
       </S.Button>
 
-      <ModalLogoutTeam
+      <ModalLeaveTeam
         isVisible={modalType === 'logout'}
         onClose={handleCloseModal}
       />
@@ -257,12 +259,12 @@ export default function TeamProfileScreen() {
         onClose={handleCloseModal}
       />
 
-      <ModalRefuseInvitation
+      <ModalDeclineInvite
         isVisible={modalType === 'refuse'}
         onClose={handleCloseModal}
       />
 
-      <ModalAcceptInvitation
+      <ModalAcceptInvite
         isVisible={modalType === 'accept'}
         onClose={handleCloseModal}
       />
