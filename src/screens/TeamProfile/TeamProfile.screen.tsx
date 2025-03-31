@@ -1,5 +1,7 @@
 import { ScrollView, View } from 'react-native';
 
+import { router } from 'expo-router';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import { Button } from '@/src/components/Button/Button';
@@ -135,11 +137,23 @@ export default function TeamProfileScreen() {
           <S.Players>
             <S.ViewAll>
               <ThemedText type="bold">Jogadores</ThemedText>
-              <Button type="link" text="Ver todos" textColor={Colors.blue500} />
+              <Button
+                type="link"
+                text="Ver todos"
+                textColor={Colors.blue500}
+                onPress={() =>
+                  router.push({
+                    pathname: '/TeamPlayers.stack',
+                    params: {
+                      players: JSON.stringify(teamData?.members?.players),
+                    },
+                  })
+                }
+              />
             </S.ViewAll>
             <S.ContainerPlayers>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {teamData?.members?.players.map(player => (
+                {teamData?.members?.players.slice(0, 10).map(player => (
                   <S.ContentPlayer key={player.id}>
                     <S.PlayerItem>
                       <S.PlayerImage

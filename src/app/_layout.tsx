@@ -122,6 +122,10 @@ export default function RootLayout() {
           name="TeamProfile.stack"
           options={{ headerShown: true }}
         />
+        <Stack.Screen
+          name="TeamPlayers.stack"
+          options={{ headerShown: true }}
+        />
       </Stack>
     </ThemeProvider>
   );
