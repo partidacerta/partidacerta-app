@@ -3,8 +3,15 @@ import { ITeamDTO } from '@/src/services/team/team.dto';
 export interface IUseTeamProfileControllerProps {
   teamData: ITeamDTO | undefined;
   isLoading: boolean;
-  modalType: 'logout' | 'cancel' | 'refuse' | 'accept' | null;
-  handleOpenModal: (type: 'logout' | 'cancel' | 'refuse' | 'accept') => void;
+  modalType:
+    | 'LeaveTeam'
+    | 'cancelRequest'
+    | 'declineInvite'
+    | 'acceptInvite'
+    | null;
+  handleOpenModal: (
+    type: 'LeaveTeam' | 'cancelRequest' | 'declineInvite' | 'acceptInvite'
+  ) => void;
   handleCloseModal: () => void;
   mapTeamGender: (gender: string | undefined) => string | undefined;
   handlePlayerRequestJoin: () => void;

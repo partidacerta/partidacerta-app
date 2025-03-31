@@ -184,7 +184,7 @@ export default function TeamProfileScreen() {
               width: 120,
               backgroundColor: Colors.red500,
             }}
-            onPress={() => handleOpenModal('refuse')}
+            onPress={() => handleOpenModal('declineInvite')}
           />
           <Button
             type="primary"
@@ -193,7 +193,7 @@ export default function TeamProfileScreen() {
               width: 120,
               backgroundColor: Colors.green900,
             }}
-            onPress={() => handleOpenModal('accept')}
+            onPress={() => handleOpenModal('acceptInvite')}
           />
         </S.ContainerButton>
       )}
@@ -207,7 +207,7 @@ export default function TeamProfileScreen() {
               width: 180,
               backgroundColor: Colors.red500,
             }}
-            onPress={() => handleOpenModal('cancel')}
+            onPress={() => handleOpenModal('cancelRequest')}
           />
         </S.ButtonCancelRequest>
       )}
@@ -221,7 +221,7 @@ export default function TeamProfileScreen() {
               width: 120,
               backgroundColor: Colors.red500,
             }}
-            onPress={() => handleOpenModal('logout')}
+            onPress={() => handleOpenModal('LeaveTeam')}
           />
         </S.ButtonLeaveTeam>
       )}
@@ -242,22 +242,22 @@ export default function TeamProfileScreen() {
         )}
 
       <ModalLeaveTeam
-        isVisible={modalType === 'logout'}
+        isVisible={modalType === 'LeaveTeam'}
         onClose={handleCloseModal}
       />
 
       <ModalCancelRequest
-        isVisible={modalType === 'cancel'}
+        isVisible={modalType === 'cancelRequest'}
         onClose={handleCloseModal}
       />
 
       <ModalDeclineInvite
-        isVisible={modalType === 'refuse'}
+        isVisible={modalType === 'declineInvite'}
         onClose={handleCloseModal}
       />
 
       <ModalAcceptInvite
-        isVisible={modalType === 'accept'}
+        isVisible={modalType === 'acceptInvite'}
         onClose={handleCloseModal}
       />
     </View>

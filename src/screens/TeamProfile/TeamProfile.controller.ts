@@ -22,10 +22,12 @@ export const useTeamProfileController = (): IUseTeamProfileControllerProps => {
   } = useTeamStore();
 
   const [modalType, setModalType] = useState<
-    'logout' | 'cancel' | 'refuse' | 'accept' | null
+    'LeaveTeam' | 'cancelRequest' | 'declineInvite' | 'acceptInvite' | null
   >(null);
 
-  const handleOpenModal = (type: 'logout' | 'cancel' | 'refuse' | 'accept') => {
+  const handleOpenModal = (
+    type: 'LeaveTeam' | 'cancelRequest' | 'declineInvite' | 'acceptInvite'
+  ) => {
     setModalType(type);
   };
 
@@ -52,6 +54,10 @@ export const useTeamProfileController = (): IUseTeamProfileControllerProps => {
 
     if (teamId && playerId) {
       action(teamId, playerId);
+
+      setTimeout(() => {
+        getTeamById(teamId);
+      }, 0);
     }
   };
 
