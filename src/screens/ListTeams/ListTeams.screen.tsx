@@ -2,7 +2,6 @@ import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 
 import { router } from 'expo-router';
 
-import LockTime from '@/src/assets/svgs/images/lockTime.svg';
 import { Button } from '@/src/components/Button/Button';
 import Input from '@/src/components/Input/Input';
 import SportsFilter from '@/src/components/SportsFilter/SportsFilter';
@@ -75,8 +74,8 @@ export default function ListTeamsScreen() {
                     <S.TeamInfo>
                       <S.BoxLeft>
                         <ThemedText type="bold" style={{ fontSize: 18 }}>
-                          {team?.name?.length > 20
-                            ? `${team.name.slice(0, 20)}...`
+                          {team?.name?.length > 15
+                            ? `${team.name.slice(0, 15)}...`
                             : team.name}
                         </ThemedText>
                         <S.Box>
@@ -88,7 +87,28 @@ export default function ListTeamsScreen() {
                       <S.BoxRight>
                         {(team?.playerLoggedHasBeenInvitedToJoin ||
                           team?.playerLoggedHasSentRequestToJoin) && (
-                          <LockTime />
+                          <>
+                            {team?.playerLoggedHasBeenInvitedToJoin && (
+                              <S.Invited>
+                                <ThemedText
+                                  type="bold"
+                                  colorText={Colors.green900}
+                                >
+                                  Convidado
+                                </ThemedText>
+                              </S.Invited>
+                            )}
+                            {team?.playerLoggedHasSentRequestToJoin && (
+                              <S.Requested>
+                                <ThemedText
+                                  type="bold"
+                                  colorText={Colors.yellor900}
+                                >
+                                  Solicitado
+                                </ThemedText>
+                              </S.Requested>
+                            )}
+                          </>
                         )}
                       </S.BoxRight>
                     </S.TeamInfo>

@@ -113,7 +113,7 @@ export const CardMatches = styled.View`
 export const Players = styled.View`
   padding: 0 20px;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
 `;
 
 export const ContainerPlayers = styled.View`
@@ -144,16 +144,30 @@ export const PlayerInfo = styled.View`
   align-items: center;
 `;
 
+export const ContainerButton = styled.View`
+  flex-direction: row;
+  gap: 16px;
+  position: absolute;
+  bottom: 20px;
+  left: 18%;
+`;
+
+export const ButtonCancelRequest = styled.View`
+  position: absolute;
+  bottom: 20px;
+  left: 28%;
+`;
+
+export const ButtonLeaveTeam = styled.View`
+  position: absolute;
+  bottom: 20px;
+  left: 35%;
+`;
+
 export const Button = styled.View`
   position: absolute;
   bottom: 20px;
-  right: 20px;
-`;
-
-export const FloatingButton = styled.View`
-  position: absolute;
-  bottom: 0;
-  right: 20px;
+  left: 35%;
 `;
 
 export const Modal = styled.View`

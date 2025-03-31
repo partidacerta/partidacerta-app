@@ -49,6 +49,22 @@ export const BoxLeft = styled.View``;
 
 export const BoxRight = styled.View``;
 
+export const Requested = styled.View`
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 12px;
+  background-color: ${Colors.yellor900Opacity20};
+`;
+
+export const Invited = styled.View`
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 12px;
+  background-color: ${Colors.green900Opacity20};
+`;
+
 export const Box = styled.View`
   flex-direction: row;
   align-items: center;

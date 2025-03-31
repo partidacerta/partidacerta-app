@@ -57,6 +57,7 @@ export const Colors = {
 
   green: '#32C07C',
   green900: '#14AE5C',
+  green900Opacity20: '#14AE5C33',
   lightGreen: '#E3F5E1',
 
   red: '#E60000',
@@ -64,6 +65,7 @@ export const Colors = {
   lightRed: '#FFF3F2',
 
   yellor900: '#FDCD08',
+  yellor900Opacity20: '#FDCD0833',
   yellow600: '#ACA61C',
 
   orange: '#FF8000',

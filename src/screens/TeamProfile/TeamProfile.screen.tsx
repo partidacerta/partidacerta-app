@@ -160,94 +160,72 @@ export default function TeamProfileScreen() {
           </S.Players>
         </ScrollView>
       </S.Container>
-      <S.Button>
-        {teamData?.playerLoggedHasBeenInvitedToJoin && (
-          <>
-            <Button
-              type="primary"
-              icon="close"
-              sizeIcon={24}
-              colorIcon={Colors.white}
-              style={{
-                position: 'absolute',
-                bottom: 60,
-                right: 20,
-                width: 46,
-                height: 46,
-                backgroundColor: Colors.red500,
-              }}
-              onPress={() => handleOpenModal('refuse')}
-            />
-            <Button
-              type="primary"
-              icon="checkmark"
-              sizeIcon={24}
-              colorIcon={Colors.white}
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                right: 20,
-                width: 46,
-                height: 46,
-                backgroundColor: Colors.green900,
-              }}
-              onPress={() => handleOpenModal('accept')}
-            />
-          </>
-        )}
+      {teamData?.playerLoggedHasBeenInvitedToJoin && (
+        <S.ContainerButton>
+          <Button
+            type="primary"
+            text="Recusar"
+            colorIcon={Colors.white}
+            style={{
+              width: 120,
+              backgroundColor: Colors.red500,
+            }}
+            onPress={() => handleOpenModal('refuse')}
+          />
+          <Button
+            type="primary"
+            text="Aceitar convite"
+            style={{
+              width: 120,
+              backgroundColor: Colors.green900,
+            }}
+            onPress={() => handleOpenModal('accept')}
+          />
+        </S.ContainerButton>
+      )}
 
-        {teamData?.playerLoggedHasSentRequestToJoin && (
-          <S.FloatingButton>
+      {teamData?.playerLoggedHasSentRequestToJoin && (
+        <S.ButtonCancelRequest>
+          <Button
+            type="primary"
+            text="Cancelar solicitação"
+            style={{
+              width: 180,
+              backgroundColor: Colors.red500,
+            }}
+            onPress={() => handleOpenModal('cancel')}
+          />
+        </S.ButtonCancelRequest>
+      )}
+
+      {teamData?.playerLoggedWasInTeam && (
+        <S.ButtonLeaveTeam>
+          <Button
+            type="primary"
+            text="Sair do time"
+            style={{
+              width: 120,
+              backgroundColor: Colors.red500,
+            }}
+            onPress={() => handleOpenModal('logout')}
+          />
+        </S.ButtonLeaveTeam>
+      )}
+
+      {!teamData?.playerLoggedHasBeenInvitedToJoin &&
+        !teamData?.playerLoggedHasSentRequestToJoin &&
+        !teamData?.playerLoggedWasInTeam && (
+          <S.Button>
             <Button
               type="primary"
-              icon="close"
-              sizeIcon={24}
-              colorIcon={Colors.white}
+              text="Entrar"
               style={{
-                width: 46,
-                height: 46,
-                backgroundColor: Colors.red500,
+                width: 120,
               }}
-              onPress={() => handleOpenModal('cancel')}
+              onPress={handlePlayerRequestJoin}
             />
-          </S.FloatingButton>
+          </S.Button>
         )}
-
-        {teamData?.playerLoggedWasInTeam && (
-          <S.FloatingButton>
-            <Button
-              type="primary"
-              icon="log-out-outline"
-              sizeIcon={24}
-              colorIcon={Colors.white}
-              style={{
-                width: 46,
-                height: 46,
-                backgroundColor: Colors.red500,
-              }}
-              onPress={() => handleOpenModal('logout')}
-            />
-          </S.FloatingButton>
-        )}
-
-        {!teamData?.playerLoggedHasBeenInvitedToJoin &&
-          !teamData?.playerLoggedHasSentRequestToJoin &&
-          !teamData?.playerLoggedWasInTeam && (
-            <S.FloatingButton>
-              <Button
-                type="primary"
-                icon="add"
-                sizeIcon={24}
-                colorIcon={Colors.white}
-                style={{
-                  width: 46,
-                  height: 46,
-                }}
-                onPress={handlePlayerRequestJoin}
-              />
-            </S.FloatingButton>
-          )}
-      </S.Button>
 
       <ModalLeaveTeam
         isVisible={modalType === 'logout'}
