@@ -18,6 +18,7 @@ export function Button({
   sizeIcon = 20,
   colorIcon = Colors.white,
   borderRadius,
+  textColor = Colors.white,
   onPress,
   ...props
 }: ButtonProps) {
@@ -52,7 +53,7 @@ export function Button({
             borderRadius={borderRadius}
             onPress={onPress}
           >
-            <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
+            <ThemedText size={16} type="bold" style={{ color: textColor }}>
               {text}
             </ThemedText>
             <RenderIconButton />
@@ -67,7 +68,7 @@ export function Button({
             borderRadius={borderRadius}
             onPress={onPress}
           >
-            <ThemedText size={16} type="bold" style={{ color: Colors.white }}>
+            <ThemedText size={16} type="bold" style={{ color: textColor }}>
               {text}
             </ThemedText>
             <RenderIconButton />

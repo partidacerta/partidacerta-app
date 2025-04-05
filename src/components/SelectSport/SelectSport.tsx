@@ -3,9 +3,9 @@ import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import Basketball from '@/src/assets/svgs/images/basketball.svg';
-import Soccer2 from '@/src/assets/svgs/images/soccer2.svg';
+import Soccer from '@/src/assets/svgs/images/soccer.svg';
 import Tennis from '@/src/assets/svgs/images/tennis.svg';
-import Volleyball2 from '@/src/assets/svgs/images/volleyball2.svg';
+import Volleyball from '@/src/assets/svgs/images/volleyball.svg';
 import { ThemedText } from '@/src/components/ThemedText/ThemedText';
 import { Colors } from '@/src/constants/Colors';
 
@@ -18,8 +18,8 @@ const SelectSport: React.FC<SelectSportProps> = ({
   error,
 }) => {
   const sports = [
-    { name: 'Futebol', icon: <Soccer2 />, value: 'SOCCER' },
-    { name: 'Vôlei', icon: <Volleyball2 />, value: 'VOLLEYBALL' },
+    { name: 'Futebol', icon: <Soccer />, value: 'SOCCER' },
+    { name: 'Vôlei', icon: <Volleyball />, value: 'VOLLEYBALL' },
     { name: 'Padel', icon: <Tennis />, value: 'PADEL' },
     { name: 'Tênis', icon: <Tennis />, value: 'TENNIS' },
     { name: 'Basquete', icon: <Basketball />, value: 'BASKETBALL' },

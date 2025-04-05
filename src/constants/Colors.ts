@@ -34,7 +34,7 @@ export const Colors = {
   gray100: '#E1E1E6',
   gray200: '#A9A9B2',
   gray300: '#828282',
-  gray400: '#636363',
+  gray400: '#7C8591',
   gray500: '#505059',
   gray600: '#333333',
   gray700: '#29292E',
@@ -44,6 +44,7 @@ export const Colors = {
 
   blue: bluePrimary,
   blue700: '#0D6EFD',
+  blue500: '#3B82F6',
   blueOpacity50: '#0D6EFD80',
 
   darkBlue: darkBlue,
@@ -56,11 +57,15 @@ export const Colors = {
 
   green: '#32C07C',
   green900: '#14AE5C',
+  green900Opacity20: '#14AE5C33',
   lightGreen: '#E3F5E1',
 
   red: '#E60000',
+  red500: '#EA4335',
   lightRed: '#FFF3F2',
 
+  yellor900: '#FDCD08',
+  yellor900Opacity20: '#FDCD0833',
   yellow600: '#ACA61C',
 
   orange: '#FF8000',

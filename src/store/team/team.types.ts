@@ -1,7 +1,8 @@
 import { IPlayer } from '@/src/services/player/player.dto';
+import { IListTeams, ITeamDTO } from '@/src/services/team/team.dto';
 
 export type TeamStoreProps = {
-  teamData: TeamDataProps;
+  teamDataCreated: TeamDataProps;
   setTeamData: ({
     logo,
     name,
@@ -14,6 +15,15 @@ export type TeamStoreProps = {
   selectedPlayers: IPlayer[];
   addPlayer: (player: IPlayer) => void;
   removePlayer: (playerId: string) => void;
+  teams?: IListTeams;
+  getTeams: (name?: string, location?: string, sport?: string) => Promise<void>;
+  getTeamById: (teamId: string) => void;
+  teamData?: ITeamDTO;
+  playerRequestJoin: (teamId: string, playerId: string) => void;
+  playerRequestCancel: (teamId: string, playerId: string) => void;
+  leaveTeam: (teamId: string, playerId: string) => void;
+  declineTeamInvite: (teamId: string, playerId: string) => void;
+  acceptPlayerInTeam: (teamId: string, playerId: string) => void;
   makeAsync: <T>(props: {
     handle: () => Promise<T>;
     onError?: (error: unknown) => void;
