@@ -35,7 +35,7 @@ export default function ModalLogin({ isVisible, onClose }: ModalLoginProps) {
       visible={isVisible}
       onClose={onClose}
       backgroundColor={Colors.darkBlue}
-      borderRadius="40px"
+      borderRadius={40}
     >
       <LoadingScreen isLoading={isLoading} />
       <S.ContainerModal>
