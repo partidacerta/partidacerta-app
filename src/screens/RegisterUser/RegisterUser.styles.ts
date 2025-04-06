@@ -57,8 +57,7 @@ export const ButtonGoogle = styled.TouchableOpacity``;
 export const FooterScreen = styled.View`
   width: 100%;
   flex: 1;
-  min-height: 50%;
+  margin-top: 110px;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 30px;
 `;

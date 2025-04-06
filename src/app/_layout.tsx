@@ -13,7 +13,7 @@ import {
 
 import 'react-native-reanimated';
 
-import '../helpers/reactotronConfig';
+import '../config/reactotron';
 import ToastPopup from '../components/ToastPopup/ToastPopup';
 import { Colors } from '../constants/Colors';
 
