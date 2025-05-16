@@ -19,6 +19,6 @@ export const Sport = styled.View`
   align-items: center;
   gap: 8px;
   padding: 8px 20px;
-  border-radius: 50%;
+  border-radius: 50px;
   background-color: ${Colors.darkOverlay};
 `;
