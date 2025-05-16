@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface ModalizeProps {
+interface ContentProps {
   backgroundColor: string;
   borderRadius: number;
 }
@@ -11,7 +11,8 @@ export const Container = styled.View`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const Content = styled.View<ModalizeProps>`
-  border-radius: ${({ borderRadius }) => borderRadius}px;
+export const Content = styled.View<ContentProps>`
+  padding: 6px;
   background-color: ${({ backgroundColor }) => backgroundColor};
+  border-radius: ${({ borderRadius }) => borderRadius}px;
 `;

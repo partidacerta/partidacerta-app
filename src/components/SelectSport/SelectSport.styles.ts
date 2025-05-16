@@ -20,7 +20,7 @@ export const Sport = styled.View`
   align-items: center;
   width: 52px;
   height: 52px;
-  border-radius: 50%;
+  border-radius: 50px;
   background-color: ${Colors.darkOverlay};
 `;
 
@@ -36,7 +36,7 @@ export const ContainerCheck = styled.View`
   position: absolute;
   bottom: 22px;
   right: 4px;
-  border-radius: 50%;
+  border-radius: 50px;
   padding: 2px;
   background-color: ${Colors.green};
 `;
